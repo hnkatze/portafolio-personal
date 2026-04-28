@@ -1,6 +1,6 @@
 import type { Testimonial, Lang } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { Reveal } from '@/components/animations';
+import { Reveal, SplitWords } from '@/components/animations';
 
 /* ============================================================
    Testimonials Section — Swiss editorial-minimal (06)
@@ -45,15 +45,13 @@ export function TestimonialsSection({
 
       {/* Massive headline */}
       <div className="mt-16">
-        <Reveal direction="up" duration={0.7}>
-          <h2
-            id="testimonials-heading"
-            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-          >
-            Voices.
-          </h2>
-        </Reveal>
+        <h2
+          id="testimonials-heading"
+          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        >
+          <SplitWords text="Voices." />
+        </h2>
       </div>
 
       {/* Testimonials grid */}

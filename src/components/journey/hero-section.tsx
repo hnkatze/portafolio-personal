@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { Lang, PersonalInfo } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { Reveal, CountUp } from '@/components/animations';
+import { Reveal, CountUp, SplitWords, ScrollParallax, ScrollScale } from '@/components/animations';
 
 /* ============================================================
    Hero Section — Swiss editorial-minimal
@@ -47,14 +47,12 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start">
           {/* Headline column */}
           <div>
-            <Reveal direction="up" duration={0.7}>
-              <h1
-                className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-              >
-                {data.name}
-              </h1>
-            </Reveal>
+            <h1
+              className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+              style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+            >
+              <SplitWords text={data.name} stagger={0.08} />
+            </h1>
 
             <Reveal direction="up" delay={0.15} duration={0.6}>
               <p
@@ -80,18 +78,21 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
 
           {/* Photo — small grayscale square */}
           <div className="order-first lg:order-last">
-            <Image
-              src={data.photo}
-              alt={data.name}
-              width={300}
-              height={300}
-              className="grayscale aspect-square object-cover w-48 h-48 lg:w-56 lg:h-56"
-              priority
-            />
+            <ScrollParallax offset={-80}>
+              <Image
+                src={data.photo}
+                alt={data.name}
+                width={300}
+                height={300}
+                className="grayscale aspect-square object-cover w-48 h-48 lg:w-56 lg:h-56"
+                priority
+              />
+            </ScrollParallax>
           </div>
         </div>
 
         {/* Stats row — animated metrics, editorial framing */}
+        <ScrollScale from={0.92} to={1} fromOpacity={0.4} toOpacity={1}>
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-b border-[#e4e4e7] py-8">
           <div>
             <p
@@ -154,6 +155,7 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
             </p>
           </div>
         </div>
+        </ScrollScale>
 
         {/* Social links — pure typography */}
         <div className="mt-20 flex flex-wrap items-center gap-x-10 gap-y-4">

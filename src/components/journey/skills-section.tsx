@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Skill, SkillCategory, SkillLevel } from '@/lib/types';
-import { Reveal } from '@/components/animations';
+import { Reveal, SplitWords } from '@/components/animations';
 
 interface SkillsSectionProps {
   readonly skills: readonly Skill[];
@@ -100,14 +100,12 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           paddingRight: 'var(--shell-padding-x)',
         }}
       >
-        <Reveal direction="up" duration={0.7}>
-          <h2
-            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-          >
-            Stack.
-          </h2>
-        </Reveal>
+        <h2
+          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        >
+          <SplitWords text="Stack." />
+        </h2>
       </div>
 
       {/* Tabs */}

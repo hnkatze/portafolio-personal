@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import type { IntegrationConfig, Lang } from '@/lib/types';
-import { Reveal } from '@/components/animations';
+import { Reveal, SplitWords } from '@/components/animations';
 import { ShimmerSkeleton } from '@/components/animations/shimmer-skeleton';
 import { GitHubStats } from '@/components/integrations/github-stats';
 import { GitHubTopLangs } from '@/components/integrations/github-top-langs';
@@ -54,15 +54,13 @@ export function IntegrationsSection({
 
       {/* Massive headline */}
       <div className="mt-16">
-        <Reveal direction="up" duration={0.7}>
-          <h2
-            id="integrations-heading"
-            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-          >
-            Integrations.
-          </h2>
-        </Reveal>
+        <h2
+          id="integrations-heading"
+          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        >
+          <SplitWords text="Integrations." />
+        </h2>
       </div>
 
       {/* Integration grid — hairline cards, 2-col on desktop */}

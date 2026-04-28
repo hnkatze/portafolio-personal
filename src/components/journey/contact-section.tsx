@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { sendContact, type ContactState } from '@/app/actions/contact';
 import { useLang } from '@/components/i18n/i18n-provider';
-import { Reveal } from '@/components/animations';
+import { Reveal, SplitWords } from '@/components/animations';
 import type { PersonalInfo } from '@/lib/types';
 
 /* ============================================================
@@ -94,16 +94,12 @@ export function ContactSection({ data }: ContactSectionProps) {
           paddingRight: 'var(--shell-padding-x)',
         }}
       >
-        <Reveal direction="up" duration={0.7}>
-          <h2
-            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-            data-i18n-en="Contact."
-            data-i18n-es="Contacto."
-          >
-            {lang === 'en' ? 'Contact.' : 'Contacto.'}
-          </h2>
-        </Reveal>
+        <h2
+          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        >
+          <SplitWords text={lang === 'en' ? 'Contact.' : 'Contacto.'} />
+        </h2>
 
         <Reveal direction="up" delay={0.15} duration={0.6}>
           <p

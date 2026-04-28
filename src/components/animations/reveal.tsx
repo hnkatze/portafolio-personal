@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from 'react';
 import { motion, useInView, useReducedMotion } from 'motion/react';
 
 type RevealDirection = 'up' | 'down' | 'left' | 'right' | 'fade';
+type RevealAs = 'div' | 'section' | 'article' | 'li' | 'span';
 
 export interface RevealProps {
   readonly children: ReactNode;
@@ -14,6 +15,10 @@ export interface RevealProps {
   readonly once?: boolean;
   readonly amount?: number;
   readonly className?: string;
+  readonly blur?: number;
+  readonly scale?: number;
+  readonly rotate?: number;
+  readonly as?: RevealAs;
 }
 
 const OFFSET_PRESETS: Record<RevealDirection, { x?: number; y?: number }> = {
@@ -24,46 +29,61 @@ const OFFSET_PRESETS: Record<RevealDirection, { x?: number; y?: number }> = {
   fade: {},
 };
 
-const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export function Reveal({
   children,
   direction = 'up',
   delay = 0,
-  duration = 0.6,
-  stagger,
+  duration = 0.9,
+  stagger: _stagger,
   once = true,
   amount = 0.15,
   className,
+  blur = 12,
+  scale = 0.95,
+  rotate = 0,
+  as = 'div',
 }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref, { once, amount });
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
+  const ref = useRef<HTMLElement | null>(null);
+  const inView = useInView(ref, { once, amount });
+  const Tag = motion[as];
   const offset = OFFSET_PRESETS[direction];
 
+  void _stagger;
+
+  if (shouldReduceMotion) {
+    return <Tag className={className}>{children}</Tag>;
+  }
+
   return (
-    <motion.div
-      ref={ref}
+    <Tag
+      ref={ref as never}
       className={className}
-      initial={{ opacity: 0, x: offset.x ?? 0, y: offset.y ?? 0 }}
-      animate={
-        isInView
-          ? { opacity: 1, x: 0, y: 0 }
-          : { opacity: 0, x: offset.x ?? 0, y: offset.y ?? 0 }
-      }
-      transition={{
-        duration,
-        delay,
-        ease: EASE,
-        ...(stagger ? { staggerChildren: stagger } : {}),
+      initial={{
+        opacity: 0,
+        x: offset.x ?? 0,
+        y: offset.y ?? 0,
+        scale,
+        rotate,
+        filter: `blur(${blur}px)`,
       }}
+      animate={
+        inView
+          ? { opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, filter: 'blur(0px)' }
+          : {
+              opacity: 0,
+              x: offset.x ?? 0,
+              y: offset.y ?? 0,
+              scale,
+              rotate,
+              filter: `blur(${blur}px)`,
+            }
+      }
+      transition={{ duration, delay, ease: EASE }}
     >
       {children}
-    </motion.div>
+    </Tag>
   );
 }

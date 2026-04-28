@@ -1,6 +1,6 @@
 import type { Project, Lang } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { Reveal } from '@/components/animations';
+import { Reveal, SplitWords } from '@/components/animations';
 
 /* ============================================================
    Projects Section — Swiss editorial-minimal (section 05)
@@ -43,17 +43,13 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
 
       {/* Massive headline */}
       <div className="mt-16">
-        <Reveal direction="up" duration={0.7}>
-          <h2
-            id="projects-heading"
-            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-            data-i18n-en="Projects."
-            data-i18n-es="Proyectos."
-          >
-            {lang === 'en' ? 'Projects.' : 'Proyectos.'}
-          </h2>
-        </Reveal>
+        <h2
+          id="projects-heading"
+          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        >
+          <SplitWords text={lang === 'en' ? 'Projects.' : 'Proyectos.'} />
+        </h2>
       </div>
 
       {/* Projects grid — pure typography */}

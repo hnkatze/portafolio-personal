@@ -7,8 +7,17 @@ export type { MarqueeProps } from './marquee';
 export { Reveal } from './reveal';
 export type { RevealProps } from './reveal';
 
+export { ScrollParallax } from './scroll-parallax';
+export type { ScrollParallaxProps } from './scroll-parallax';
+
 export { ScrollProgress } from './scroll-progress';
 export type { ScrollProgressProps } from './scroll-progress';
+
+export { ScrollScale } from './scroll-scale';
+export type { ScrollScaleProps } from './scroll-scale';
+
+export { SplitWords } from './split-words';
+export type { SplitWordsProps } from './split-words';
 
 export { TiltCard } from './tilt-card';
 export type { TiltCardProps } from './tilt-card';
