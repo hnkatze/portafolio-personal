@@ -39,9 +39,12 @@ export function ContactSection({ data }: ContactSectionProps) {
   const t = translations[lang];
 
   const handleCvClick = () => {
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('open-cv-modal'));
-    }
+    if (typeof window === 'undefined') return;
+    const pdfUrl =
+      lang === 'es'
+        ? '/cv/Camilo Henriquez — CV Desarrollador Full-Stack.pdf'
+        : '/cv/Camilo Henriquez — Full-Stack Engineer CV.pdf';
+    window.open(pdfUrl, '_blank', 'noopener,noreferrer');
   };
 
   // Submit-button label depends on lifecycle state

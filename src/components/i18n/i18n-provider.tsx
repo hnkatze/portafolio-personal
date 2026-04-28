@@ -3,7 +3,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
   type ReactNode,
 } from 'react';
@@ -42,6 +41,11 @@ function persistLangCookie(lang: Lang): void {
 function applyLangToDom(lang: Lang): void {
   const textAttr = lang === 'en' ? 'data-i18n-en' : 'data-i18n-es';
   document.querySelectorAll<HTMLElement>(`[${textAttr}]`).forEach((el) => {
+    // Skip elements with child elements — React owns their structure and
+    // setting textContent here would destroy spans/icons rendered as children,
+    // causing hydration mismatches when child sections hydrate later (e.g.,
+    // under Suspense). Only swap on leaf text-only elements.
+    if (el.children.length > 0) return;
     const value = el.getAttribute(textAttr);
     if (value !== null) el.textContent = value;
   });
@@ -84,11 +88,14 @@ export function I18nProvider({ initialLang, children }: I18nProviderProps) {
     return fromCookie !== 'en' ? fromCookie : initialLang;
   });
 
-  // Apply DOM swap after mount (need DOM to be available)
-  useEffect(() => {
-    applyLangToDom(lang);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // No on-mount DOM swap: the server already rendered the correct text
+  // via the `lang` prop (resolved from cookie in page.tsx getLang()).
+  // Running applyLangToDom here would collapse React's text-node trees
+  // into a single textContent, causing hydration mismatches in any
+  // element whose children include element nodes, multiple text nodes,
+  // or interpolations (e.g. <blockquote>“{quote}”</blockquote>).
+  // applyLangToDom only runs in setLang() — when the user actually
+  // toggles language, after hydration is complete.
 
   const setLang = (next: Lang) => {
     setLangState(next);
