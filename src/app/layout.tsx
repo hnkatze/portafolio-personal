@@ -3,13 +3,11 @@ import { Inter, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { env } from '@/lib/env';
 import { I18nProvider } from '@/components/i18n/i18n-provider';
-import { CursorFollower } from '@/components/animations/cursor-follower';
 
 /* ============================================================
-   Fonts — Option C (user decision)
-   - Inter: body + headings, variable font, weights 100-900
-   - Geist Mono: code blocks, CV dates, mono contexts
-   CSS variables injected on <html>; consumed by globals.css @theme
+   Fonts — Inter (body/headings, variable 100-900) + Geist Mono
+   (labels, metadata, code). CSS variables injected on <html>;
+   consumed by globals.css @theme.
    ============================================================ */
 const inter = Inter({
   subsets: ['latin'],
@@ -26,8 +24,6 @@ const geistMono = Geist_Mono({
 
 /* ============================================================
    Metadata — static, SEO-complete
-   Sources: Astro Layout.astro lines 9-57 (verbatim copy intent)
-   Note: themeColor / colorScheme moved to viewport export per Next.js 14+ deprecation
    ============================================================ */
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
@@ -89,25 +85,65 @@ export const metadata: Metadata = {
 };
 
 /* ============================================================
-   Viewport — separated from metadata per Next.js 14+ requirement
-   themeColor and colorScheme must be exported here, NOT in metadata
+   Viewport — editorial light theme
    ============================================================ */
 export const viewport: Viewport = {
-  themeColor: '#0a0a0a',
-  colorScheme: 'dark',
+  themeColor: '#ffffff',
+  colorScheme: 'light',
 };
 
 /* ============================================================
-   Root Layout — Server Component (no 'use client')
+   EditorialHeader — sticky top bar (server component, no interactivity)
+   Two rows:
+     Row 1: logo + primary nav + CTA
+     Row 2: section number + tagline + EST. label  (matches reference)
+   ============================================================ */
+function EditorialHeader() {
+  return (
+    <header className="sticky top-0 z-50 bg-white">
+      <div className="flex items-center justify-between h-16 px-[var(--shell-padding-x)]">
+        <a href="/" className="flex items-center gap-3" aria-label="Camilo Henriquez — Home">
+          <span aria-hidden="true" className="block h-3 w-3 bg-[#0a0a0a]" />
+          <span className="label-mono">CAMILO HENRIQUEZ</span>
+        </a>
 
-   cacheComponents: true / dynamicIO mode design notes:
-   - Layout does NOT read cookies (no getLang() here) — it is static.
-   - <html lang> defaults to "en"; I18nProvider (client) reads the cookie
-     on mount and updates the DOM, ensuring correct lang without layout
-     being dynamic.
-   - Pages that need server-side lang resolution call connection() +
-     getLang() themselves, opting only that page into dynamic rendering.
-   - This keeps the layout prerenderable as a static shell.
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-10">
+          <a href="#about" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
+            SOBRE MÍ
+          </a>
+          <a href="#experience" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
+            EXPERIENCIA
+          </a>
+          <a href="#projects" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
+            PROYECTOS
+          </a>
+          <a href="#contact" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
+            CONTACTO
+          </a>
+        </nav>
+
+        <a
+          href="#contact"
+          className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+        >
+          AGENDAR <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div className="flex items-center justify-between py-3 px-[var(--shell-padding-x)] border-t border-b border-[#e4e4e7]">
+        <span className="label-mono-muted">01</span>
+        <span className="label-mono-muted hidden md:inline">FULL-STACK ENGINEER</span>
+        <span className="label-mono-muted">EST. 2020</span>
+      </div>
+    </header>
+  );
+}
+
+/* ============================================================
+   Root Layout — Server Component
+   - cacheComponents: true compatible (no dynamic APIs read here)
+   - <html lang> defaults to "en"; I18nProvider (client) hydrates
+     to actual cookie value on mount.
    ============================================================ */
 export default function RootLayout({
   children,
@@ -118,14 +154,9 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable} antialiased`}
     >
       <body className="min-h-screen bg-background text-foreground">
-        {/* I18nProvider: client component — reads lang cookie on mount,
-            initialLang="en" is SSR default; client hydrates from actual cookie */}
         <I18nProvider initialLang="en">
+          <EditorialHeader />
           {children}
-          {/* CursorFollower — desktop-only magnetic cursor overlay.
-              Self-gates on matchMedia(min-width:768px) + hover:hover
-              and respects prefers-reduced-motion. */}
-          <CursorFollower />
         </I18nProvider>
       </body>
     </html>

@@ -15,7 +15,6 @@ import {
 import { t } from '@/lib/i18n';
 import type { Lang } from '@/lib/types';
 
-import { JourneyNav } from '@/components/journey/journey-nav';
 import { HeroSection } from '@/components/journey/hero-section';
 import { SkillsSection } from '@/components/journey/skills-section';
 import { ExperienceSection } from '@/components/journey/experience-section';
@@ -77,8 +76,6 @@ function SectionsFallback() {
 export default function Home() {
   return (
     <>
-      <JourneyNav />
-
       <main>
         <Suspense fallback={<SectionsFallback />}>
           <LangBoundary>
