@@ -280,8 +280,8 @@ export function ContactSection({ data }: ContactSectionProps) {
           <ContactRowStatic
             labelEn="BASED IN"
             labelEs="UBICACIÓN"
-            valueEn="Tegucigalpa, Honduras / Remote"
-            valueEs="Tegucigalpa, Honduras / Remoto"
+            valueEn="San Pedro Sula, Honduras / Remote"
+            valueEs="San Pedro Sula, Honduras / Remoto"
           />
         </div>
       </div>

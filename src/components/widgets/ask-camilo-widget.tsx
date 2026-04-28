@@ -101,10 +101,49 @@ function MessageBubble({ message }: { message: Message }) {
 export function AskCamiloWidget() {
   const webhook = process.env.NEXT_PUBLIC_ASK_CAMILO_WEBHOOK;
 
-  // If no webhook configured, render nothing
-  if (!webhook) return null;
+  // Production: silent when webhook missing — never expose dev hints to visitors
+  if (!webhook) {
+    if (process.env.NODE_ENV === 'production') return null;
+    return <AskCamiloDebugBadge />;
+  }
 
   return <AskCamiloWidgetInner webhook={webhook} />;
+}
+
+/* ============================================================
+   AskCamiloDebugBadge — only rendered in dev when webhook is missing.
+   Surfaces an unobtrusive editorial-style indicator so the dev knows
+   the widget is intentionally disabled (vs broken). Click to toggle a
+   short hint about which env var to set.
+   ============================================================ */
+function AskCamiloDebugBadge() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+      {open && (
+        <div className="mb-3 max-w-xs border border-[#1a1a1a] bg-white p-4 text-sm text-[#1a1a1a]">
+          <p className="label-mono mb-2">ASK CAMILO — DISABLED</p>
+          <p className="leading-relaxed">
+            Set{' '}
+            <code className="font-mono text-xs bg-[#f4f4f5] px-1 py-0.5">
+              NEXT_PUBLIC_ASK_CAMILO_WEBHOOK
+            </code>{' '}
+            in <code className="font-mono text-xs">.env</code> to enable the
+            chat widget.
+          </p>
+        </div>
+      )}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="label-mono bg-white border border-[#e4e4e7] text-[#71717a] px-3 py-2 hover:border-[#1a1a1a] hover:text-[#1a1a1a] transition-colors"
+        aria-label="Ask Camilo widget — disabled (missing webhook env)"
+        aria-expanded={open}
+      >
+        ASK CAMILO · DEV
+      </button>
+    </div>
+  );
 }
 
 function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
