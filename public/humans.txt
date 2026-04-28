@@ -1,0 +1,23 @@
+/* TEAM */
+Developer: Camilo Henriquez
+Title: Full Stack Developer
+Site: https://camilohenriquez.com
+Contact: contact@camilohenriquez.com
+Location: Remote / Worldwide
+LinkedIn: https://linkedin.com/in/camilohenriquez
+GitHub: https://github.com/camilohenriquez
+
+/* THANKS */
+Employer: Creative Information Technologies
+University: CEUTEC
+
+/* SITE */
+Last update: 2025/01/14
+Language: English / Spanish
+Doctype: HTML5
+IDE: Visual Studio Code
+Framework: Astro
+UI Library: React
+Styling: TailwindCSS
+Standards: HTML5, CSS3, ES6+
+Components: Responsive, Accessible, SEO Optimized
