@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Skill, SkillCategory, SkillLevel } from '@/lib/types';
-import { ParallaxLayer, TiltCard } from '@/components/animations';
 
 interface SkillsSectionProps {
   readonly skills: readonly Skill[];
@@ -19,10 +18,6 @@ interface LevelConfig {
   readonly label: string;
   readonly labelEs: string;
   readonly dots: number;
-  readonly color: string;
-  readonly dotColor: string;
-  readonly bg: string;
-  readonly border: string;
 }
 
 const CATEGORIES: readonly CategoryConfig[] = [
@@ -32,33 +27,9 @@ const CATEGORIES: readonly CategoryConfig[] = [
 ] as const;
 
 const LEVEL_CONFIG = {
-  expert: {
-    label: 'Expert',
-    labelEs: 'Experto',
-    dots: 3,
-    color: 'text-emerald-400',
-    dotColor: 'bg-emerald-400',
-    bg: 'bg-emerald-400/10',
-    border: 'border-emerald-400/20',
-  },
-  proficient: {
-    label: 'Proficient',
-    labelEs: 'Competente',
-    dots: 2,
-    color: 'text-blue-400',
-    dotColor: 'bg-blue-400',
-    bg: 'bg-blue-400/10',
-    border: 'border-blue-400/20',
-  },
-  familiar: {
-    label: 'Familiar',
-    labelEs: 'Familiar',
-    dots: 1,
-    color: 'text-gray-400',
-    dotColor: 'bg-gray-400',
-    bg: 'bg-white/5',
-    border: 'border-white/10',
-  },
+  expert: { label: 'Expert', labelEs: 'Experto', dots: 3 },
+  proficient: { label: 'Proficient', labelEs: 'Competente', dots: 2 },
+  familiar: { label: 'Familiar', labelEs: 'Familiar', dots: 1 },
 } as const satisfies Record<SkillLevel, LevelConfig>;
 
 const LEVELS: readonly SkillLevel[] = ['expert', 'proficient', 'familiar'];
@@ -84,122 +55,112 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
     return acc;
   }, [skills]);
 
+  const transitionDuration = shouldReduceMotion ? 0 : 0.2;
+
   return (
     <section
       id="skills"
-      className="relative min-h-screen flex items-center py-24 overflow-hidden"
+      className="relative bg-white"
+      style={{
+        paddingTop: 'var(--section-padding-y)',
+        paddingBottom: 'var(--section-padding-y)',
+      }}
     >
-      {/* Parallax decorations */}
-      <ParallaxLayer
-        speed={-0.2}
-        className="absolute inset-0 pointer-events-none"
+      {/* Section number + label row */}
+      <div
+        className="flex items-center justify-between border-t border-b border-[#e4e4e7] py-3"
+        style={{
+          paddingLeft: 'var(--shell-padding-x)',
+          paddingRight: 'var(--shell-padding-x)',
+        }}
       >
-        <div className="absolute top-10 right-20 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-20 w-60 h-60 bg-blue-500/5 rounded-full blur-3xl" />
-      </ParallaxLayer>
+        <span className="label-mono">03</span>
+        <span
+          className="label-mono-muted"
+          data-i18n-en="STACK"
+          data-i18n-es="STACK"
+        >
+          STACK
+        </span>
+        <span
+          className="label-mono-muted"
+          data-i18n-en="CORE TECHNOLOGIES"
+          data-i18n-es="TECNOLOGÍAS CORE"
+        >
+          CORE TECHNOLOGIES
+        </span>
+      </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
-        {/* Heading */}
-        <div className="text-center mb-12">
-          <h2
-            className="text-3xl md:text-5xl font-bold text-white mb-4"
-            data-i18n-en="Skills & Technologies"
-            data-i18n-es="Habilidades y Tecnologías"
-          >
-            Skills &amp; Technologies
-          </h2>
-          <p
-            className="text-gray-400 max-w-xl mx-auto"
-            data-i18n-en="Technologies I work with daily to build modern web applications"
-            data-i18n-es="Tecnologías con las que trabajo a diario para construir aplicaciones web modernas"
-          >
-            Technologies I work with daily to build modern web applications
-          </p>
+      {/* Massive headline */}
+      <div
+        className="mt-16"
+        style={{
+          paddingLeft: 'var(--shell-padding-x)',
+          paddingRight: 'var(--shell-padding-x)',
+        }}
+      >
+        <h2
+          className="font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        >
+          Stack.
+        </h2>
+      </div>
 
-          {/* Level legend */}
-          <div className="flex items-center justify-center gap-6 mt-6 text-xs">
-            {LEVELS.map((level) => {
-              const cfg = LEVEL_CONFIG[level];
-              return (
-                <div key={level} className="flex items-center gap-1.5">
-                  <div className="flex gap-0.5">
-                    {[0, 1, 2].map((i) => (
-                      <span
-                        key={i}
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          i < cfg.dots ? cfg.dotColor : 'bg-white/10'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span
-                    className={cfg.color}
-                    data-i18n-en={cfg.label}
-                    data-i18n-es={cfg.labelEs}
-                  >
-                    {cfg.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Category tabs with shared layout indicator */}
-        <div className="flex justify-center gap-2 mb-12">
+      {/* Tabs */}
+      <div
+        className="mt-16"
+        style={{
+          paddingLeft: 'var(--shell-padding-x)',
+          paddingRight: 'var(--shell-padding-x)',
+        }}
+      >
+        <div
+          role="tablist"
+          aria-label="Skill categories"
+          className="flex flex-wrap items-center gap-8 pb-3"
+        >
           {CATEGORIES.map(({ key, label, labelEs }) => {
             const isActive = key === activeCategory;
             return (
               <button
                 key={key}
                 type="button"
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActiveCategory(key)}
-                className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-colors duration-300 border ${
+                className={`label-mono pb-2 transition-colors ${
                   isActive
-                    ? 'text-blue-400 border-blue-400/30'
-                    : 'bg-white/5 text-gray-400 border-white/5 hover:text-white hover:border-white/10'
+                    ? 'text-[#0a0a0a] border-b-2 border-[#0a0a0a]'
+                    : 'text-[#71717a] border-b-2 border-transparent hover:text-[#0a0a0a]'
                 }`}
-                aria-pressed={isActive}
+                data-i18n-en={label}
+                data-i18n-es={labelEs}
               >
-                {isActive && !shouldReduceMotion && (
-                  <motion.span
-                    layoutId="skills-tab-indicator"
-                    className="absolute inset-0 rounded-xl bg-blue-500/20 border border-blue-400/30"
-                    transition={{
-                      type: 'spring',
-                      stiffness: 380,
-                      damping: 30,
-                    }}
-                    aria-hidden="true"
-                  />
-                )}
-                {isActive && shouldReduceMotion && (
-                  <span
-                    className="absolute inset-0 rounded-xl bg-blue-500/20"
-                    aria-hidden="true"
-                  />
-                )}
-                <span
-                  className="relative z-10"
-                  data-i18n-en={label}
-                  data-i18n-es={labelEs}
-                >
-                  {label}
-                </span>
+                {label}
               </button>
             );
           })}
         </div>
+        <div className="divider-hairline" />
+      </div>
 
-        {/* Skill grids for active category */}
+      {/* Skills display: typography rows by level */}
+      <div
+        className="mt-16"
+        style={{
+          paddingLeft: 'var(--shell-padding-x)',
+          paddingRight: 'var(--shell-padding-x)',
+        }}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="space-y-8"
+            initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: shouldReduceMotion ? 1 : 0 }}
+            transition={{ duration: transitionDuration, ease: 'easeOut' }}
+            className="space-y-16"
           >
             {LEVELS.map((level) => {
               const group = grouped[activeCategory][level];
@@ -208,74 +169,83 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
 
               return (
                 <div key={level}>
-                  {/* Level header */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="flex gap-0.5">
+                  {/* Level header: dots + mono label */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div
+                      className="flex gap-1"
+                      aria-hidden="true"
+                    >
                       {[0, 1, 2].map((i) => (
                         <span
                           key={i}
-                          className={`w-2 h-2 rounded-full ${
-                            i < cfg.dots ? cfg.dotColor : 'bg-white/10'
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            i < cfg.dots ? 'bg-[#1a1a1a]' : 'bg-[#e4e4e7]'
                           }`}
                         />
                       ))}
                     </div>
                     <span
-                      className={`text-sm font-medium ${cfg.color}`}
-                      data-i18n-en={cfg.label}
-                      data-i18n-es={cfg.labelEs}
+                      className="label-mono"
+                      data-i18n-en={cfg.label.toUpperCase()}
+                      data-i18n-es={cfg.labelEs.toUpperCase()}
                     >
-                      {cfg.label}
+                      {cfg.label.toUpperCase()}
                     </span>
-                    <div className="flex-1 h-px bg-white/5" />
+                    <span className="flex-1 divider-hairline" />
                   </div>
 
-                  {/* Cards grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {/* Skills row: flex-wrap of icon + name */}
+                  <ul className="flex flex-wrap items-center gap-x-8 gap-y-4 list-none p-0 m-0">
                     {group.map((skill, i) => (
-                      <motion.div
+                      <li
                         key={`${skill.category}-${skill.name}`}
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.35,
-                          delay: i * 0.03,
-                          ease: [0.25, 0.46, 0.45, 0.94],
-                        }}
+                        className="flex items-center gap-3"
                       >
-                        <TiltCard maxTilt={8} scale={1.02}>
-                          <div
-                            className={`relative flex items-center gap-3 p-4 rounded-2xl border cursor-default transition-colors duration-300 ${cfg.bg} ${cfg.border} hover:border-blue-400/40 hover:bg-white/[0.06]`}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={skill.icon}
+                          alt=""
+                          aria-hidden="true"
+                          className="w-5 h-5 object-contain shrink-0"
+                          loading="lazy"
+                        />
+                        <span className="text-[#1a1a1a] text-base sm:text-lg font-normal">
+                          {skill.name}
+                        </span>
+                        {skill.favorite && (
+                          <span
+                            className="text-[#0a0a0a] text-sm"
+                            aria-label="Favorite skill"
                           >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt={skill.name}
-                              className="w-8 h-8 object-contain shrink-0"
-                              loading="lazy"
-                            />
-                            <span className="text-sm font-medium text-white truncate">
-                              {skill.name}
-                            </span>
-                            {skill.favorite && (
-                              <span
-                                className="ml-auto text-xs text-yellow-400 shrink-0"
-                                aria-label="Favorite skill"
-                              >
-                                ★
-                              </span>
-                            )}
-                          </div>
-                        </TiltCard>
-                      </motion.div>
+                            ★
+                          </span>
+                        )}
+                        {i < group.length - 1 && (
+                          <span
+                            aria-hidden="true"
+                            className="text-[#d4d4d8] text-lg ml-5 select-none"
+                          >
+                            /
+                          </span>
+                        )}
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               );
             })}
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* Bottom hairline divider */}
+      <div
+        className="divider-hairline mt-24"
+        style={{
+          marginLeft: 'var(--shell-padding-x)',
+          marginRight: 'var(--shell-padding-x)',
+        }}
+      />
     </section>
   );
 }
