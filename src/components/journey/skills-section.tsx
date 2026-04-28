@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Skill, SkillCategory, SkillLevel } from '@/lib/types';
+import { Reveal } from '@/components/animations';
 
 interface SkillsSectionProps {
   readonly skills: readonly Skill[];
@@ -99,22 +100,29 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           paddingRight: 'var(--shell-padding-x)',
         }}
       >
-        <h2
-          className="font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
-          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-        >
-          Stack.
-        </h2>
+        <Reveal direction="up" duration={0.7}>
+          <h2
+            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+            style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+          >
+            Stack.
+          </h2>
+        </Reveal>
       </div>
 
       {/* Tabs */}
-      <div
+      <Reveal
+        direction="up"
+        delay={0.15}
+        duration={0.6}
         className="mt-16"
-        style={{
-          paddingLeft: 'var(--shell-padding-x)',
-          paddingRight: 'var(--shell-padding-x)',
-        }}
       >
+        <div
+          style={{
+            paddingLeft: 'var(--shell-padding-x)',
+            paddingRight: 'var(--shell-padding-x)',
+          }}
+        >
         <div
           role="tablist"
           aria-label="Skill categories"
@@ -143,16 +151,22 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           })}
         </div>
         <div className="divider-hairline" />
-      </div>
+        </div>
+      </Reveal>
 
       {/* Skills display: typography rows by level */}
-      <div
+      <Reveal
+        direction="up"
+        delay={0.25}
+        duration={0.6}
         className="mt-16"
-        style={{
-          paddingLeft: 'var(--shell-padding-x)',
-          paddingRight: 'var(--shell-padding-x)',
-        }}
       >
+        <div
+          style={{
+            paddingLeft: 'var(--shell-padding-x)',
+            paddingRight: 'var(--shell-padding-x)',
+          }}
+        >
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -236,7 +250,8 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
             })}
           </motion.div>
         </AnimatePresence>
-      </div>
+        </div>
+      </Reveal>
 
       {/* Bottom hairline divider */}
       <div

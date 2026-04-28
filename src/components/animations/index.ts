@@ -1,5 +1,14 @@
+export { CountUp } from './count-up';
+export type { CountUpProps } from './count-up';
+
+export { Marquee } from './marquee';
+export type { MarqueeProps } from './marquee';
+
 export { Reveal } from './reveal';
 export type { RevealProps } from './reveal';
+
+export { ScrollProgress } from './scroll-progress';
+export type { ScrollProgressProps } from './scroll-progress';
 
 export { TiltCard } from './tilt-card';
 export type { TiltCardProps } from './tilt-card';

@@ -48,7 +48,7 @@ export function TestimonialsSection({
         <Reveal direction="up" duration={0.7}>
           <h2
             id="testimonials-heading"
-            className="font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
             style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
           >
             Voices.

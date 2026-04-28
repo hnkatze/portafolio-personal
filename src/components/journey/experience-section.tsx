@@ -46,7 +46,7 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
         <Reveal direction="up" duration={0.7}>
           <h2
             id="experience-heading"
-            className="font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
             style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
             data-i18n-en="Experience."
             data-i18n-es="Experiencia."
@@ -57,6 +57,7 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
       </div>
 
       {/* Timeline entries */}
+      <Reveal direction="up" delay={0.15} duration={0.6}>
       <ol className="mt-24 list-none p-0 m-0">
         {experience.map((entry, index) => {
           const period = `${entry.startDate} — ${entry.endDate}`.toUpperCase();
@@ -120,6 +121,7 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
           );
         })}
       </ol>
+      </Reveal>
 
       {/* Bottom hairline divider */}
       <div className="divider-hairline mt-24" />

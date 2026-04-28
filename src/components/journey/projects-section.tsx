@@ -46,7 +46,7 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
         <Reveal direction="up" duration={0.7}>
           <h2
             id="projects-heading"
-            className="font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
             style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
             data-i18n-en="Projects."
             data-i18n-es="Proyectos."
@@ -57,6 +57,7 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
       </div>
 
       {/* Projects grid — pure typography */}
+      <Reveal direction="up" delay={0.15} duration={0.6}>
       <ul className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 list-none p-0 m-0">
         {projects.map((project, index) => {
           const num = String(index + 1).padStart(2, '0');
@@ -119,6 +120,7 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
           );
         })}
       </ul>
+      </Reveal>
 
       {/* Bottom hairline divider */}
       <div className="divider-hairline mt-24" />

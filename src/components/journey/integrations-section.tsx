@@ -57,7 +57,7 @@ export function IntegrationsSection({
         <Reveal direction="up" duration={0.7}>
           <h2
             id="integrations-heading"
-            className="font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
             style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
           >
             Integrations.
@@ -66,6 +66,7 @@ export function IntegrationsSection({
       </div>
 
       {/* Integration grid — hairline cards, 2-col on desktop */}
+      <Reveal direction="up" delay={0.15} duration={0.6}>
       <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* GitHub Stats */}
         <div className="border border-[#e4e4e7] p-6">
@@ -159,6 +160,7 @@ export function IntegrationsSection({
           <LinkedInBadge profileUrl={config.linkedin.profileUrl} />
         </div>
       </div>
+      </Reveal>
 
       {/* Bottom hairline divider */}
       <div className="divider-hairline mt-24" />

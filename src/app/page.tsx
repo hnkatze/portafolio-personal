@@ -19,6 +19,26 @@ import { TestimonialsSection } from '@/components/journey/testimonials-section';
 import { IntegrationsSection } from '@/components/journey/integrations-section';
 import { ContactSection } from '@/components/journey/contact-section';
 import { AskCamiloWidget } from '@/components/widgets/ask-camilo-widget';
+import { Marquee } from '@/components/animations';
+
+/* ============================================================
+   TickerStrip — full-bleed editorial marquee between sections.
+   Hairline borders top/bottom, slow scroll for readability.
+   ============================================================ */
+const tickerStack = [
+  'React', 'Next.js', 'TypeScript', 'Angular', 'Astro',
+  'Lit Element', 'Flutter', 'Tailwind CSS', 'NestJS', 'Node.js',
+  'PostgreSQL', 'Go', 'Docker', 'GitHub Actions', 'Vercel',
+  'Playwright', 'Vitest', 'MCP', 'OpenAPI',
+] as const;
+
+function TickerStrip() {
+  return (
+    <div className="border-t border-b border-[#e4e4e7] bg-white">
+      <Marquee items={tickerStack} speed={50} separator=" / " className="py-3" />
+    </div>
+  );
+}
 
 /* ============================================================
    LangBoundary — defers to request time so getLang() (cookies)
@@ -73,6 +93,7 @@ export default function Home() {
               <>
                 <HeroSection data={personalInfo} lang={lang} />
                 <SkillsSection skills={skills} />
+                <TickerStrip />
                 <ExperienceSection experience={experience} lang={lang} />
                 <ProjectsSection projects={projects} lang={lang} />
                 <TestimonialsSection testimonials={testimonials} lang={lang} />

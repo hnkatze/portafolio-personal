@@ -96,7 +96,7 @@ export function ContactSection({ data }: ContactSectionProps) {
       >
         <Reveal direction="up" duration={0.7}>
           <h2
-            className="font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+            className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
             style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
             data-i18n-en="Contact."
             data-i18n-es="Contacto."
@@ -105,15 +105,17 @@ export function ContactSection({ data }: ContactSectionProps) {
           </h2>
         </Reveal>
 
-        <p
-          className="mt-6 text-lg text-[#1a1a1a] max-w-2xl"
-          data-i18n-en="Have a project in mind? Let's build something that lasts."
-          data-i18n-es="¿Tenés un proyecto en mente? Construyamos algo que perdure."
-        >
-          {lang === 'en'
-            ? "Have a project in mind? Let's build something that lasts."
-            : '¿Tenés un proyecto en mente? Construyamos algo que perdure.'}
-        </p>
+        <Reveal direction="up" delay={0.15} duration={0.6}>
+          <p
+            className="mt-6 text-lg text-[#1a1a1a] max-w-2xl"
+            data-i18n-en="Have a project in mind? Let's build something that lasts."
+            data-i18n-es="¿Tenés un proyecto en mente? Construyamos algo que perdure."
+          >
+            {lang === 'en'
+              ? "Have a project in mind? Let's build something that lasts."
+              : '¿Tenés un proyecto en mente? Construyamos algo que perdure.'}
+          </p>
+        </Reveal>
       </div>
 
       {/* Two-column layout: form (left) + contact info (right) */}

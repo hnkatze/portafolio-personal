@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { Lang, PersonalInfo } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { Reveal } from '@/components/animations';
+import { Reveal, CountUp } from '@/components/animations';
 
 /* ============================================================
    Hero Section — Swiss editorial-minimal
@@ -46,31 +46,37 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
       <div className="px-[var(--shell-padding-x)] py-[var(--section-padding-y)]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start">
           {/* Headline column */}
-          <Reveal direction="up" duration={0.7}>
-            <h1
-              className="font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
-              style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-            >
-              {data.name}
-            </h1>
+          <div>
+            <Reveal direction="up" duration={0.7}>
+              <h1
+                className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+                style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+              >
+                {data.name}
+              </h1>
+            </Reveal>
 
-            <p
-              className="mt-6 font-medium text-[#1a1a1a] leading-snug"
-              style={{ fontSize: 'clamp(1.25rem, 2vw, 1.75rem)' }}
-              data-i18n-en={titleEn}
-              data-i18n-es={titleEs}
-            >
-              {t(data.title, lang)}
-            </p>
+            <Reveal direction="up" delay={0.15} duration={0.6}>
+              <p
+                className="mt-6 font-medium text-[#1a1a1a] leading-snug"
+                style={{ fontSize: 'clamp(1.25rem, 2vw, 1.75rem)' }}
+                data-i18n-en={titleEn}
+                data-i18n-es={titleEs}
+              >
+                {t(data.title, lang)}
+              </p>
+            </Reveal>
 
-            <p
-              className="mt-8 max-w-2xl text-lg leading-relaxed text-[#1a1a1a]"
-              data-i18n-en={summaryEn}
-              data-i18n-es={summaryEs}
-            >
-              {t(data.summary, lang)}
-            </p>
-          </Reveal>
+            <Reveal direction="up" delay={0.3} duration={0.6}>
+              <p
+                className="mt-8 max-w-2xl text-lg leading-relaxed text-[#1a1a1a]"
+                data-i18n-en={summaryEn}
+                data-i18n-es={summaryEs}
+              >
+                {t(data.summary, lang)}
+              </p>
+            </Reveal>
+          </div>
 
           {/* Photo — small grayscale square */}
           <div className="order-first lg:order-last">
@@ -82,6 +88,70 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
               className="grayscale aspect-square object-cover w-48 h-48 lg:w-56 lg:h-56"
               priority
             />
+          </div>
+        </div>
+
+        {/* Stats row — animated metrics, editorial framing */}
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-b border-[#e4e4e7] py-8">
+          <div>
+            <p
+              className="font-extrabold text-[#0a0a0a] leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+            >
+              <CountUp to={4} suffix="+" duration={1.4} />
+            </p>
+            <p
+              className="label-mono-muted mt-3"
+              data-i18n-en="YEARS EXPERIENCE"
+              data-i18n-es="AÑOS EXPERIENCIA"
+            >
+              {lang === 'en' ? 'YEARS EXPERIENCE' : 'AÑOS EXPERIENCIA'}
+            </p>
+          </div>
+          <div>
+            <p
+              className="font-extrabold text-[#0a0a0a] leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+            >
+              <CountUp to={130} suffix="+" duration={1.8} />
+            </p>
+            <p
+              className="label-mono-muted mt-3"
+              data-i18n-en="API ENDPOINTS"
+              data-i18n-es="ENDPOINTS API"
+            >
+              {lang === 'en' ? 'API ENDPOINTS' : 'ENDPOINTS API'}
+            </p>
+          </div>
+          <div>
+            <p
+              className="font-extrabold text-[#0a0a0a] leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+            >
+              <CountUp to={25} suffix="+" duration={1.6} />
+            </p>
+            <p
+              className="label-mono-muted mt-3"
+              data-i18n-en="PROJECTS DELIVERED"
+              data-i18n-es="PROYECTOS ENTREGADOS"
+            >
+              {lang === 'en' ? 'PROJECTS DELIVERED' : 'PROYECTOS ENTREGADOS'}
+            </p>
+          </div>
+          <div>
+            <p
+              className="font-extrabold text-[#0a0a0a] leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+            >
+              <CountUp to={2} duration={1.2} />
+            </p>
+            <p
+              className="label-mono-muted mt-3"
+              data-i18n-en="OPEN SOURCE MCP SERVERS"
+              data-i18n-es="MCP SERVERS OPEN SOURCE"
+            >
+              {lang === 'en' ? 'OPEN SOURCE MCP SERVERS' : 'MCP SERVERS OPEN SOURCE'}
+            </p>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { env } from '@/lib/env';
 import { I18nProvider } from '@/components/i18n/i18n-provider';
+import { ScrollProgress } from '@/components/animations';
 
 /* ============================================================
    Fonts — Inter (body/headings, variable 100-900) + Geist Mono
@@ -155,6 +156,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground">
         <I18nProvider initialLang="en">
+          <ScrollProgress />
           <EditorialHeader />
           {children}
         </I18nProvider>
