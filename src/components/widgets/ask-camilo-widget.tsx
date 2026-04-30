@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { useLang } from '@/components/i18n/i18n-provider';
 
 /* ============================================================
    AskCamiloWidget — Swiss editorial-minimal floating chat
@@ -16,14 +17,8 @@ interface Message {
 }
 
 /* ============================================================
-   i18n helpers — reads lang cookie client-side
+   i18n strings — read via useLang() inside the component
    ============================================================ */
-function getLang(): 'en' | 'es' {
-  if (typeof document === 'undefined') return 'en';
-  const match = document.cookie.match(/(?:^|;)\s*lang=([^;]+)/);
-  return match?.[1] === 'es' ? 'es' : 'en';
-}
-
 const welcomeMessages = {
   en: "Hey! I'm Camilo's AI assistant. Ask me about my skills, projects, experience, or availability — I answer in first person as him.",
   es: '¡Hola! Soy el asistente IA de Camilo. Preguntame sobre mis skills, proyectos, experiencia o disponibilidad — te respondo en primera persona como él.',
@@ -148,6 +143,7 @@ function AskCamiloDebugBadge() {
 
 function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
   const reduced = useReducedMotion() ?? false;
+  const { lang } = useLang();
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -208,7 +204,6 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
   function openPanel() {
     if (!welcomeShown.current) {
       welcomeShown.current = true;
-      const lang = getLang();
       setMessages([
         { id: crypto.randomUUID(), role: 'bot', text: welcomeMessages[lang] },
       ]);
@@ -246,7 +241,7 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
       const answer =
         (typeof data.answer === 'string' ? data.answer : null) ??
         (typeof data.reply === 'string' ? data.reply : null) ??
-        errorMessages[getLang()];
+        errorMessages[lang];
       setMessages((prev) => [
         ...prev,
         { id: crypto.randomUUID(), role: 'bot', text: answer },
@@ -257,7 +252,7 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
         {
           id: crypto.randomUUID(),
           role: 'bot',
-          text: errorMessages[getLang()],
+          text: errorMessages[lang],
         },
       ]);
     } finally {
@@ -282,7 +277,6 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
   }
 
   function handleSuggestionClick(en: string, es: string) {
-    const lang = getLang();
     const text = lang === 'es' ? es : en;
     void sendQuestion(text);
   }
@@ -307,9 +301,7 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
       style={{ color: '#ffffff' }}
       aria-label="Open chat with Camilo"
     >
-      <span data-i18n-en="ASK CAMILO" data-i18n-es="PREGUNTÁ A CAMILO">
-        ASK CAMILO
-      </span>
+      <span>{lang === 'en' ? 'ASK CAMILO' : 'PREGUNTÁ A CAMILO'}</span>
       <span aria-hidden="true">↗</span>
     </button>
   );
@@ -348,12 +340,10 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
           >
             {/* ---- Header ---- */}
             <header className="flex items-center justify-between px-4 py-3 border-b border-[#e4e4e7] bg-white">
-              <span
-                className="label-mono"
-                data-i18n-en="ASK CAMILO — AI ASSISTANT"
-                data-i18n-es="PREGUNTÁ A CAMILO — ASISTENTE IA"
-              >
-                ASK CAMILO — AI ASSISTANT
+              <span className="label-mono">
+                {lang === 'en'
+                  ? 'ASK CAMILO — AI ASSISTANT'
+                  : 'PREGUNTÁ A CAMILO — ASISTENTE IA'}
               </span>
 
               <button
@@ -387,10 +377,8 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
                     key={en}
                     onClick={() => handleSuggestionClick(en, es)}
                     className="label-mono border border-[#e4e4e7] px-3 py-1.5 text-[#1a1a1a] hover:border-[#0a0a0a] hover:bg-[#f4f4f5] transition-colors"
-                    data-i18n-en={en}
-                    data-i18n-es={es}
                   >
-                    {en}
+                    {lang === 'en' ? en : es}
                   </button>
                 ))}
               </div>
@@ -414,9 +402,11 @@ function AskCamiloWidgetInner({ webhook }: { webhook: string }) {
                 }}
                 onKeyDown={handleInputKeyDown}
                 className="flex-1 border-0 outline-none px-3 py-3 text-sm text-[#1a1a1a] placeholder:text-[#a1a1aa] bg-white resize-none max-h-24"
-                placeholder="Ask me anything..."
-                data-placeholder-en="Ask me anything..."
-                data-placeholder-es="Preguntame lo que quieras..."
+                placeholder={
+                  lang === 'en'
+                    ? 'Ask me anything...'
+                    : 'Preguntame lo que quieras...'
+                }
                 aria-label="Your question"
               />
               <button

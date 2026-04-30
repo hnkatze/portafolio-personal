@@ -37,7 +37,7 @@ export function Reveal({
   delay = 0,
   duration = 0.9,
   stagger: _stagger,
-  once = true,
+  once = false,
   amount = 0.15,
   className,
   blur = 12,

@@ -2,18 +2,16 @@ import { Suspense } from 'react';
 import type { IntegrationConfig, Lang } from '@/lib/types';
 import { Reveal, SplitWords } from '@/components/animations';
 import { ShimmerSkeleton } from '@/components/animations/shimmer-skeleton';
-import { GitHubStats } from '@/components/integrations/github-stats';
-import { GitHubTopLangs } from '@/components/integrations/github-top-langs';
-import { GitHubStreak } from '@/components/integrations/github-streak';
+import { GitHubStatStrip } from '@/components/integrations/github-stat-strip';
+import { GitHubLangRanking } from '@/components/integrations/github-lang-ranking';
 import { GitHubContributions } from '@/components/integrations/github-contributions';
 import { GitHubRepos } from '@/components/integrations/github-repos';
 import { LinkedInBadge } from '@/components/integrations/linkedin-badge';
 
 /* ============================================================
    Integrations Section — Swiss editorial-minimal (07)
-   Server component. White background, near-black text,
-   massive Inter headline, hairline cards, no shadows, no glow.
-   Live integration components are wrapped, not modified.
+   Server component. Compact layout: typography-first stat strip,
+   editorial repo list, hairline contribution chart.
    ============================================================ */
 
 interface IntegrationsSectionProps {
@@ -25,7 +23,7 @@ export function IntegrationsSection({
   config,
   lang = 'en',
 }: IntegrationsSectionProps) {
-  const { username, statsTheme } = config.github;
+  const { username } = config.github;
 
   return (
     <section
@@ -63,102 +61,110 @@ export function IntegrationsSection({
         </h2>
       </div>
 
-      {/* Integration grid — hairline cards, 2-col on desktop */}
-      <Reveal direction="up" delay={0.15} duration={0.6}>
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* GitHub Stats */}
-        <div className="border border-[#e4e4e7] p-6">
-          <p
-            className="label-mono-muted mb-4"
-            data-i18n-en="GITHUB STATS"
-            data-i18n-es="ESTADÍSTICAS GITHUB"
-          >
-            {lang === 'en' ? 'GITHUB STATS' : 'ESTADÍSTICAS GITHUB'}
-          </p>
-          <Suspense
-            fallback={<ShimmerSkeleton height={180} className="w-full" />}
-          >
-            <GitHubStats username={username} theme={statsTheme} />
-          </Suspense>
-        </div>
+      {/* Centered content stack — 80% on desktop */}
+      <div className="mt-20 mx-auto w-[80%] flex flex-col gap-16">
+        {/* GitHub stat strip — replaces the 3 dark SVG embeds */}
+        <Reveal direction="up" amount={0.1}>
+          <div>
+            <p
+              className="label-mono-muted mb-6"
+              data-i18n-en="GITHUB · LIVE STATS"
+              data-i18n-es="GITHUB · ESTADÍSTICAS EN VIVO"
+            >
+              {lang === 'en' ? 'GITHUB · LIVE STATS' : 'GITHUB · ESTADÍSTICAS EN VIVO'}
+            </p>
+            <Suspense
+              fallback={<ShimmerSkeleton height={140} className="w-full" />}
+            >
+              <GitHubStatStrip username={username} lang={lang} />
+            </Suspense>
+          </div>
+        </Reveal>
 
-        {/* Top Languages */}
-        <div className="border border-[#e4e4e7] p-6">
-          <p
-            className="label-mono-muted mb-4"
-            data-i18n-en="TOP LANGUAGES"
-            data-i18n-es="LENGUAJES PRINCIPALES"
-          >
-            {lang === 'en' ? 'TOP LANGUAGES' : 'LENGUAJES PRINCIPALES'}
-          </p>
-          <Suspense
-            fallback={<ShimmerSkeleton height={180} className="w-full" />}
-          >
-            <GitHubTopLangs username={username} theme={statsTheme} />
-          </Suspense>
-        </div>
+        {/* Language ranking — proportional hairline bars */}
+        <Reveal direction="up" amount={0.1}>
+          <div>
+            <p
+              className="label-mono-muted mb-6"
+              data-i18n-en="LANGUAGE RANKING · BY REPO COUNT"
+              data-i18n-es="RANKING DE LENGUAJES · POR REPOS"
+            >
+              {lang === 'en'
+                ? 'LANGUAGE RANKING · BY REPO COUNT'
+                : 'RANKING DE LENGUAJES · POR REPOS'}
+            </p>
+            <Suspense
+              fallback={<ShimmerSkeleton height={180} className="w-full" />}
+            >
+              <GitHubLangRanking username={username} lang={lang} />
+            </Suspense>
+          </div>
+        </Reveal>
 
-        {/* Streak — full width */}
-        <div className="border border-[#e4e4e7] p-6 md:col-span-2">
-          <p
-            className="label-mono-muted mb-4"
-            data-i18n-en="STREAK"
-            data-i18n-es="RACHA"
-          >
-            {lang === 'en' ? 'STREAK' : 'RACHA'}
-          </p>
-          <Suspense
-            fallback={<ShimmerSkeleton height={180} className="w-full" />}
-          >
-            <GitHubStreak username={username} theme={statsTheme} />
-          </Suspense>
-        </div>
+        {/* Contribution heatmap */}
+        <Reveal direction="up" amount={0.1}>
+          <div>
+            <p
+              className="label-mono-muted mb-4"
+              data-i18n-en="CONTRIBUTION HEATMAP"
+              data-i18n-es="MAPA DE CONTRIBUCIONES"
+            >
+              {lang === 'en' ? 'CONTRIBUTION HEATMAP' : 'MAPA DE CONTRIBUCIONES'}
+            </p>
+            <Suspense
+              fallback={<ShimmerSkeleton height={140} className="w-full" />}
+            >
+              <GitHubContributions username={username} />
+            </Suspense>
+          </div>
+        </Reveal>
 
-        {/* Contributions — full width */}
-        <div className="border border-[#e4e4e7] p-6 md:col-span-2">
-          <p
-            className="label-mono-muted mb-4"
-            data-i18n-en="CONTRIBUTIONS"
-            data-i18n-es="CONTRIBUCIONES"
-          >
-            {lang === 'en' ? 'CONTRIBUTIONS' : 'CONTRIBUCIONES'}
-          </p>
-          <Suspense
-            fallback={<ShimmerSkeleton height={200} className="w-full" />}
-          >
-            <GitHubContributions username={username} />
-          </Suspense>
-        </div>
+        {/* Top repos — editorial list, sorted by stars */}
+        <Reveal direction="up" amount={0.1}>
+          <div>
+            <div className="flex items-baseline justify-between mb-4">
+              <p
+                className="label-mono-muted"
+                data-i18n-en="TOP REPOSITORIES · BY STARS"
+                data-i18n-es="REPOSITORIOS DESTACADOS · POR STARS"
+              >
+                {lang === 'en'
+                  ? 'TOP REPOSITORIES · BY STARS'
+                  : 'REPOSITORIOS DESTACADOS · POR STARS'}
+              </p>
+              <a
+                href={`https://github.com/${username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label-mono text-[#0a0a0a] hover:opacity-70 transition-opacity"
+                data-i18n-en="ALL REPOS ↗"
+                data-i18n-es="TODOS ↗"
+              >
+                {lang === 'en' ? 'ALL REPOS ↗' : 'TODOS ↗'}
+              </a>
+            </div>
+            <Suspense
+              fallback={<ShimmerSkeleton height={400} className="w-full" />}
+            >
+              <GitHubRepos username={username} lang={lang} />
+            </Suspense>
+          </div>
+        </Reveal>
 
-        {/* Repos — full width */}
-        <div className="border border-[#e4e4e7] p-6 md:col-span-2">
-          <p
-            className="label-mono-muted mb-4"
-            data-i18n-en="REPOSITORIES"
-            data-i18n-es="REPOSITORIOS"
-          >
-            {lang === 'en' ? 'REPOSITORIES' : 'REPOSITORIOS'}
-          </p>
-          <Suspense
-            fallback={<ShimmerSkeleton height={400} className="w-full" />}
-          >
-            <GitHubRepos username={username} />
-          </Suspense>
-        </div>
-
-        {/* LinkedIn — full width */}
-        <div className="border border-[#e4e4e7] p-6 md:col-span-2">
-          <p
-            className="label-mono-muted mb-4"
-            data-i18n-en="LINKEDIN"
-            data-i18n-es="LINKEDIN"
-          >
-            LINKEDIN
-          </p>
-          <LinkedInBadge profileUrl={config.linkedin.profileUrl} />
-        </div>
+        {/* LinkedIn — minimal editorial CTA */}
+        <Reveal direction="up" amount={0.1}>
+          <div>
+            <p
+              className="label-mono-muted mb-4"
+              data-i18n-en="LINKEDIN"
+              data-i18n-es="LINKEDIN"
+            >
+              LINKEDIN
+            </p>
+            <LinkedInBadge profileUrl={config.linkedin.profileUrl} lang={lang} />
+          </div>
+        </Reveal>
       </div>
-      </Reveal>
 
       {/* Bottom hairline divider */}
       <div className="divider-hairline mt-24" />

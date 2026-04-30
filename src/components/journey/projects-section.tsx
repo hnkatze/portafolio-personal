@@ -1,6 +1,6 @@
 import type { Project, Lang } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { Reveal, SplitWords } from '@/components/animations';
+import { Reveal, I18nSplitWords } from '@/components/animations';
 
 /* ============================================================
    Projects Section — Swiss editorial-minimal (section 05)
@@ -48,19 +48,31 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
           className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
           style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
         >
-          <SplitWords text={lang === 'en' ? 'Projects.' : 'Proyectos.'} />
+          <I18nSplitWords textEn="Projects." textEs="Proyectos." />
         </h2>
       </div>
 
-      {/* Projects grid — pure typography */}
-      <Reveal direction="up" delay={0.15} duration={0.6}>
-      <ul className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 list-none p-0 m-0">
+      {/* Projects grid — pure typography, centered on wide viewports.
+          Each card animates one-by-one with a staggered delay based on
+          its column position so the diagonal sweep reads cleanly. */}
+      <ul className="mt-20 mx-auto w-[80%] grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16 list-none p-0 m-0">
         {projects.map((project, index) => {
           const num = String(index + 1).padStart(2, '0');
           const stack = project.technologies.join(' / ').toUpperCase();
+          // Stagger delay per card. Cap at 6 cards so a long list doesn't
+          // queue up forever — after that they share the last delay slot.
+          const stepDelay = Math.min(index, 6) * 0.12;
 
           return (
-            <li key={project.title}>
+            <Reveal
+              as="li"
+              key={project.title}
+              direction="up"
+              delay={stepDelay}
+              duration={0.7}
+              amount={0.2}
+              blur={8}
+            >
               <article className="flex flex-col h-full">
                 {/* Number */}
                 <span className="label-mono">{num}</span>
@@ -112,11 +124,10 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                   </div>
                 )}
               </article>
-            </li>
+            </Reveal>
           );
         })}
       </ul>
-      </Reveal>
 
       {/* Bottom hairline divider */}
       <div className="divider-hairline mt-24" />

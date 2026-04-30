@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { Lang, PersonalInfo } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { Reveal, CountUp, SplitWords, ScrollParallax, ScrollScale } from '@/components/animations';
+import { Reveal, CountUp, SplitWords, ScrollParallax, ScrollScale, MagneticButton } from '@/components/animations';
 
 /* ============================================================
    Hero Section — Swiss editorial-minimal
@@ -48,7 +48,7 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
           {/* Headline column */}
           <div>
             <h1
-              className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
+              className="font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
               style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
             >
               <SplitWords text={data.name} stagger={0.08} />
@@ -76,15 +76,15 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
             </Reveal>
           </div>
 
-          {/* Photo — small grayscale square */}
+          {/* Photo — large editorial portrait */}
           <div className="order-first lg:order-last">
-            <ScrollParallax offset={-80}>
+            <ScrollParallax offset={-100}>
               <Image
                 src={data.photo}
                 alt={data.name}
-                width={300}
-                height={300}
-                className="grayscale aspect-square object-cover w-48 h-48 lg:w-56 lg:h-56"
+                width={520}
+                height={650}
+                className="grayscale aspect-[4/5] object-cover w-64 sm:w-72 lg:w-80 xl:w-[26rem]"
                 priority
               />
             </ScrollParallax>
@@ -157,13 +157,28 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
         </div>
         </ScrollScale>
 
-        {/* Social links — pure typography */}
-        <div className="mt-20 flex flex-wrap items-center gap-x-10 gap-y-4">
+        {/* Primary CTA — magnetic editorial button */}
+        <Reveal direction="up" delay={0.4} duration={0.7} className="mt-20">
+          <MagneticButton asChild className="inline-block">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-4 bg-[#0a0a0a] text-white px-10 py-5 hover:bg-[#1a1a1a] transition-colors label-mono"
+              data-i18n-en="LET'S BUILD →"
+              data-i18n-es="CONSTRUYAMOS →"
+            >
+              {lang === 'en' ? "LET'S BUILD" : 'CONSTRUYAMOS'}
+              <span aria-hidden="true" className="text-lg">→</span>
+            </a>
+          </MagneticButton>
+        </Reveal>
+
+        {/* Secondary social links — sutil, debajo del CTA */}
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
           <a
             href={`https://github.com/${data.socials.github}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+            className="label-mono-muted inline-flex items-center gap-1 hover:text-[#0a0a0a] transition-colors"
           >
             GITHUB <span aria-hidden="true">↗</span>
           </a>
@@ -171,13 +186,13 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
             href={data.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+            className="label-mono-muted inline-flex items-center gap-1 hover:text-[#0a0a0a] transition-colors"
           >
             LINKEDIN <span aria-hidden="true">↗</span>
           </a>
           <a
             href={`mailto:${data.email}`}
-            className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+            className="label-mono-muted inline-flex items-center gap-1 hover:text-[#0a0a0a] transition-colors"
           >
             EMAIL <span aria-hidden="true">↗</span>
           </a>

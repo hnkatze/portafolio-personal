@@ -36,7 +36,7 @@ function wrap(min: number, max: number, value: number): number {
 export function Marquee({
   items,
   direction = 'left',
-  speed = 60,
+  speed = 25,
   className,
   separator = ' / ',
 }: MarqueeProps): JSX.Element | null {
@@ -50,10 +50,12 @@ export function Marquee({
     damping: 50,
     stiffness: 400,
   });
+  // Scroll-velocity boost is now subtle: 1000px/s of scroll only adds 40% speed
+  // (was 150%). Keeps the cinematic feel without making the strip turbo-charged.
   const velocityFactor = useTransform(
     smoothVelocity,
     [0, 1000],
-    [0, 1.5],
+    [0, 0.4],
     { clamp: false },
   );
   const x = useTransform(baseX, (v) => `${wrap(-25, -75, v)}%`);

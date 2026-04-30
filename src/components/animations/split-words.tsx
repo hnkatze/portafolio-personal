@@ -20,7 +20,7 @@ export function SplitWords({
   stagger = 0.06,
   className,
   amount = 0.5,
-  once = true,
+  once = false,
 }: SplitWordsProps) {
   const shouldReduceMotion = useReducedMotion();
   const ref = useRef<HTMLSpanElement | null>(null);

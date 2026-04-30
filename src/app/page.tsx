@@ -18,6 +18,7 @@ import { ProjectsSection } from '@/components/journey/projects-section';
 import { TestimonialsSection } from '@/components/journey/testimonials-section';
 import { IntegrationsSection } from '@/components/journey/integrations-section';
 import { ContactSection } from '@/components/journey/contact-section';
+import { EditorialFooter } from '@/components/journey/editorial-footer';
 import { AskCamiloWidget } from '@/components/widgets/ask-camilo-widget';
 import { Marquee } from '@/components/animations';
 
@@ -35,7 +36,7 @@ const tickerStack = [
 function TickerStrip() {
   return (
     <div className="border-t border-b border-[#e4e4e7] bg-white">
-      <Marquee items={tickerStack} speed={50} separator=" / " className="py-3" />
+      <Marquee items={tickerStack} speed={20} separator=" / " className="py-3" />
     </div>
   );
 }
@@ -99,6 +100,7 @@ export default function Home() {
                 <TestimonialsSection testimonials={testimonials} lang={lang} />
                 <IntegrationsSection config={integrationConfig} />
                 <ContactSection data={personalInfo} />
+                <EditorialFooter data={personalInfo} lang={lang} />
               </>
             )}
           </LangBoundary>

@@ -1,43 +1,55 @@
 'use client';
 
 import { useLang } from './i18n-provider';
+import type { Lang } from '@/lib/types';
 
 /**
- * Bilingual toggle button.
- *
- * Matches Astro source JourneyNav.astro lines 20-25 visual style:
- * flex items, gap-1, px-3 py-2, text-sm font-medium, rounded-lg,
- * border border-white/10, hover:border-blue-400/50.
- *
- * Accessible: explicit aria-label announces current language and action.
+ * Editorial bilingual toggle. Mono uppercase, hairline underline on active.
+ * Renders as a single `EN · ES` pair so it reads as typography, not as a switch.
  */
-export function LangToggle() {
+export function LangToggle({ className }: { readonly className?: string }) {
   const { lang, setLang } = useLang();
-  const next = lang === 'en' ? 'es' : 'en';
 
+  return (
+    <div
+      role="group"
+      aria-label="Language"
+      className={`inline-flex items-center gap-2 ${className ?? ''}`}
+    >
+      <LangButton current={lang} value="en" onSelect={setLang}>
+        EN
+      </LangButton>
+      <span aria-hidden="true" className="label-mono-muted text-[#a1a1aa]">
+        ·
+      </span>
+      <LangButton current={lang} value="es" onSelect={setLang}>
+        ES
+      </LangButton>
+    </div>
+  );
+}
+
+interface LangButtonProps {
+  readonly current: Lang;
+  readonly value: Lang;
+  readonly onSelect: (next: Lang) => void;
+  readonly children: string;
+}
+
+function LangButton({ current, value, onSelect, children }: LangButtonProps) {
+  const isActive = current === value;
   return (
     <button
       type="button"
-      aria-label={`Switch language to ${next.toUpperCase()}`}
-      onClick={() => setLang(next)}
-      className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg border border-white/10 hover:border-blue-400/50 transition-all duration-300"
+      onClick={() => onSelect(value)}
+      aria-pressed={isActive}
+      className={`label-mono pb-0.5 transition-colors ${
+        isActive
+          ? 'text-[#0a0a0a] border-b border-[#0a0a0a]'
+          : 'text-[#a1a1aa] border-b border-transparent hover:text-[#0a0a0a]'
+      }`}
     >
-      <span className="text-blue-400">{lang.toUpperCase()}</span>
-      {/* Up/down chevron — decorative, hidden from a11y tree */}
-      <svg
-        className="w-3 h-3 text-gray-500"
-        aria-hidden="true"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        strokeWidth={2}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-        />
-      </svg>
+      {children}
     </button>
   );
 }

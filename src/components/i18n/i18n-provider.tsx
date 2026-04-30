@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type ReactNode,
 } from 'react';
@@ -65,12 +66,16 @@ function applyLangToDom(lang: Lang): void {
 /* ============================================================
    Provider
 
-   Initialization strategy (cacheComponents: true compatible):
-   - Layout is static; passes initialLang="en" (SSR default).
-   - On mount, reads actual lang cookie from document.cookie.
-   - If actual lang differs from SSR default, applies DOM swap immediately.
-   - Pages that need SSR lang resolution use connection() + getLang() and
-     can pass the resolved lang via a prop bridge in Phase 4+.
+   Initialization strategy (cacheComponents-friendly):
+   - Layout is static and passes initialLang="en". SSR and client's
+     first render share the same state — no hydration mismatch.
+   - On mount (post-hydration), useEffect reads the actual cookie.
+     If it differs from initialLang, it updates state + applies the
+     DOM swap for [data-i18n-en|es] leaves + updates <html lang>.
+   - This causes a brief headline flash for cookie='es' users on
+     first paint (server pre-rendered "Experience." via the client
+     component using provider lang='en'; effect then swaps to
+     "Experiencia."), but it is hydration-safe.
    ============================================================ */
 interface I18nProviderProps {
   initialLang: Lang;
@@ -78,29 +83,32 @@ interface I18nProviderProps {
 }
 
 export function I18nProvider({ initialLang, children }: I18nProviderProps) {
-  // Lazy initializer: reads cookie client-side; falls back to initialLang on server
-  // (where document is unavailable). This avoids synchronous setState inside useEffect
-  // (lint: no set-state-in-effect) while still syncing client state with the real cookie.
-  const [lang, setLangState] = useState<Lang>(() => {
-    const fromCookie = readLangCookie();
-    // readLangCookie() returns 'en' on server (no document) — use initialLang in that case
-    // so SSR snapshot is consistent with what the layout requested.
-    return fromCookie !== 'en' ? fromCookie : initialLang;
-  });
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
-  // No on-mount DOM swap: the server already rendered the correct text
-  // via the `lang` prop (resolved from cookie in page.tsx getLang()).
-  // Running applyLangToDom here would collapse React's text-node trees
-  // into a single textContent, causing hydration mismatches in any
-  // element whose children include element nodes, multiple text nodes,
-  // or interpolations (e.g. <blockquote>“{quote}”</blockquote>).
-  // applyLangToDom only runs in setLang() — when the user actually
-  // toggles language, after hydration is complete.
+  useEffect(() => {
+    const fromCookie = readLangCookie();
+    if (fromCookie === lang) return;
+    // Initial sync: ONLY update React state + <html lang>. Do NOT call
+    // applyLangToDom here — mutating the DOM before all client components
+    // finish hydrating causes mismatches (their VDOM still has the
+    // server-rendered text but the DOM has already been swapped).
+    // Components that depend on lang should use useLang() so they re-render
+    // reactively. applyLangToDom only runs on user-triggered setLang.
+    setLangState(fromCookie);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = fromCookie;
+    }
+    // Sync once on mount only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const setLang = (next: Lang) => {
     setLangState(next);
     applyLangToDom(next);
     persistLangCookie(next);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = next;
+    }
     window.dispatchEvent(new CustomEvent('lang-change', { detail: next }));
   };
 

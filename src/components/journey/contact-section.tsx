@@ -39,11 +39,12 @@ export function ContactSection({ data }: ContactSectionProps) {
 
   const handleCvClick = () => {
     if (typeof window === 'undefined') return;
-    const pdfUrl =
+    const pdfPath =
       lang === 'es'
         ? '/cv/Camilo Henriquez — CV Desarrollador Full-Stack.pdf'
         : '/cv/Camilo Henriquez — Full-Stack Engineer CV.pdf';
-    window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    // encodeURI handles spaces + the em-dash (—) used in the filenames.
+    window.open(encodeURI(pdfPath), '_blank', 'noopener,noreferrer');
   };
 
   const buttonLabel = isPending
@@ -86,7 +87,7 @@ export function ContactSection({ data }: ContactSectionProps) {
         </span>
       </div>
 
-      {/* Massive headline + subheading */}
+      {/* Massive headline + subheading + CV CTA row */}
       <div
         className="mt-16"
         style={{
@@ -98,7 +99,7 @@ export function ContactSection({ data }: ContactSectionProps) {
           className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
           style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
         >
-          <SplitWords text={lang === 'en' ? 'Contact.' : 'Contacto.'} />
+          <SplitWords key={lang} text={lang === 'en' ? 'Contact.' : 'Contacto.'} />
         </h2>
 
         <Reveal direction="up" delay={0.15} duration={0.6}>
@@ -111,6 +112,31 @@ export function ContactSection({ data }: ContactSectionProps) {
               ? "Have a project in mind? Let's build something that lasts."
               : '¿Tenés un proyecto en mente? Construyamos algo que perdure.'}
           </p>
+        </Reveal>
+
+        {/* CV download — prominent secondary CTA next to the headline */}
+        <Reveal direction="up" delay={0.25} duration={0.6}>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <button
+              type="button"
+              onClick={handleCvClick}
+              className="label-mono inline-flex items-center gap-2 border border-[#0a0a0a] px-5 py-3 text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white transition-colors"
+              data-i18n-en="DOWNLOAD CV (PDF) ↓"
+              data-i18n-es="DESCARGAR CV (PDF) ↓"
+            >
+              {lang === 'en' ? 'DOWNLOAD CV (PDF)' : 'DESCARGAR CV (PDF)'}
+              <span aria-hidden="true">↓</span>
+            </button>
+            <span
+              className="label-mono-muted"
+              data-i18n-en="EN · ES VERSIONS AVAILABLE"
+              data-i18n-es="VERSIONES EN · ES DISPONIBLES"
+            >
+              {lang === 'en'
+                ? 'EN · ES VERSIONS AVAILABLE'
+                : 'VERSIONES EN · ES DISPONIBLES'}
+            </span>
+          </div>
         </Reveal>
       </div>
 
@@ -238,18 +264,6 @@ export function ContactSection({ data }: ContactSectionProps) {
             )}
           </div>
 
-          {/* CV download row */}
-          <div className="divider-hairline pt-6 mt-2">
-            <button
-              type="button"
-              onClick={handleCvClick}
-              className="label-mono inline-flex items-center gap-2 hover:opacity-70 transition-opacity"
-              data-i18n-en="DOWNLOAD CV ↗"
-              data-i18n-es="DESCARGAR CV ↗"
-            >
-              {lang === 'en' ? 'DOWNLOAD CV ↗' : 'DESCARGAR CV ↗'}
-            </button>
-          </div>
         </form>
 
         {/* ---- Right: Contact info ---- */}
@@ -284,14 +298,8 @@ export function ContactSection({ data }: ContactSectionProps) {
         </div>
       </div>
 
-      {/* Bottom hairline divider */}
-      <div
-        className="divider-hairline mt-24"
-        style={{
-          marginLeft: 'var(--shell-padding-x)',
-          marginRight: 'var(--shell-padding-x)',
-        }}
-      />
+      {/* Bottom spacer — footer provides its own top border */}
+      <div className="mt-24" />
     </section>
   );
 }

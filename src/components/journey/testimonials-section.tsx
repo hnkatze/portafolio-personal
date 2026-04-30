@@ -54,15 +54,16 @@ export function TestimonialsSection({
         </h2>
       </div>
 
-      {/* Testimonials grid */}
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+      {/* Testimonials grid — centered, 80% width on desktop */}
+      <div className="mt-20 mx-auto w-[80%] grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
         {testimonials.map((item, index) => {
           const quoteEn = t(item.quote, 'en');
           const quoteEs = t(item.quote, 'es');
           const roleEn = t(item.role, 'en');
           const roleEs = t(item.role, 'es');
-          const attributionEn = `— ${item.name} · ${roleEn} · ${item.project}`;
-          const attributionEs = `— ${item.name} · ${roleEs} · ${item.project}`;
+          const attributionEn = `— ${item.name} · ${roleEn}`;
+          const attributionEs = `— ${item.name} · ${roleEs}`;
+          const projectUrl = toProjectUrl(item.project);
           const isLast = index === testimonials.length - 1;
 
           return (
@@ -87,7 +88,7 @@ export function TestimonialsSection({
                   {t(item.quote, lang)}
                 </p>
 
-                {/* Attribution — single mono line: NAME · ROLE · COMPANY */}
+                {/* Attribution — single mono line: NAME · ROLE */}
                 <figcaption
                   className="label-mono mt-6"
                   data-i18n-en={attributionEn}
@@ -95,6 +96,22 @@ export function TestimonialsSection({
                 >
                   {lang === 'en' ? attributionEn : attributionEs}
                 </figcaption>
+
+                {/* Visit site link — editorial CTA */}
+                {projectUrl && (
+                  <a
+                    href={projectUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="label-mono mt-4 inline-flex items-center gap-2 text-[#0a0a0a] hover:opacity-70 transition-opacity self-start border-b border-[#0a0a0a] pb-0.5"
+                    data-i18n-en={`VISIT ${item.project.toUpperCase()} ↗`}
+                    data-i18n-es={`VISITAR ${item.project.toUpperCase()} ↗`}
+                    aria-label={`Visit ${item.project} (opens in new tab)`}
+                  >
+                    {lang === 'en' ? 'VISIT' : 'VISITAR'} {item.project.toUpperCase()}{' '}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </figure>
             </Reveal>
           );
@@ -105,4 +122,18 @@ export function TestimonialsSection({
       <div className="divider-hairline mt-24" />
     </section>
   );
+}
+
+/**
+ * Builds a clickable URL from the testimonial's `project` field.
+ * If `project` already includes a protocol, returns it as-is.
+ * If it looks like a bare domain (contains a dot), prepends https://.
+ * Otherwise returns null and no link is rendered.
+ */
+function toProjectUrl(project: string): string | null {
+  const trimmed = project.trim();
+  if (!trimmed) return null;
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  if (/\.[a-z]{2,}$/i.test(trimmed)) return `https://${trimmed}`;
+  return null;
 }

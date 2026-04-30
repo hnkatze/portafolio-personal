@@ -3,6 +3,8 @@ import { Inter, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { env } from '@/lib/env';
 import { I18nProvider } from '@/components/i18n/i18n-provider';
+import { LangToggle } from '@/components/i18n/lang-toggle';
+import { SectionNav } from '@/components/layout/section-nav';
 import { ScrollProgress } from '@/components/animations';
 
 /* ============================================================
@@ -123,12 +125,15 @@ function EditorialHeader() {
           </a>
         </nav>
 
-        <a
-          href="#contact"
-          className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
-        >
-          AGENDAR <span aria-hidden="true">↗</span>
-        </a>
+        <div className="flex items-center gap-6">
+          <LangToggle />
+          <a
+            href="#contact"
+            className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+          >
+            AGENDAR <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
 
       <div className="flex items-center justify-between py-3 px-[var(--shell-padding-x)] border-t border-b border-[#e4e4e7]">
@@ -141,10 +146,12 @@ function EditorialHeader() {
 }
 
 /* ============================================================
-   Root Layout — Server Component
-   - cacheComponents: true compatible (no dynamic APIs read here)
-   - <html lang> defaults to "en"; I18nProvider (client) hydrates
-     to actual cookie value on mount.
+   Root Layout — Static Server Component (cacheComponents-friendly)
+
+   The layout MUST stay static — reading cookies()/headers() here
+   would block the entire route. Instead, the layout passes
+   `initialLang="en"` and the I18nProvider syncs to the actual
+   cookie value in a post-hydration useEffect (see provider).
    ============================================================ */
 export default function RootLayout({
   children,
@@ -153,11 +160,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${geistMono.variable} antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground">
         <I18nProvider initialLang="en">
           <ScrollProgress />
           <EditorialHeader />
+          <SectionNav />
           {children}
         </I18nProvider>
       </body>
