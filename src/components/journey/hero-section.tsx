@@ -114,14 +114,16 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
               className="font-extrabold text-[#0a0a0a] leading-none"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
             >
-              <CountUp to={130} suffix="+" duration={1.8} />
+              <CountUp to={12} suffix="+" duration={1.8} />
             </p>
             <p
               className="label-mono-muted mt-3"
-              data-i18n-en="API ENDPOINTS"
-              data-i18n-es="ENDPOINTS API"
+              data-i18n-en="TECHNOLOGIES IN PRODUCTION"
+              data-i18n-es="TECNOLOGÍAS EN PRODUCCIÓN"
             >
-              {lang === 'en' ? 'API ENDPOINTS' : 'ENDPOINTS API'}
+              {lang === 'en'
+                ? 'TECHNOLOGIES IN PRODUCTION'
+                : 'TECNOLOGÍAS EN PRODUCCIÓN'}
             </p>
           </div>
           <div>
@@ -143,15 +145,22 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
             <p
               className="font-extrabold text-[#0a0a0a] leading-none"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+              aria-label={
+                lang === 'en'
+                  ? 'Active open source contributor'
+                  : 'Contribuyente activo open source'
+              }
             >
-              <CountUp to={2} duration={1.2} />
+              ∞
             </p>
             <p
               className="label-mono-muted mt-3"
-              data-i18n-en="OPEN SOURCE MCP SERVERS"
-              data-i18n-es="MCP SERVERS OPEN SOURCE"
+              data-i18n-en="ACTIVE OPEN SOURCE CONTRIBUTOR"
+              data-i18n-es="CONTRIBUYENTE OPEN SOURCE ACTIVO"
             >
-              {lang === 'en' ? 'OPEN SOURCE MCP SERVERS' : 'MCP SERVERS OPEN SOURCE'}
+              {lang === 'en'
+                ? 'ACTIVE OPEN SOURCE CONTRIBUTOR'
+                : 'CONTRIBUYENTE OPEN SOURCE ACTIVO'}
             </p>
           </div>
         </div>

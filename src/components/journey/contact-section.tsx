@@ -96,7 +96,7 @@ export function ContactSection({ data }: ContactSectionProps) {
         }}
       >
         <h2
-          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
+          className="font-extrabold text-[#0a0a0a] leading-[0.95] tracking-tight"
           style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
         >
           <SplitWords key={lang} text={lang === 'en' ? 'Contact.' : 'Contacto.'} />
