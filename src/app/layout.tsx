@@ -125,9 +125,15 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground">
         <LenisProvider>
           <I18nProvider initialLang="en">
-            <ScrollProgress />
-            <EditorialHeader />
-            <SectionNav />
+            {/* print:hidden — /cv-print renders its own printable page;
+                the site chrome below must never bleed into the exported
+                PDF (scripts/generate-cv-pdf.ts calls page.pdf(), which
+                renders under the print media type). */}
+            <div className="print:hidden">
+              <ScrollProgress />
+              <EditorialHeader />
+              <SectionNav />
+            </div>
             {children}
           </I18nProvider>
         </LenisProvider>

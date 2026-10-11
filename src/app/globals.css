@@ -538,6 +538,18 @@
 }
 
 /* ============================================================
+   Print — /cv-print only (T-11/T-12). Zero @page margin: the page
+   itself (src/app/cv-print/page.tsx) sets its own 14mm/9mm
+   vertical/horizontal padding so the exported PDF's margins are
+   controlled in one place (CSS here), not duplicated as a
+   Playwright page.pdf() margin option too.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* ============================================================
    Reduced motion — global kill switch
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

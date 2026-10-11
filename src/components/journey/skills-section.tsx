@@ -29,13 +29,13 @@ interface QuadrantMeta {
   readonly description: BilingualText;
 }
 
-interface SpecializationItem {
+export interface SpecializationItem {
   readonly name: string;
   readonly note: BilingualText;
   readonly badge: BilingualText;
 }
 
-const LEVEL_LABEL: Record<SkillLevel, BilingualText> = {
+export const LEVEL_LABEL: Record<SkillLevel, BilingualText> = {
   expert: { es: 'PROFUNDO', en: 'DEEP' },
   proficient: { es: 'FUNCIONAL', en: 'WORKING' },
   familiar: { es: 'INICIAL', en: 'STARTING' },
@@ -74,7 +74,7 @@ const BACKEND_META: QuadrantMeta = {
   },
 };
 
-const DATA_CLOUD_META: QuadrantMeta = {
+export const DATA_CLOUD_META: QuadrantMeta = {
   index: '03',
   tag: { es: 'ESPECIALIZACIÓN NUEVA · 2026', en: 'NEW SPECIALIZATION · 2026' },
   title: { es: 'Datos, Cloud & IA', en: 'Data, Cloud & AI' },
@@ -99,7 +99,7 @@ const TOOLS_META: QuadrantMeta = {
 // in PERFIL.md, so the badge reflects what the source actually says
 // (certified / training / consumption context) instead of an invented
 // expert/proficient/familiar rating.
-const DATA_CLOUD_ITEMS: readonly SpecializationItem[] = [
+export const DATA_CLOUD_ITEMS: readonly SpecializationItem[] = [
   {
     name: 'CDC (Change Data Capture)',
     note: {

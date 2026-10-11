@@ -31,7 +31,7 @@ interface CertificationsSectionProps {
   readonly lang: Lang;
 }
 
-interface AnthropicCert {
+export interface AnthropicCert {
   readonly ref: string;
   readonly title: string;
   readonly verifyUrl?: string;
@@ -41,7 +41,7 @@ interface AnthropicCert {
 // Introduction to MCP and Claude Code in Action have a public Skilljar
 // link; the other two are left without one, per the task's instruction
 // to never invent a verification link that doesn't exist in the source.
-const ANTHROPIC_CERTS: readonly AnthropicCert[] = [
+export const ANTHROPIC_CERTS: readonly AnthropicCert[] = [
   {
     ref: 'ANTH-01 // MCP',
     title: 'Introduction to Model Context Protocol',
@@ -62,7 +62,7 @@ const ANTHROPIC_CERTS: readonly AnthropicCert[] = [
   },
 ];
 
-interface TrainingRow {
+export interface TrainingRow {
   readonly course: string;
   readonly issuer: string;
   readonly year: string;
@@ -71,7 +71,7 @@ interface TrainingRow {
 // Verbatim from PERFIL.md "Formación y cursos completados" table, same
 // order. No invented subtitle/modality column — PERFIL.md's table only
 // has course, issuer, and year.
-const TRAINING: readonly TrainingRow[] = [
+export const TRAINING: readonly TrainingRow[] = [
   {
     course: 'Getting Started with Amazon Connect — Customer Agentic CX Designer (ACXD)',
     issuer: 'AWS Training & Certification',
