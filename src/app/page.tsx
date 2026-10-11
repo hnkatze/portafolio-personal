@@ -21,7 +21,6 @@ import { IntegrationsSection } from '@/components/journey/integrations-section';
 import { CertificationsSection } from '@/components/journey/certifications-section';
 import { ContactSection } from '@/components/journey/contact-section';
 import { EditorialFooter } from '@/components/journey/editorial-footer';
-import { AskCamiloWidget } from '@/components/widgets/ask-camilo-widget';
 import { Marquee } from '@/components/animations';
 import { TECH_ICONS } from '@/components/icons/tech-icons';
 
@@ -95,7 +94,7 @@ function SectionsFallback() {
  * Home page — Server Component.
  *
  * Architecture (cacheComponents: true / dynamicIO):
- * - Static shell: EditorialHeader (in layout) + AskCamiloWidget (client).
+ * - Static shell: EditorialHeader (in layout).
  * - Dynamic subtree: all sections that need lang cookie resolution are wrapped
  *   in <Suspense> around <LangBoundary>, which calls connection() + getLang()
  *   to opt into request-time rendering.
@@ -126,8 +125,6 @@ export default function Home() {
           </LangBoundary>
         </Suspense>
       </main>
-
-      <AskCamiloWidget />
     </>
   );
 }
