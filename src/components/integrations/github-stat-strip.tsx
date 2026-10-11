@@ -99,26 +99,30 @@ export async function GitHubStatStrip({ username, lang = 'en' }: GitHubStatStrip
   } as const;
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-b border-[#e4e4e7] py-10">
+    <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-b border-border-hairline py-10">
       <Metric
         value={<CountUp to={stats.totalRepos} duration={1.4} />}
         labelEn={labels.repos.en}
         labelEs={labels.repos.es}
+        lang={lang}
       />
       <Metric
         value={<CountUp to={stats.totalStars} duration={1.6} />}
         labelEn={labels.stars.en}
         labelEs={labels.stars.es}
+        lang={lang}
       />
       <Metric
         value={<span>{stats.primaryLang}</span>}
         labelEn={labels.lang.en}
         labelEs={labels.lang.es}
+        lang={lang}
       />
       <Metric
         value={<CountUp to={stats.followers} duration={1.2} />}
         labelEn={labels.followers.en}
         labelEs={labels.followers.es}
+        lang={lang}
       />
     </div>
   );
@@ -128,14 +132,15 @@ interface MetricProps {
   readonly value: React.ReactNode;
   readonly labelEn: string;
   readonly labelEs: string;
+  readonly lang: Lang;
 }
 
-function Metric({ value, labelEn, labelEs }: MetricProps) {
+function Metric({ value, labelEn, labelEs, lang }: MetricProps) {
   return (
-    <div>
+    <div className="min-w-0">
       <p
-        className="font-extrabold text-[#0a0a0a] leading-none"
-        style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
+        className="font-extrabold text-text-primary leading-none truncate"
+        style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)' }}
       >
         {value}
       </p>
@@ -144,7 +149,7 @@ function Metric({ value, labelEn, labelEs }: MetricProps) {
         data-i18n-en={labelEn}
         data-i18n-es={labelEs}
       >
-        {labelEn}
+        {lang === 'en' ? labelEn : labelEs}
       </p>
     </div>
   );
