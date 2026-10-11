@@ -19,7 +19,7 @@ export function LangToggle({ className }: { readonly className?: string }) {
       <LangButton current={lang} value="en" onSelect={setLang}>
         EN
       </LangButton>
-      <span aria-hidden="true" className="label-mono-muted text-[#a1a1aa]">
+      <span aria-hidden="true" className="text-label-mono text-text-muted">
         ·
       </span>
       <LangButton current={lang} value="es" onSelect={setLang}>
@@ -43,10 +43,10 @@ function LangButton({ current, value, onSelect, children }: LangButtonProps) {
       type="button"
       onClick={() => onSelect(value)}
       aria-pressed={isActive}
-      className={`label-mono pb-0.5 transition-colors ${
+      className={`text-label-mono pb-0.5 transition-colors ${
         isActive
-          ? 'text-[#0a0a0a] border-b border-[#0a0a0a]'
-          : 'text-[#a1a1aa] border-b border-transparent hover:text-[#0a0a0a]'
+          ? 'text-text-primary border-b border-text-primary'
+          : 'text-text-muted border-b border-transparent hover:text-text-primary'
       }`}
     >
       {children}

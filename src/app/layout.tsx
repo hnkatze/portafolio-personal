@@ -1,28 +1,38 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Geist_Mono } from 'next/font/google';
+import { Space_Grotesk, Hanken_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { env } from '@/lib/env';
 import { I18nProvider } from '@/components/i18n/i18n-provider';
-import { LangToggle } from '@/components/i18n/lang-toggle';
 import { SectionNav } from '@/components/layout/section-nav';
+import { EditorialHeader } from '@/components/layout/editorial-header';
 import { ScrollProgress } from '@/components/animations';
+import { LenisProvider } from '@/components/lenis-provider';
 
 /* ============================================================
-   Fonts — Inter (body/headings, variable 100-900) + Geist Mono
-   (labels, metadata, code). CSS variables injected on <html>;
+   Fonts — Swiss editorial system (Stitch design tokens):
+   Space Grotesk (headlines) + Hanken Grotesk (body) + JetBrains Mono
+   (metadata/labels/indices). CSS variables injected on <html>;
    consumed by globals.css @theme.
    ============================================================ */
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-space-grotesk',
   display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ['600', '700'],
 });
 
-const geistMono = Geist_Mono({
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-hanken-grotesk',
   display: 'swap',
+  weight: ['400'],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+  weight: ['400', '500', '600'],
 });
 
 /* ============================================================
@@ -91,59 +101,9 @@ export const metadata: Metadata = {
    Viewport — editorial light theme
    ============================================================ */
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
-  colorScheme: 'light',
+  themeColor: '#0D0D11',
+  colorScheme: 'dark',
 };
-
-/* ============================================================
-   EditorialHeader — sticky top bar (server component, no interactivity)
-   Two rows:
-     Row 1: logo + primary nav + CTA
-     Row 2: section number + tagline + EST. label  (matches reference)
-   ============================================================ */
-function EditorialHeader() {
-  return (
-    <header className="sticky top-0 z-50 bg-white">
-      <div className="flex items-center justify-between h-16 px-[var(--shell-padding-x)]">
-        <a href="/" className="flex items-center gap-3" aria-label="Camilo Henriquez — Home">
-          <span aria-hidden="true" className="block h-3 w-3 bg-[#0a0a0a]" />
-          <span className="label-mono">CAMILO HENRIQUEZ</span>
-        </a>
-
-        <nav aria-label="Primary" className="hidden md:flex items-center gap-10">
-          <a href="#about" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
-            SOBRE MÍ
-          </a>
-          <a href="#experience" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
-            EXPERIENCIA
-          </a>
-          <a href="#projects" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
-            PROYECTOS
-          </a>
-          <a href="#contact" className="label-mono-muted hover:text-[#1a1a1a] transition-colors">
-            CONTACTO
-          </a>
-        </nav>
-
-        <div className="flex items-center gap-6">
-          <LangToggle />
-          <a
-            href="#contact"
-            className="label-mono inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
-          >
-            AGENDAR <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between py-3 px-[var(--shell-padding-x)] border-t border-b border-[#e4e4e7]">
-        <span className="label-mono-muted">01</span>
-        <span className="label-mono-muted hidden md:inline">FULL-STACK ENGINEER</span>
-        <span className="label-mono-muted">EST. 2020</span>
-      </div>
-    </header>
-  );
-}
 
 /* ============================================================
    Root Layout — Static Server Component (cacheComponents-friendly)
@@ -159,16 +119,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} antialiased`}
+      className={`${spaceGrotesk.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground">
-        <I18nProvider initialLang="en">
-          <ScrollProgress />
-          <EditorialHeader />
-          <SectionNav />
-          {children}
-        </I18nProvider>
+        <LenisProvider>
+          <I18nProvider initialLang="en">
+            <ScrollProgress />
+            <EditorialHeader />
+            <SectionNav />
+            {children}
+          </I18nProvider>
+        </LenisProvider>
       </body>
     </html>
   );
