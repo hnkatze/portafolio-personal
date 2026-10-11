@@ -18,8 +18,8 @@ export const personalInfo: PersonalInfo = {
     en: 'Full-Stack Engineer & AI Tooling',
   },
   summary: {
-    es: 'Desarrollador Full-Stack con 4+ años de experiencia. En mi trabajo actual (CIT) me enfoco en frontend y mobile con Angular (v17–v21), Next.js, Astro, Lit Element y Flutter. En paralelo, como freelance, construyo sistemas completos — incluyendo una plataforma gubernamental con API NestJS de 130+ endpoints sobre PostgreSQL. Autor de MCP servers open source para integrar IA en flujos de desarrollo.',
-    en: 'Full-Stack developer with 4+ years of experience. In my current role (CIT) I focus on frontend and mobile with Angular (v17–v21), Next.js, Astro, Lit Element, and Flutter. In parallel, as a freelancer, I build complete systems — including a government platform with a 130+ endpoint NestJS API on PostgreSQL. Author of open source MCP servers for integrating AI into dev workflows.',
+    es: 'Desarrollador Full-Stack con 4+ años de experiencia. En mi trabajo actual (CIT) me enfoco en frontend y mobile con Angular (v17–v21), Next.js, Astro, Lit Element y Flutter. En paralelo, como freelance, soy responsable de la arquitectura full-stack en sistemas multi-frontend para clientes empresariales. Autor de MCP servers open source para integrar IA en flujos de desarrollo.',
+    en: 'Full-Stack developer with 4+ years of experience. In my current role (CIT) I focus on frontend and mobile with Angular (v17–v21), Next.js, Astro, Lit Element, and Flutter. In parallel, as a freelancer, I’m responsible for full-stack architecture on multi-frontend systems for enterprise clients. Author of open source MCP servers for integrating AI into dev workflows.',
   },
   email: 'contact@camilohenriquez.com',
   location: 'Remote / Worldwide',
@@ -331,8 +331,8 @@ export const experience: Experience[] = [
     },
     highlights: [
       {
-        es: 'Arquitectura full-stack para sistema de gobierno municipal: API REST NestJS con 130+ endpoints, PostgreSQL + PostGIS, sirviendo 5 frontends (4 Angular 21 + 1 Astro)',
-        en: 'Full-stack architecture for municipal government system: NestJS REST API with 130+ endpoints, PostgreSQL + PostGIS, serving 5 frontends (4 Angular 21 + 1 Astro)',
+        es: 'Responsable de la arquitectura full-stack en proyectos multi-frontend para clientes empresariales (APIs REST con NestJS, PostgreSQL)',
+        en: 'Responsible for full-stack architecture on multi-frontend projects for enterprise clients (NestJS REST APIs, PostgreSQL)',
       },
       {
         es: '25+ proyectos entregados con 100% de satisfacción del cliente: ONG, ecommerce, talleres de servicios y herramientas para desarrolladores',

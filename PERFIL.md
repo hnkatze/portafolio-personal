@@ -97,6 +97,9 @@ Soluciones web end-to-end para clientes internacionales: frontend (React, Next.j
 - Scrunshes HN — landing social-commerce (Next.js).
 - Portfolio — portafolio personal, Astro SSG con GSAP.
 
+**Privados** (bajo NDA/confidencialidad de cliente, sin repo/URL pública)
+- 10+ proyectos privados entregados: apps móviles, sitios web, APIs, servidores MCP, y automatizaciones con n8n/Zapier.
+
 ## Formación y cursos completados
 
 > ⚠️ Son *completion certificates* de cursos/labs (AWS Training & Certification, AWS Skill Builder, Udemy, Platzi) — **no son certificaciones vendor-proctored** como AWS Certified Solutions Architect/Developer Associate. En CV/LinkedIn deben figurar como "formación completada", no como "AWS Certified".
