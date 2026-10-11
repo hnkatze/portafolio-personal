@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useRef, type JSX } from 'react';
+import { Fragment, useRef, type JSX, type ReactNode } from 'react';
 import {
   motion,
   useAnimationFrame,
@@ -18,6 +18,12 @@ export interface MarqueeProps {
   readonly speed?: number;
   readonly className?: string;
   readonly separator?: string;
+  /** Lookup of item label -> node rendered before it (e.g. an icon).
+   *  A plain object, not a function — Marquee is used from Server
+   *  Components, and functions can't cross the RSC boundary, but a
+   *  pre-resolved ReactNode value can. Decorative; the screen-reader
+   *  fallback list stays text-only regardless. */
+  readonly icons?: Readonly<Record<string, ReactNode>>;
 }
 
 /**
@@ -39,6 +45,7 @@ export function Marquee({
   speed = 25,
   className,
   separator = ' / ',
+  icons,
 }: MarqueeProps): JSX.Element | null {
   const reduce = useReducedMotion() ?? false;
   const baseVelocity = direction === 'left' ? -speed : speed;
@@ -106,7 +113,10 @@ export function Marquee({
         >
           {items.map((item, index) => (
             <Fragment key={`${item}-${index}`}>
-              <span className="label-mono-muted">{item}</span>
+              <span className="label-mono-muted inline-flex items-center gap-2">
+                {icons?.[item]}
+                {item}
+              </span>
               {index < items.length - 1 ? (
                 <span className="label-mono-muted" aria-hidden="true">
                   {separator}
@@ -128,7 +138,10 @@ export function Marquee({
     >
       {items.map((item, index) => (
         <Fragment key={`block-${key}-${item}-${index}`}>
-          <span className="label-mono-muted whitespace-nowrap">{item}</span>
+          <span className="label-mono-muted inline-flex items-center gap-2 whitespace-nowrap">
+            {icons?.[item]}
+            {item}
+          </span>
           {index < items.length - 1 ? (
             <span
               className="label-mono-muted mx-2"

@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import { connection } from 'next/server';
 import { getLang } from '@/lib/cookies';
 import {
@@ -6,6 +6,7 @@ import {
   skills,
   projects,
   experience,
+  education,
   integrationConfig,
   testimonials,
 } from '@/lib/data';
@@ -17,10 +18,12 @@ import { ExperienceSection } from '@/components/journey/experience-section';
 import { ProjectsSection } from '@/components/journey/projects-section';
 import { TestimonialsSection } from '@/components/journey/testimonials-section';
 import { IntegrationsSection } from '@/components/journey/integrations-section';
+import { CertificationsSection } from '@/components/journey/certifications-section';
 import { ContactSection } from '@/components/journey/contact-section';
 import { EditorialFooter } from '@/components/journey/editorial-footer';
 import { AskCamiloWidget } from '@/components/widgets/ask-camilo-widget';
 import { Marquee } from '@/components/animations';
+import { TECH_ICONS } from '@/components/icons/tech-icons';
 
 /* ============================================================
    TickerStrip — full-bleed editorial marquee between sections.
@@ -33,10 +36,26 @@ const tickerStack = [
   'Playwright', 'Vitest', 'MCP', 'OpenAPI',
 ] as const;
 
+// Pre-resolved per Server Component constraints: Marquee is a Client
+// Component, and functions can't cross the RSC boundary — a plain
+// object of ReactNode values can, so the icon lookup is built here.
+const tickerIcons: Record<string, ReactNode> = Object.fromEntries(
+  Object.entries(TECH_ICONS).map(([name, Icon]) => [
+    name,
+    <Icon key={name} className="h-3.5 w-3.5 shrink-0" />,
+  ]),
+);
+
 function TickerStrip() {
   return (
-    <div className="border-t border-b border-[#e4e4e7] bg-white">
-      <Marquee items={tickerStack} speed={20} separator=" / " className="py-3" />
+    <div className="border-t border-b border-border-hairline bg-canvas-subtle">
+      <Marquee
+        items={tickerStack}
+        speed={20}
+        separator=" / "
+        className="py-3"
+        icons={tickerIcons}
+      />
     </div>
   );
 }
@@ -93,12 +112,13 @@ export default function Home() {
             {(lang) => (
               <>
                 <HeroSection data={personalInfo} lang={lang} />
-                <SkillsSection skills={skills} />
+                <SkillsSection skills={skills} lang={lang} />
                 <TickerStrip />
                 <ExperienceSection experience={experience} lang={lang} />
                 <ProjectsSection projects={projects} lang={lang} />
                 <TestimonialsSection testimonials={testimonials} lang={lang} />
                 <IntegrationsSection config={integrationConfig} />
+                <CertificationsSection education={education} lang={lang} />
                 <ContactSection data={personalInfo} />
                 <EditorialFooter data={personalInfo} lang={lang} />
               </>
