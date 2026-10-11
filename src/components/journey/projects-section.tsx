@@ -84,6 +84,11 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
   const privateNoteEs =
     'MCP servers privados construidos para consumir Amazon Athena (consultas analíticas), servicios de autenticación y otras fuentes internas, exponiéndolas como herramientas para asistentes de IA en flujos de trabajo específicos de cliente/empresa.';
 
+  const privateClientNoteEn =
+    '10+ private projects delivered under client NDA: mobile apps, websites, APIs, MCP servers, and automation workflows with n8n/Zapier.';
+  const privateClientNoteEs =
+    '10+ proyectos privados entregados bajo NDA de cliente: apps móviles, sitios web, APIs, servidores MCP, y automatizaciones con n8n/Zapier.';
+
   return (
     <section id="projects" className="relative bg-canvas-base">
       {/* Dossier breadcrumb bar — mirrors Skills/Experience "0N /" pattern */}
@@ -239,6 +244,33 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                     data-i18n-es={privateNoteEs}
                   >
                     {lang === 'en' ? privateNoteEn : privateNoteEs}
+                  </p>
+                </div>
+              )}
+
+              {/* Private client work note — sourced verbatim from PERFIL.md
+                  "Proyectos destacados > Privados" (not data.ts entries; no
+                  public repo/URL exists under client NDA, informational only). */}
+              {group.key === 'client-work' && (
+                <div className="mt-lg border border-border-hairline bg-canvas-subtle p-md">
+                  <div className="mb-xs flex items-center justify-between border-b border-border-hairline pb-xs">
+                    <span
+                      className="text-label-index uppercase tracking-widest text-text-muted"
+                      data-i18n-en="PRIVATE CLIENT WORK"
+                      data-i18n-es="TRABAJO PRIVADO DE CLIENTES"
+                    >
+                      {lang === 'en' ? 'PRIVATE CLIENT WORK' : 'TRABAJO PRIVADO DE CLIENTES'}
+                    </span>
+                    <span className="text-label-index text-accent-vermilion">
+                      NDA
+                    </span>
+                  </div>
+                  <p
+                    className="text-body-sm leading-relaxed text-text-secondary"
+                    data-i18n-en={privateClientNoteEn}
+                    data-i18n-es={privateClientNoteEs}
+                  >
+                    {lang === 'en' ? privateClientNoteEn : privateClientNoteEs}
                   </p>
                 </div>
               )}
