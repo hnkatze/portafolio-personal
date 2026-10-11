@@ -224,16 +224,6 @@ export const projects: Project[] = [
   },
   // --- Client & Real-World Projects ---
   {
-    title: 'El Carbonal FC',
-    description: {
-      es: 'Sitio web oficial del club de fútbol El Carbonal FC de Bonito Oriental, Honduras. Con calendario de partidos, roster de jugadores, resultados en vivo, noticias y galería. Formando jugadores y personas desde 2017.',
-      en: 'Official website for El Carbonal FC football club from Bonito Oriental, Honduras. Features match schedules, player rosters, live scores, news, and gallery. Forming players and people since 2017.',
-    },
-    technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Vercel'],
-    projectUrl: 'https://elcarbonalfc.vercel.app',
-    repoUrl: 'https://github.com/hnkatze/carbonal',
-  },
-  {
     title: 'TacticBoard',
     description: {
       es: 'Pizarra táctica interactiva para fútbol 8. Permite agregar jugadores, crear formaciones, dibujar jugadas con herramientas de dibujo y exportar diagramas tácticos como imágenes.',
@@ -281,15 +271,6 @@ export const projects: Project[] = [
     },
     technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Vercel'],
     projectUrl: 'https://www.scrunsheshn.com',
-  },
-  {
-    title: 'Template Catalog',
-    description: {
-      es: 'Catálogo profesional de templates web con más de 10 diseños para e-commerce, hoteles, restaurantes, eventos y más. Construido como showcase de servicios de desarrollo web con diseños modernos y funcionales.',
-      en: 'Professional web template catalog with 10+ designs for e-commerce, hotels, restaurants, events, and more. Built as a web development services showcase with modern, functional designs.',
-    },
-    technologies: ['Next.js', 'TailwindCSS', 'TypeScript', 'Vercel'],
-    projectUrl: 'https://templates.camilohenriquez.com',
   },
   {
     title: 'Portfolio',
