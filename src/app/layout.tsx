@@ -125,15 +125,17 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground">
         <LenisProvider>
           <I18nProvider initialLang="en">
-            {/* print:hidden — /cv-print renders its own printable page;
-                the site chrome below must never bleed into the exported
-                PDF (scripts/generate-cv-pdf.ts calls page.pdf(), which
-                renders under the print media type). */}
-            <div className="print:hidden">
-              <ScrollProgress />
-              <EditorialHeader />
-              <SectionNav />
-            </div>
+            {/* print:hidden on each component (not a shared wrapper) — a
+                wrapper div here would become EditorialHeader's sticky
+                containing block, collapsed to just the header's own
+                height instead of the full page, breaking position:sticky.
+                /cv-print renders its own printable page; this site chrome
+                must never bleed into the exported PDF
+                (scripts/generate-cv-pdf.ts calls page.pdf() under the
+                print media type). */}
+            <ScrollProgress className="print:hidden" />
+            <EditorialHeader />
+            <SectionNav />
             {children}
           </I18nProvider>
         </LenisProvider>

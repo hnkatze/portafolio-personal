@@ -26,7 +26,7 @@ export function EditorialHeader() {
   const { lang } = useLang();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border-hairline bg-canvas-base/95 backdrop-blur-sm">
+    <header className="print:hidden sticky top-0 z-50 border-b border-border-hairline bg-canvas-base/95 backdrop-blur-sm">
       <div className="flex items-center justify-between h-16 gap-4 px-[var(--shell-padding-x)]">
         <a
           href="/"

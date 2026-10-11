@@ -63,7 +63,7 @@ export function SectionNav() {
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 pointer-events-none"
+      className="print:hidden hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 pointer-events-none"
     >
       {SECTION_NAV_ITEMS.map((item) => {
         const isActive = activeId === item.id;
