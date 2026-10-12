@@ -1,6 +1,6 @@
 import type { BilingualText, Lang, PersonalInfo } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { CountUp, Reveal, SplitWords } from '@/components/animations';
+import { CountUp, Reveal } from '@/components/animations';
 
 /* ============================================================
    Hero Section — Swiss Editorial "Perfil" dossier
@@ -204,29 +204,35 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
 
           {/* Right — primary editorial type block */}
           <div className="flex flex-col gap-xl lg:col-span-8">
+            {/* Name/title/summary render immediately, unanimated — this is
+                the hero's LCP candidate block. A Framer Motion mount/inView
+                reveal here (SplitWords/Reveal, used everywhere else in the
+                hero) starts at opacity:0 and only paints once JS hydrates
+                and the transition finishes; verified via a real Chrome
+                performance trace (chrome-devtools MCP) that this exact
+                h1/p were 99.7% "render delay" — 2.7s of the page's 2.74s
+                LCP on throttled mobile came from waiting on the animation,
+                not from loading anything. Below-the-fold Reveal usage is
+                unaffected (those elements aren't LCP candidates). */}
             <h1 className="text-display-hero text-text-primary leading-[0.95]">
-              <SplitWords text={data.name} stagger={0.08} />
+              {data.name}
             </h1>
 
-            <Reveal direction="up" delay={0.15} duration={0.6}>
-              <p
-                className="text-headline-lg text-text-secondary"
-                data-i18n-en={titleEn}
-                data-i18n-es={titleEs}
-              >
-                {t(data.title, lang)}
-              </p>
-            </Reveal>
+            <p
+              className="text-headline-lg text-text-secondary"
+              data-i18n-en={titleEn}
+              data-i18n-es={titleEs}
+            >
+              {t(data.title, lang)}
+            </p>
 
-            <Reveal direction="up" delay={0.3} duration={0.6}>
-              <p
-                className="max-w-[48rem] text-body-lead text-text-secondary"
-                data-i18n-en={summaryEn}
-                data-i18n-es={summaryEs}
-              >
-                {t(data.summary, lang)}
-              </p>
-            </Reveal>
+            <p
+              className="max-w-[48rem] text-body-lead text-text-secondary"
+              data-i18n-en={summaryEn}
+              data-i18n-es={summaryEs}
+            >
+              {t(data.summary, lang)}
+            </p>
 
             <Reveal
               direction="up"
