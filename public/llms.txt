@@ -1,0 +1,42 @@
+# Camilo Henriquez
+
+> Full-Stack Engineer & AI Tooling. 4+ years of experience building web
+> applications and open source MCP (Model Context Protocol) servers for AI
+> developer workflows. Based in Honduras, working remotely worldwide.
+
+Camilo is a full-stack developer currently at Creative Information
+Technologies (CIT), focused on frontend and mobile with Angular (v17–v21),
+Next.js, Astro, Lit Element, and Flutter. In parallel, as a freelancer since
+2021, he is responsible for full-stack architecture on multi-frontend
+systems for enterprise clients (NestJS REST APIs, PostgreSQL), and has
+delivered 25+ projects with 100% client satisfaction. He is the author of
+several open source MCP servers that expose developer tools (OpenAPI/Swagger
+specs, PrimeNG component docs) as AI assistant tools.
+
+## Core stack
+
+- Frontend: React, Next.js, TypeScript, Angular, Astro, Lit Element, Flutter
+- Backend: NestJS, PostgreSQL, SQL Server, MongoDB, Firestore, Firebase
+  Realtime Database, DynamoDB, Go, C#
+- AI tooling: Model Context Protocol (MCP) servers, AI developer workflow
+  integrations
+- Data/cloud (2026 specialization): CDC, AWS DMS, Amazon Athena, RAG, Amazon
+  Connect / ACXD
+
+## Links
+
+- Portfolio: https://camilohenriquez.com
+- GitHub: https://github.com/hnkatze
+- LinkedIn: https://www.linkedin.com/in/hnkatze/
+- Contact: contact@camilohenriquez.com
+
+## Notes for AI agents
+
+- The portfolio is a single page (camilohenriquez.com); all sections —
+  profile, stack, experience, projects, testimonials, integrations,
+  certifications, contact — live at that one URL.
+- Language toggle (EN/ES) is a client-side swap on the same URL, not a
+  separate path, so there is no /es route to crawl.
+- /cv-print is a print-only utility route used to generate downloadable CV
+  PDFs and is excluded from indexing (see /robots.txt) — it duplicates
+  homepage content in a different layout, not a distinct page.
