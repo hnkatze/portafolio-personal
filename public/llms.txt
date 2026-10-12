@@ -25,10 +25,10 @@ specs, PrimeNG component docs) as AI assistant tools.
 
 ## Links
 
-- Portfolio: https://camilohenriquez.com
-- GitHub: https://github.com/hnkatze
-- LinkedIn: https://www.linkedin.com/in/hnkatze/
-- Contact: contact@camilohenriquez.com
+- [Portfolio](https://camilohenriquez.com): profile, stack, experience, projects, testimonials, integrations, certifications, and contact — all on this one page.
+- [GitHub](https://github.com/hnkatze): open source projects and MCP servers.
+- [LinkedIn](https://www.linkedin.com/in/hnkatze/): professional profile and work history.
+- [Contact](mailto:contact@camilohenriquez.com): direct email.
 
 ## Notes for AI agents
 
