@@ -295,7 +295,7 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                   {t(meta.description, lang)}
                 </p>
 
-                <div className="mt-auto flex flex-col divide-y divide-border-hairline">
+                <div className="mt-lg flex flex-col divide-y divide-border-hairline">
                   {items.map((skill, i) => (
                     <div
                       key={skill.name}
@@ -374,7 +374,7 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                 {t(DATA_CLOUD_META.description, lang)}
               </p>
 
-              <div className="mt-auto flex flex-col divide-y divide-border-hairline">
+              <div className="mt-lg flex flex-col divide-y divide-border-hairline">
                 {DATA_CLOUD_ITEMS.map((item, i) => (
                   <div
                     key={item.name}
@@ -445,7 +445,7 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                 {t(TOOLS_META.description, lang)}
               </p>
 
-              <div className="mt-auto flex flex-col divide-y divide-border-hairline">
+              <div className="mt-lg flex flex-col divide-y divide-border-hairline">
                 {tools.map((skill, i) => (
                   <div
                     key={skill.name}

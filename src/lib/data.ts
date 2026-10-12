@@ -129,6 +129,36 @@ export const skills: Skill[] = [
     icon: 'https://icon.icepanel.io/Technology/svg/C%23-%28CSharp%29.svg',
     category: 'backend',
   },
+  {
+    name: 'SQL Server',
+    level: 'proficient',
+    icon: 'https://icon.icepanel.io/Technology/svg/Microsoft-SQL-Server.svg',
+    category: 'backend',
+  },
+  {
+    name: 'MongoDB',
+    level: 'proficient',
+    icon: 'https://icon.icepanel.io/Technology/svg/MongoDB.svg',
+    category: 'backend',
+  },
+  {
+    name: 'Firestore',
+    level: 'proficient',
+    icon: 'https://icon.icepanel.io/Technology/svg/Firebase.svg',
+    category: 'backend',
+  },
+  {
+    name: 'Firebase Realtime Database',
+    level: 'proficient',
+    icon: 'https://icon.icepanel.io/Technology/svg/Firebase.svg',
+    category: 'backend',
+  },
+  {
+    name: 'DynamoDB',
+    level: 'proficient',
+    icon: 'https://icon.icepanel.io/Technology/svg/AWS-DynamoDB.svg',
+    category: 'backend',
+  },
   // --- Tools ---
   {
     name: 'Git',
