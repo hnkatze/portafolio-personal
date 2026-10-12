@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cv:pdf": "tsx scripts/generate-cv-pdf.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
     "@phosphor-icons/react": "^2.1.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "lenis": "^1.3.23",
     "motion": "^12.38.0",
     "next": "16.2.4",
     "react": "19.2.4",
@@ -29,7 +31,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "playwright": "^1.64.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

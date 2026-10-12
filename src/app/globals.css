@@ -1,86 +1,127 @@
 /* ============================================================
    Portafolio Personal — Camilo Henriquez
-   Tailwind v4 + editorial light theme
+   Tailwind v4 + Swiss Editorial dark system ("International
+   Typographic Modernism" — Stitch design system)
 
-   Editorial system tokens (Fase 1 of redesign):
-   - Background: pure white #ffffff
-   - Foreground: near-black #1a1a1a (rgb 26,26,26 — matches reference)
-   - Contrast surface: black #0a0a0a (used by sections like "Método")
-   - Borders: hairline #e4e4e7
-   - Type: Inter (sans, weights 100-900) + Geist Mono (mono, labels)
-   - Radius: sharp (0-12px), no decorative rounding
+   Design tokens (Fase 2 of redesign, from Stitch):
+   - Dark mode only — there is no light mode.
+   - Canvas: #0D0D11 / #131318 / #18181F
+   - Text: #F4F4F6 / #A1A1AA / #63636E
+   - Hairlines: #24242D / #1C1C24 (replace shadows/cards — depth
+     comes from tonal surface contrast + 1px borders only)
+   - Accents: #E63926 vermilion (sparing — live states, critical
+     CTAs, indices) and #2D68FF cobalt (MCP/certification markers)
+   - Type: Space Grotesk (headlines) + Hanken Grotesk (body) +
+     JetBrains Mono (metadata/labels/indices) via next/font
+   - Radius: 0 everywhere — intentional Swiss/constructivist
+     squared corners, not a bug to "fix" in review.
 
-   The dark psychedelic glassmorphism utilities below are NEUTRALIZED
-   (kept by name for component compat, restyled to editorial neutrals)
-   and will be removed entirely in Fase 3 when sections are rewritten.
+   LEGACY note: the compat color aliases and neutralized glass/
+   gradient utilities below keep pre-redesign section components
+   (hero, skills, experience, projects, contact — rewritten in
+   T-03..T-08) rendering without crashing on the new dark tokens.
+   They will be removed once every section is rewritten.
    ============================================================ */
 
 @import "tailwindcss";
 @import "tw-animate-css";
 
 /* ============================================================
-   @theme — editorial design tokens
+   @theme — Swiss editorial design tokens
    ============================================================ */
 @theme {
-  /* Fonts — preserved from prior layout (Inter + Geist Mono via next/font) */
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* Fonts — Space Grotesk (headlines) + Hanken Grotesk (body) +
+     JetBrains Mono (metadata/labels/indices) via next/font */
+  --font-sans: var(--font-hanken-grotesk), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-hanken-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
-  /* Base — editorial light */
-  --color-background: #ffffff;
-  --color-foreground: #1a1a1a;
+  /* Canvas (dark mode only) */
+  --color-canvas-base: #0d0d11;
+  --color-canvas-subtle: #131318;
+  --color-canvas-elevated: #18181f;
 
-  /* Surfaces */
-  --color-surface: #ffffff;
-  --color-surface-contrast: #0a0a0a;
-  --color-surface-contrast-foreground: #f5f5f5;
+  /* Text */
+  --color-text-primary: #f4f4f6;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #63636e;
 
-  /* Muted / subtle */
-  --color-muted: #f4f4f5;
-  --color-muted-foreground: #71717a;
+  /* Borders — hairlines replace shadows/cards */
+  --color-border-hairline: #24242d;
+  --color-border-subtle: #1c1c24;
 
-  /* Borders */
-  --color-border: #e4e4e7;
-  --color-border-strong: #1a1a1a;
+  /* Accents — use sparingly */
+  --color-accent-vermilion: #e63926;
+  --color-accent-vermilion-subtle: #2b1614;
+  --color-accent-cobalt: #2d68ff;
+  --color-accent-cobalt-subtle: #121a2e;
 
-  /* Primary = pure black for editorial CTAs */
-  --color-primary: #0a0a0a;
-  --color-primary-foreground: #ffffff;
+  /* Status */
+  --color-status-success: #30a46c;
+  --color-status-warning: #e5943b;
 
-  /* Secondary — kept minimal: dark gray */
-  --color-secondary: #27272a;
-  --color-secondary-foreground: #ffffff;
+  /* ---------- Compat aliases ----------
+     Pre-redesign section components (T-03..T-08) reference these
+     shadcn-style tokens. Mapped onto the new dark palette so they
+     keep rendering (with the old light-mode markup/classes) until
+     each section is rewritten against the tokens above directly. */
+  --color-background: var(--color-canvas-base);
+  --color-foreground: var(--color-text-primary);
+  --color-surface: var(--color-canvas-subtle);
+  --color-surface-contrast: var(--color-canvas-elevated);
+  --color-surface-contrast-foreground: var(--color-text-primary);
+  --color-muted: var(--color-canvas-subtle);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-border: var(--color-border-hairline);
+  --color-border-strong: var(--color-text-primary);
+  --color-primary: var(--color-text-primary);
+  --color-primary-foreground: var(--color-canvas-base);
+  --color-secondary: var(--color-canvas-elevated);
+  --color-secondary-foreground: var(--color-text-primary);
+  --color-accent: var(--color-accent-vermilion);
+  --color-accent-foreground: var(--color-text-primary);
+  --color-card: var(--color-canvas-subtle);
+  --color-card-foreground: var(--color-text-primary);
+  --color-popover: var(--color-canvas-subtle);
+  --color-popover-foreground: var(--color-text-primary);
+  --color-destructive: var(--color-accent-vermilion);
+  --color-destructive-foreground: var(--color-text-primary);
+  --color-input: var(--color-border-hairline);
+  --color-ring: var(--color-accent-vermilion);
 
-  /* Accent — same as primary in editorial system */
-  --color-accent: #0a0a0a;
-  --color-accent-foreground: #ffffff;
+  /* Radius — 0 everywhere. Intentional, do not round. */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
 
-  /* Card / popover (compat tokens for components that reference these) */
-  --color-card: #ffffff;
-  --color-card-foreground: #1a1a1a;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #1a1a1a;
+  /* Spacing scale (named, additive to Tailwind's default --spacing) */
+  --spacing-2xs: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
 
-  /* Destructive */
-  --color-destructive: #dc2626;
-  --color-destructive-foreground: #ffffff;
-
-  /* Input / Ring */
-  --color-input: #e4e4e7;
-  --color-ring: #0a0a0a;
-
-  /* Radius — editorial uses sharp-to-minimal corners */
-  --radius: 0;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
-  --radius-xl: 8px;
-  --radius-2xl: 12px;
-
-  /* Editorial-specific tokens */
-  --tracking-mono-label: 0.16em; /* 1.76px @ 11px — matches reference */
-  --shell-padding-x: clamp(1.25rem, 4vw, 4rem);
+  /* Layout — gutter 1.5rem (desktop 2.5rem), margin 1.25rem
+     (tablet 2.5rem, desktop 4rem). Mobile values here; overridden
+     at md/lg breakpoints in @layer base below. */
+  --shell-gutter: 1.5rem;
+  --content-margin: 1.25rem;
+  --tracking-mono-label: 0.04em;
+  --shell-padding-x: var(--shell-gutter);
   --section-padding-y: clamp(4rem, 10vw, 8rem);
+
+  /* Sticky EditorialHeader total height (two rows) — already the
+     established magic number other sections pin against (see
+     TestimonialsSpotlightScene's old `top-[6.5rem]`). Used for
+     scroll-padding-top so anchor-nav jumps don't land a section's
+     breadcrumb underneath the sticky header. */
+  --header-height: 6.5rem;
 
   /* Custom animations (kept names for tw-animate-css compat — most no-op now) */
   --animate-shimmer: shimmer 2s linear infinite;
@@ -99,8 +140,9 @@
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    background: #ffffff;
-    color: #1a1a1a;
+    scroll-padding-top: var(--header-height);
+    background: var(--color-canvas-base);
+    color: var(--color-text-primary);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -109,47 +151,153 @@
 
   body {
     line-height: 1.55;
-    color: #1a1a1a;
-    background: #ffffff;
+    color: var(--color-text-primary);
+    background: var(--color-canvas-base);
   }
 
-  /* Subtle gray scrollbar */
+  /* Layout tokens — tablet/desktop overrides */
+  @media (min-width: 768px) {
+    :root {
+      --content-margin: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --shell-gutter: 2.5rem;
+      --content-margin: 4rem;
+    }
+  }
+
+  /* Subtle dark scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: var(--color-canvas-base);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #d4d4d8;
+    background: var(--color-border-hairline);
     border-radius: 0;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #1a1a1a;
+    background: var(--color-text-secondary);
   }
 
   /* Selection — inverted for editorial */
   ::selection {
-    background: #1a1a1a;
-    color: #ffffff;
+    background: var(--color-text-primary);
+    color: var(--color-canvas-base);
   }
 
-  /* Focus visible — dark editorial outline */
+  /* Focus visible — vermilion editorial outline */
   :focus-visible {
-    outline: 2px solid #0a0a0a;
+    outline: 2px solid var(--color-accent-vermilion);
     outline-offset: 2px;
     border-radius: 0;
   }
 }
 
 /* ============================================================
-   @layer components — editorial primitives + neutralized legacy classes
+   @layer components — Swiss editorial primitives + neutralized
+   legacy classes (kept for pre-redesign sections, T-03..T-08)
    ============================================================ */
 @layer components {
+  /* ---------- Typographic scale (Stitch tokens) ----------
+     Weight/letter-spacing/transform are written out directly
+     (not via @theme --text-* pairing, which only supports
+     font-size + line-height) so each utility is self-contained. */
+
+  .text-display-hero {
+    font-family: var(--font-display);
+    font-size: 72px;
+    line-height: 76px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .text-headline-xl {
+    font-family: var(--font-display);
+    font-size: 44px;
+    line-height: 48px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  .text-headline-lg {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 34px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .text-headline-md {
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .text-body-lead {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .text-body-md {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+
+  .text-body-sm {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  .text-label-mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .text-label-index {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 767px) {
+    .text-display-hero {
+      font-size: 40px;
+      line-height: 44px;
+      letter-spacing: -0.03em;
+    }
+
+    .text-headline-xl {
+      font-size: 30px;
+      line-height: 36px;
+      letter-spacing: -0.02em;
+    }
+  }
+
   /* ---------- Editorial primitives ---------- */
 
   /* Mono label (uppercase, tracked) — used for section numbers, metadata, CTAs */
@@ -159,7 +307,7 @@
     font-weight: 500;
     letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: #1a1a1a;
+    color: var(--color-text-primary);
   }
 
   .label-mono-muted {
@@ -168,31 +316,31 @@
     font-weight: 400;
     letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: #71717a;
+    color: var(--color-text-secondary);
   }
 
-  /* Hairline divider (1px gray) */
+  /* Hairline divider (1px) */
   .divider-hairline {
-    border-top: 1px solid #e4e4e7;
+    border-top: 1px solid var(--color-border-hairline);
   }
 
   .divider-hairline-strong {
-    border-top: 1px solid #1a1a1a;
+    border-top: 1px solid var(--color-text-primary);
   }
 
-  /* ---------- LEGACY classes — neutralized for editorial light theme ----------
+  /* ---------- LEGACY classes — neutralized for the dark Swiss system ----------
      These names remain referenced by pre-redesign section components.
-     They render as plain editorial surfaces (white/border/no shadows) so
-     nothing crashes visually before Fase 3 rewrites.
-     TODO Fase 3: remove these blocks when sections are rewritten. */
+     They render as plain dark-editorial surfaces (canvas/hairline border/
+     no shadows) so nothing crashes visually before T-03..T-08 rewrites.
+     TODO: remove these blocks once every section is rewritten. */
 
   .glass,
   .glass-card,
   .glass-dark {
-    background: #ffffff;
+    background: var(--color-canvas-subtle);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border: 1px solid #e4e4e7;
+    border: 1px solid var(--color-border-hairline);
     box-shadow: none;
   }
 
@@ -201,15 +349,15 @@
   }
 
   .glass-hover:hover {
-    border-color: #1a1a1a;
+    border-color: var(--color-text-primary);
     transform: none;
     box-shadow: none;
   }
 
   .glass-button {
-    background: #ffffff;
-    border: 1px solid #1a1a1a;
-    color: #1a1a1a;
+    background: var(--color-canvas-subtle);
+    border: 1px solid var(--color-text-primary);
+    color: var(--color-text-primary);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 500;
@@ -222,48 +370,48 @@
   }
 
   .glass-button:hover {
-    background: #0a0a0a;
-    color: #ffffff;
+    background: var(--color-text-primary);
+    color: var(--color-canvas-base);
     transform: none;
     box-shadow: none;
   }
 
   .glass-input {
-    background: #ffffff;
+    background: var(--color-canvas-subtle);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border: 1px solid #e4e4e7;
+    border: 1px solid var(--color-border-hairline);
     padding: 12px 16px;
     border-radius: 0;
-    color: #1a1a1a;
+    color: var(--color-text-primary);
     transition: border-color 0.2s ease;
   }
 
   .glass-input::placeholder {
-    color: #71717a;
+    color: var(--color-text-secondary);
   }
 
   .glass-input:focus {
     outline: none;
-    background: #ffffff;
-    border-color: #0a0a0a;
+    background: var(--color-canvas-subtle);
+    border-color: var(--color-accent-vermilion);
     box-shadow: none;
   }
 
   /* Background utilities — neutralized */
   .gradient-bg,
   .gradient-bg-dark {
-    background: #ffffff;
+    background: var(--color-canvas-base);
     animation: none;
   }
 
-  /* Gradient text — degraded to solid editorial black */
+  /* Gradient text — degraded to solid editorial foreground */
   .gradient-text {
     background: none;
     -webkit-background-clip: initial;
     -webkit-text-fill-color: initial;
     background-clip: initial;
-    color: #0a0a0a;
+    color: var(--color-text-primary);
   }
 
   /* Glow helpers — neutralized */
@@ -276,11 +424,11 @@
   /* Border gradient — neutralized to plain hairline */
   .border-gradient {
     position: relative;
-    background: #ffffff;
+    background: var(--color-canvas-subtle);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-radius: 0;
-    border: 1px solid #e4e4e7;
+    border: 1px solid var(--color-border-hairline);
   }
 
   .border-gradient::before {
@@ -334,14 +482,14 @@
   .dot-nav-item {
     width: 12px;
     height: 12px;
-    border: 1px solid #1a1a1a;
+    border: 1px solid var(--color-text-primary);
     background: transparent;
     cursor: pointer;
   }
 
   .dot-nav-item.active {
-    background: #1a1a1a;
-    border-color: #1a1a1a;
+    background: var(--color-text-primary);
+    border-color: var(--color-text-primary);
     box-shadow: none;
   }
 
@@ -357,7 +505,7 @@
 /* ============================================================
    @keyframes — kept for compat with components still referencing them.
    Editorial system itself uses none of these directly; sections will
-   migrate to motion (motion library) reveals in Fase 3.
+   migrate to motion (motion library) reveals in T-03..T-08.
    ============================================================ */
 
 @keyframes shimmer {
@@ -387,6 +535,18 @@
   .island-section {
     padding: clamp(3rem, 8vw, 5rem) 0;
   }
+}
+
+/* ============================================================
+   Print — /cv-print only (T-11/T-12). Zero @page margin: the page
+   itself (src/app/cv-print/page.tsx) sets its own 14mm/9mm
+   vertical/horizontal padding so the exported PDF's margins are
+   controlled in one place (CSS here), not duplicated as a
+   Playwright page.pdf() margin option too.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 0;
 }
 
 /* ============================================================

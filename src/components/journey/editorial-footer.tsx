@@ -3,8 +3,10 @@ import { Reveal } from '@/components/animations';
 
 /* ============================================================
    Editorial Footer — Swiss editorial-minimal closer.
-   Black surface (#0a0a0a) for dramatic remate after 8 white sections.
-   Massive name typography, mono metadata, hairline dividers in white/10.
+   Uses the same dark canvas tokens as the rest of the site (no more
+   standalone near-black contrast surface — that only made sense back
+   when the other sections were still light).
+   Massive name typography, mono metadata, hairline dividers.
    Server component.
    ============================================================ */
 
@@ -18,27 +20,27 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
 
   return (
     <footer
-      className="relative bg-[#0a0a0a] text-white"
+      className="relative bg-canvas-base text-text-primary"
       aria-labelledby="footer-heading"
     >
       {/* Top metadata band */}
       <div
-        className="grid grid-cols-3 items-center border-t border-b border-white/10 py-3"
+        className="grid grid-cols-3 items-center border-t border-b border-border-hairline py-3"
         style={{
           paddingLeft: 'var(--shell-padding-x)',
           paddingRight: 'var(--shell-padding-x)',
         }}
       >
-        <span className="label-mono text-white">09</span>
+        <span className="text-label-mono text-text-primary">09</span>
         <span
-          className="label-mono-muted text-white/60 text-center"
+          className="text-label-mono text-text-secondary text-center"
           data-i18n-en="COLOPHON"
           data-i18n-es="COLOFÓN"
         >
           {lang === 'en' ? 'COLOPHON' : 'COLOFÓN'}
         </span>
         <span
-          className="label-mono-muted text-white/60 text-right"
+          className="text-label-mono text-text-secondary text-right"
           data-i18n-en="END OF FILE"
           data-i18n-es="FIN DEL ARCHIVO"
         >
@@ -67,7 +69,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
 
       {/* Three-column metadata grid */}
       <div
-        className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 pb-16 border-b border-white/10"
+        className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 pb-16 border-b border-border-hairline"
         style={{
           paddingLeft: 'var(--shell-padding-x)',
           paddingRight: 'var(--shell-padding-x)',
@@ -75,21 +77,21 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
       >
         <div>
           <span
-            className="label-mono-muted text-white/50 block mb-3"
+            className="text-label-mono text-text-muted block mb-3"
             data-i18n-en="BASED IN"
             data-i18n-es="UBICACIÓN"
           >
             {lang === 'en' ? 'BASED IN' : 'UBICACIÓN'}
           </span>
           <p
-            className="text-base text-white/90"
+            className="text-base text-text-primary"
             data-i18n-en="San Pedro Sula, Honduras"
             data-i18n-es="San Pedro Sula, Honduras"
           >
             San Pedro Sula, Honduras
           </p>
           <p
-            className="text-base text-white/60 mt-1"
+            className="text-base text-text-secondary mt-1"
             data-i18n-en="Working remote · Worldwide"
             data-i18n-es="Trabajo remoto · A nivel mundial"
           >
@@ -101,7 +103,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
 
         <div>
           <span
-            className="label-mono-muted text-white/50 block mb-3"
+            className="text-label-mono text-text-muted block mb-3"
             data-i18n-en="DIRECT"
             data-i18n-es="DIRECTO"
           >
@@ -109,7 +111,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
           </span>
           <a
             href={`mailto:${data.email}`}
-            className="text-base text-white/90 hover:text-white transition-colors inline-flex items-center gap-2"
+            className="text-base text-text-primary hover:text-accent-vermilion transition-colors inline-flex items-center gap-2"
           >
             {data.email} <span aria-hidden="true">↗</span>
           </a>
@@ -117,7 +119,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
 
         <div>
           <span
-            className="label-mono-muted text-white/50 block mb-3"
+            className="text-label-mono text-text-muted block mb-3"
             data-i18n-en="ELSEWHERE"
             data-i18n-es="EN OTROS LADOS"
           >
@@ -129,7 +131,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
                 href={`https://github.com/${data.socials.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base text-white/90 hover:text-white transition-colors inline-flex items-center gap-2"
+                className="text-base text-text-primary hover:text-accent-vermilion transition-colors inline-flex items-center gap-2"
               >
                 GitHub <span aria-hidden="true">↗</span>
               </a>
@@ -139,7 +141,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
                 href={data.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base text-white/90 hover:text-white transition-colors inline-flex items-center gap-2"
+                className="text-base text-text-primary hover:text-accent-vermilion transition-colors inline-flex items-center gap-2"
               >
                 LinkedIn <span aria-hidden="true">↗</span>
               </a>
@@ -159,10 +161,10 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
         <div className="flex items-center gap-3">
           <span
             aria-hidden="true"
-            className="block h-2 w-2 rounded-full bg-[#22c55e] animate-pulse"
+            className="block h-2 w-2 rounded-full bg-status-success animate-pulse"
           />
           <span
-            className="label-mono-muted text-white/60"
+            className="text-label-mono text-text-secondary"
             data-i18n-en="AVAILABLE FOR WORK"
             data-i18n-es="DISPONIBLE PARA PROYECTOS"
           >
@@ -172,12 +174,12 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
           </span>
         </div>
 
-        <span className="label-mono-muted text-white/40">
+        <span className="text-label-mono text-text-muted">
           © {year} CAMILO HENRIQUEZ — EST. 2020
         </span>
 
         <span
-          className="label-mono-muted text-white/40"
+          className="text-label-mono text-text-muted"
           data-i18n-en="BUILT WITH NEXT.JS 16 · MOTION"
           data-i18n-es="HECHO CON NEXT.JS 16 · MOTION"
         >

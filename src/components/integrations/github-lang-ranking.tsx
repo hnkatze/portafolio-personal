@@ -103,19 +103,19 @@ export async function GitHubLangRanking({
             className="grid grid-cols-[2.5rem_minmax(8rem,12rem)_1fr_4rem] items-center gap-4"
           >
             <span className="label-mono-muted">{num}</span>
-            <span className="label-mono text-[#0a0a0a] truncate">
+            <span className="label-mono text-text-primary truncate">
               {row.name.toUpperCase()}
             </span>
             <span
               aria-hidden="true"
-              className="block h-px bg-[#e4e4e7] relative overflow-hidden"
+              className="block h-px bg-border-hairline relative overflow-hidden"
             >
               <span
-                className="absolute inset-y-0 left-0 block bg-[#0a0a0a]"
+                className="absolute inset-y-0 left-0 block bg-text-primary"
                 style={{ width: `${widthPct}%`, height: '2px', top: '-0.5px' }}
               />
             </span>
-            <span className="label-mono text-right text-[#0a0a0a]">
+            <span className="label-mono text-right text-text-primary">
               {row.percent.toFixed(1)}%
             </span>
           </li>

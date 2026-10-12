@@ -64,9 +64,11 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
           href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="label-mono inline-flex items-center gap-2 text-[#0a0a0a] hover:opacity-70 transition-opacity"
+          className="label-mono inline-flex items-center gap-2 text-text-primary hover:opacity-70 transition-opacity"
         >
-          {lang === 'en' ? 'VIEW ON GITHUB' : 'VER EN GITHUB'}{' '}
+          <span data-i18n-en="VIEW ON GITHUB" data-i18n-es="VER EN GITHUB">
+            {lang === 'en' ? 'VIEW ON GITHUB' : 'VER EN GITHUB'}
+          </span>
           <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -74,10 +76,11 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
   }
 
   return (
-    <ol className="list-none p-0 m-0 divide-y divide-[#e4e4e7] border-t border-b border-[#e4e4e7]">
+    <ol className="list-none p-0 m-0 divide-y divide-border-hairline border-t border-b border-border-hairline">
       {repos.map((repo, index) => {
         const num = String(index + 1).padStart(2, '0');
-        const updated = timeAgo(repo.updated_at, lang);
+        const updatedEn = timeAgo(repo.updated_at, 'en');
+        const updatedEs = timeAgo(repo.updated_at, 'es');
 
         return (
           <li key={repo.id}>
@@ -85,12 +88,12 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group grid grid-cols-[2.5rem_1fr_auto] gap-4 items-baseline py-5 hover:bg-[#fafafa] transition-colors px-2 -mx-2"
+              className="group grid grid-cols-[2.5rem_1fr_auto] gap-4 items-baseline py-5 hover:bg-canvas-subtle transition-colors px-2 -mx-2"
             >
               <span className="label-mono-muted">{num}</span>
 
               <div className="min-w-0">
-                <h3 className="text-base md:text-lg font-semibold text-[#0a0a0a] group-hover:underline truncate inline-flex items-center gap-2">
+                <h3 className="text-base md:text-lg font-semibold text-text-primary group-hover:underline truncate inline-flex items-center gap-2">
                   {repo.name}
                   <span
                     aria-hidden="true"
@@ -100,7 +103,7 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
                   </span>
                 </h3>
                 {repo.description && (
-                  <p className="mt-1 text-sm text-[#52525b] leading-relaxed line-clamp-2 max-w-2xl">
+                  <p className="mt-1 text-sm text-text-secondary leading-relaxed line-clamp-2 max-w-2xl">
                     {repo.description}
                   </p>
                 )}
@@ -111,7 +114,13 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
                 <span aria-label={`${repo.stargazers_count} stars`}>
                   ★ {repo.stargazers_count}
                 </span>
-                <span className="hidden sm:inline">{updated}</span>
+                <span
+                  className="hidden sm:inline"
+                  data-i18n-en={updatedEn}
+                  data-i18n-es={updatedEs}
+                >
+                  {lang === 'en' ? updatedEn : updatedEs}
+                </span>
               </div>
             </a>
           </li>

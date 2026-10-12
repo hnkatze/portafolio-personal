@@ -42,3 +42,6 @@ next-env.d.ts
 
 # agentic tooling (local SDD/skill registry)
 .atl/
+.agents
+.playwright-mcp
+certif

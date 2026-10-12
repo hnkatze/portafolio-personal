@@ -1,12 +1,25 @@
 import type { Testimonial, Lang } from '@/lib/types';
-import { t } from '@/lib/i18n';
-import { Reveal, SplitWords } from '@/components/animations';
+import { I18nSplitWords, Reveal } from '@/components/animations';
+import { TestimonialFigure } from './testimonial-figure';
 
 /* ============================================================
-   Testimonials Section — Swiss editorial-minimal (06)
-   Server component. White background, near-black text,
-   massive Inter headline, Geist Mono uppercase metadata,
-   text-first testimonials. No photos, no gradients, no glow.
+   Testimonials Section — Swiss Editorial "Voces" dossier (T-06b).
+   Server component. Same breadcrumb/headline skeleton as
+   Skills/Experience/Projects/Certifications (T-04..T-07) — no
+   Stitch screen exists for this section, so the dossier pattern
+   established by those is followed directly: breadcrumb, headline
+   + lead, then a plain divided list of entries (index + attribution
+   + quote), hairline borders, zero radius, no icons/shadows.
+
+   The previous cinematic pinned-scroll "spotlight stack" scene
+   (`TestimonialsSpotlightScene`) is no longer built on — same
+   decision already made for the hero's breathing photo (T-03) and
+   the projects horizontal pin (T-06): the file stays in the repo
+   untouched, this section just stops importing it.
+
+   Content: the 3 real entries in `testimonials` from src/lib/data.ts
+   (Honduras Social Foundation, Taller Gerardito, Taller Los Camilos).
+   No testimonial, quote, or metric is invented.
    ============================================================ */
 
 interface TestimonialsSectionProps {
@@ -18,122 +31,83 @@ export function TestimonialsSection({
   testimonials,
   lang,
 }: TestimonialsSectionProps) {
+  const leadEn =
+    'Direct, unedited words from the people and businesses behind each shipped project.';
+  const leadEs =
+    'Palabras directas, sin editar, de las personas y negocios detrás de cada proyecto entregado.';
+
   return (
     <section
       id="testimonials"
-      className="relative bg-white px-[var(--shell-padding-x)] py-[var(--section-padding-y)]"
       aria-labelledby="testimonials-heading"
+      className="relative bg-canvas-base"
     >
-      {/* Section number + label row — leaf spans, hydration-safe */}
-      <header className="grid grid-cols-3 items-center border-t border-b border-[#e4e4e7] py-3 -mx-[var(--shell-padding-x)] px-[var(--shell-padding-x)]">
-        <span className="label-mono">06</span>
-        <span
-          className="label-mono-muted text-center"
-          data-i18n-en="VOICES"
-          data-i18n-es="VOCES"
-        >
-          {lang === 'en' ? 'VOICES' : 'VOCES'}
-        </span>
-        <span
-          className="label-mono-muted text-right"
-          data-i18n-en="WHAT CLIENTS SAY"
-          data-i18n-es="LO QUE DICEN"
-        >
-          {lang === 'en' ? 'WHAT CLIENTS SAY' : 'LO QUE DICEN'}
-        </span>
+      {/* Dossier breadcrumb bar — mirrors Skills/Experience/Projects/Certifications "0N /" pattern */}
+      <header className="flex flex-wrap items-center justify-between gap-sm border-b border-border-hairline px-[var(--shell-padding-x)] py-xs">
+        <div className="flex items-center gap-md">
+          <span className="text-label-index font-semibold text-accent-vermilion">
+            06 /
+          </span>
+          <span
+            className="text-label-index uppercase tracking-widest text-text-primary"
+            data-i18n-en="VOICES"
+            data-i18n-es="VOCES"
+          >
+            {lang === 'en' ? 'VOICES' : 'VOCES'}
+          </span>
+        </div>
+        <div className="flex items-center gap-xs">
+          <span
+            className="inline-block h-1.5 w-1.5 bg-status-success"
+            aria-hidden="true"
+          />
+          <span
+            className="text-label-index uppercase tracking-widest text-text-secondary"
+            data-i18n-en="CLIENT RECORD"
+            data-i18n-es="REGISTRO DE CLIENTES"
+          >
+            {lang === 'en' ? 'CLIENT RECORD' : 'REGISTRO DE CLIENTES'}
+          </span>
+        </div>
       </header>
 
-      {/* Massive headline */}
-      <div className="mt-16">
-        <h2
-          id="testimonials-heading"
-          className="sticky top-[6.5rem] z-10 font-extrabold text-[#0a0a0a] tracking-tight leading-[0.95]"
-          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
-        >
-          <SplitWords text="Voices." />
+      {/* Headline + lead */}
+      <div className="px-[var(--shell-padding-x)] py-[var(--section-padding-y)]">
+        <h2 id="testimonials-heading" className="text-headline-xl text-text-primary">
+          <I18nSplitWords textEn="Voices." textEs="Voces." />
         </h2>
+        <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
+          <p
+            className="max-w-[42rem] text-body-lead text-text-secondary"
+            data-i18n-en={leadEn}
+            data-i18n-es={leadEs}
+          >
+            {lang === 'en' ? leadEn : leadEs}
+          </p>
+        </Reveal>
       </div>
 
-      {/* Testimonials grid — centered, 80% width on desktop */}
-      <div className="mt-20 mx-auto w-[80%] grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
-        {testimonials.map((item, index) => {
-          const quoteEn = t(item.quote, 'en');
-          const quoteEs = t(item.quote, 'es');
-          const roleEn = t(item.role, 'en');
-          const roleEs = t(item.role, 'es');
-          const attributionEn = `— ${item.name} · ${roleEn}`;
-          const attributionEs = `— ${item.name} · ${roleEs}`;
-          const projectUrl = toProjectUrl(item.project);
-          const isLast = index === testimonials.length - 1;
-
-          return (
-            <Reveal
-              key={`${item.name}-${index}`}
-              direction="up"
-              delay={index * 0.08}
-            >
-              <figure
-                className={`flex flex-col ${
-                  !isLast
-                    ? 'pb-12 border-b border-[#e4e4e7] md:pb-0 md:border-b-0'
-                    : ''
-                }`}
-              >
-                {/* Quote — decorative quote marks via CSS pseudo-elements */}
-                <p
-                  className="text-lg md:text-xl font-normal italic text-[#1a1a1a] leading-relaxed before:content-['“'] after:content-['”']"
-                  data-i18n-en={quoteEn}
-                  data-i18n-es={quoteEs}
-                >
-                  {t(item.quote, lang)}
-                </p>
-
-                {/* Attribution — single mono line: NAME · ROLE */}
-                <figcaption
-                  className="label-mono mt-6"
-                  data-i18n-en={attributionEn}
-                  data-i18n-es={attributionEs}
-                >
-                  {lang === 'en' ? attributionEn : attributionEs}
-                </figcaption>
-
-                {/* Visit site link — editorial CTA */}
-                {projectUrl && (
-                  <a
-                    href={projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="label-mono mt-4 inline-flex items-center gap-2 text-[#0a0a0a] hover:opacity-70 transition-opacity self-start border-b border-[#0a0a0a] pb-0.5"
-                    data-i18n-en={`VISIT ${item.project.toUpperCase()} ↗`}
-                    data-i18n-es={`VISITAR ${item.project.toUpperCase()} ↗`}
-                    aria-label={`Visit ${item.project} (opens in new tab)`}
-                  >
-                    {lang === 'en' ? 'VISIT' : 'VISITAR'} {item.project.toUpperCase()}{' '}
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                )}
-              </figure>
-            </Reveal>
-          );
-        })}
+      {/* Divided list of testimonial dossier rows */}
+      <div className="border-t border-border-hairline px-[var(--shell-padding-x)] pb-2xl">
+        {testimonials.map((testimonial, i) => (
+          <Reveal
+            key={`${testimonial.name}-${i}`}
+            direction="up"
+            delay={0.1 * i}
+            duration={0.5}
+            amount={0.2}
+          >
+            <TestimonialFigure
+              testimonial={testimonial}
+              lang={lang}
+              index={i + 1}
+              isLast={i === testimonials.length - 1}
+            />
+          </Reveal>
+        ))}
       </div>
 
-      {/* Bottom hairline divider */}
-      <div className="divider-hairline mt-24" />
+      <div className="divider-hairline" />
     </section>
   );
-}
-
-/**
- * Builds a clickable URL from the testimonial's `project` field.
- * If `project` already includes a protocol, returns it as-is.
- * If it looks like a bare domain (contains a dot), prepends https://.
- * Otherwise returns null and no link is rendered.
- */
-function toProjectUrl(project: string): string | null {
-  const trimmed = project.trim();
-  if (!trimmed) return null;
-  if (/^https?:\/\//i.test(trimmed)) return trimmed;
-  if (/\.[a-z]{2,}$/i.test(trimmed)) return `https://${trimmed}`;
-  return null;
 }

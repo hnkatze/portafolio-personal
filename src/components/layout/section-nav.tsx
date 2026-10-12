@@ -10,14 +10,15 @@ interface NavItem {
   readonly labelEs: string;
 }
 
-const ITEMS: readonly NavItem[] = [
+export const SECTION_NAV_ITEMS: readonly NavItem[] = [
   { id: 'about', num: '02', labelEn: 'ABOUT', labelEs: 'SOBRE MÍ' },
   { id: 'skills', num: '03', labelEn: 'STACK', labelEs: 'STACK' },
   { id: 'experience', num: '04', labelEn: 'EXPERIENCE', labelEs: 'EXPERIENCIA' },
   { id: 'projects', num: '05', labelEn: 'PROJECTS', labelEs: 'PROYECTOS' },
   { id: 'testimonials', num: '06', labelEn: 'VOICES', labelEs: 'VOCES' },
   { id: 'integrations', num: '07', labelEn: 'INTEGRATIONS', labelEs: 'INTEGRACIONES' },
-  { id: 'contact', num: '08', labelEn: 'CONTACT', labelEs: 'CONTACTO' },
+  { id: 'certifications', num: '08', labelEn: 'CERTIFICATIONS', labelEs: 'CERTIFICACIONES' },
+  { id: 'contact', num: '09', labelEn: 'CONTACT', labelEs: 'CONTACTO' },
 ] as const;
 
 /**
@@ -32,7 +33,7 @@ export function SectionNav() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const sections = ITEMS.map((it) => document.getElementById(it.id)).filter(
+    const sections = SECTION_NAV_ITEMS.map((it) => document.getElementById(it.id)).filter(
       (el): el is HTMLElement => el !== null,
     );
 
@@ -62,9 +63,9 @@ export function SectionNav() {
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 pointer-events-none"
+      className="print:hidden hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 pointer-events-none"
     >
-      {ITEMS.map((item) => {
+      {SECTION_NAV_ITEMS.map((item) => {
         const isActive = activeId === item.id;
         return (
           <a
@@ -76,10 +77,10 @@ export function SectionNav() {
           >
             {/* Hover label */}
             <span
-              className={`label-mono whitespace-nowrap transition-all duration-300 ${
+              className={`text-label-mono whitespace-nowrap transition-all duration-300 ${
                 isActive
-                  ? 'opacity-100 translate-x-0 text-[#0a0a0a]'
-                  : 'opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 text-[#71717a]'
+                  ? 'opacity-100 translate-x-0 text-text-primary'
+                  : 'opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 text-text-muted'
               }`}
             >
               {item.num}
@@ -87,7 +88,7 @@ export function SectionNav() {
             {/* Tick */}
             <motion.span
               aria-hidden="true"
-              className="block h-px bg-[#0a0a0a] origin-right"
+              className="block h-px bg-text-primary origin-right"
               initial={false}
               animate={{
                 width: isActive ? 32 : 12,

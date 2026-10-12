@@ -33,3 +33,22 @@ export type { ScrollSequenceProps, ScrollSequenceStep } from './scroll-sequence'
 
 export { ShimmerSkeleton } from './shimmer-skeleton';
 export type { ShimmerSkeletonProps } from './shimmer-skeleton';
+
+export { ScrollCounter } from './scroll-counter';
+export type { ScrollCounterProps } from './scroll-counter';
+
+export { HairlineProgress } from './hairline-progress';
+export type { HairlineProgressProps } from './hairline-progress';
+
+export { useVelocityBlur } from './velocity-blur';
+
+export { HorizontalPin } from './horizontal-pin';
+export type { HorizontalPinProps } from './horizontal-pin';
+
+export { SpotlightStack } from './spotlight-stack';
+export type { SpotlightStackProps } from './spotlight-stack';
+
+export { StickyScrollytelling, useScrollytelling } from './sticky-scrollytelling';
+export type { StickyScrollytellingProps } from './sticky-scrollytelling';
+
+export { useMediaQuery, useIsTablet, useIsDesktop } from './use-media-query';
