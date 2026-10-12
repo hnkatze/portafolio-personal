@@ -12,7 +12,6 @@ export interface PersonalInfo {
   summary: BilingualText;
   email: string;
   location: string;
-  photo: string;
   socials: {
     github: string;
     linkedin: string;

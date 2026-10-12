@@ -23,7 +23,6 @@ export const personalInfo: PersonalInfo = {
   },
   email: 'contact@camilohenriquez.com',
   location: 'Remote / Worldwide',
-  photo: '/tshirtw.png',
   socials: {
     github: 'hnkatze',
     linkedin: 'https://www.linkedin.com/in/hnkatze/',
