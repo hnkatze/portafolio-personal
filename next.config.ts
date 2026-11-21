@@ -2,6 +2,12 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  experimental: {
+    // The app has two root layouts, so there is no single layout to compose a
+    // 404 for unmatched routes from. Without this flag Next serves its bare
+    // default page: no <html lang>, no site chrome, no fonts.
+    globalNotFound: true,
+  },
   images: {
     remotePatterns: [
       {

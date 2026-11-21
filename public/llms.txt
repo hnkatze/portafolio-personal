@@ -25,18 +25,24 @@ specs, PrimeNG component docs) as AI assistant tools.
 
 ## Links
 
-- [Portfolio](https://camilohenriquez.com): profile, stack, experience, projects, testimonials, integrations, certifications, and contact — all on this one page.
+- [Portfolio (English)](https://camilohenriquez.com): profile, stack, experience, projects, testimonials, integrations, certifications, and contact — all on this one page.
+- [Portfolio (Spanish)](https://camilohenriquez.com/es): the same profile as a crawlable Spanish document, with `<html lang="es">` and Spanish text in the served HTML.
 - [GitHub](https://github.com/hnkatze): open source projects and MCP servers.
 - [LinkedIn](https://www.linkedin.com/in/hnkatze/): professional profile and work history.
 - [Contact](mailto:contact@camilohenriquez.com): direct email.
 
 ## Notes for AI agents
 
-- The portfolio is a single page (camilohenriquez.com); all sections —
-  profile, stack, experience, projects, testimonials, integrations,
-  certifications, contact — live at that one URL.
-- Language toggle (EN/ES) is a client-side swap on the same URL, not a
-  separate path, so there is no /es route to crawl.
+- The portfolio is one page available in two languages: English at
+  https://camilohenriquez.com and Spanish at https://camilohenriquez.com/es.
+  Both are server-rendered documents — all sections (profile, stack,
+  experience, projects, testimonials, integrations, certifications,
+  contact) are in the HTML, with no JavaScript required to read them.
+- The two URLs are alternates of each other (`hreflang` en/es, and
+  `x-default` pointing at the English URL), not duplicate content.
+- The inline EN/ES toggle also swaps the language on the current URL via a
+  `lang` cookie; the cookie only picks a default, it does not create a
+  hidden third document.
 - /cv-print is a print-only utility route used to generate downloadable CV
   PDFs and is excluded from indexing (see /robots.txt) — it duplicates
   homepage content in a different layout, not a distinct page.
