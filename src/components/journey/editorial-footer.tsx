@@ -1,7 +1,5 @@
-import { Suspense } from 'react';
 import type { Lang, PersonalInfo } from '@/lib/types';
 import { Reveal } from '@/components/animations';
-import { CurrentYear } from '@/components/layout/current-year';
 
 /* ============================================================
    Editorial Footer — Swiss editorial-minimal closer.
@@ -18,6 +16,7 @@ interface EditorialFooterProps {
 }
 
 export function EditorialFooter({ data, lang }: EditorialFooterProps) {
+  const year = new Date().getFullYear();
 
   return (
     <footer
@@ -176,14 +175,7 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
         </div>
 
         <span className="text-label-mono text-text-muted">
-          ©{' '}
-          {/* The year reads the clock, which cacheComponents forbids while
-              prerendering a page shell — it streams in instead, exactly like
-              the cookie-dependent body on `/`. */}
-          <Suspense fallback={null}>
-            <CurrentYear />
-          </Suspense>{' '}
-          CAMILO HENRIQUEZ — EST. 2020
+          © {year} CAMILO HENRIQUEZ — EST. 2020
         </span>
 
         <span
