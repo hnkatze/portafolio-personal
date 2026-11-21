@@ -28,11 +28,12 @@ export function EditorialHeader() {
   return (
     <header className="print:hidden sticky top-0 z-50 border-b border-border-hairline bg-canvas-base/95 backdrop-blur-sm">
       <div className="flex items-center justify-between h-16 gap-4 px-[var(--shell-padding-x)]">
-        <a
-          href="/"
-          className="flex items-center gap-3 min-w-0"
-          aria-label="Camilo Henriquez — Home"
-        >
+        {/* No aria-label here on purpose: the visible wordmark abbreviates to
+            "CAMILO H." on mobile, and an aria-label that does not contain the
+            visible text fails WCAG 2.5.3 (label in name). The sr-only suffix
+            completes the name at both breakpoints while the visible text stays
+            the label. */}
+        <a href="/" className="flex items-center gap-3 min-w-0">
           <span
             aria-hidden="true"
             className="block h-3 w-3 shrink-0 bg-accent-vermilion"
@@ -41,6 +42,7 @@ export function EditorialHeader() {
             <span className="hidden sm:inline">CAMILO HENRIQUEZ</span>
             <span className="sm:hidden">CAMILO H.</span>
           </span>
+          <span className="sr-only">— Home</span>
         </a>
 
         {/* Primary nav — all 8 sections, only visible lg+ to avoid cramped tablet layout */}
