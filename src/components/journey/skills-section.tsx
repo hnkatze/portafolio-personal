@@ -179,6 +179,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-accent-vermilion"
+            data-i18n-en="STACK"
+            data-i18n-es="STACK"
           >
             STACK
           </span>
@@ -190,6 +192,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
+            data-i18n-en="CORE TECHNOLOGIES"
+            data-i18n-es="TECNOLOGÍAS CORE"
           >
             {lang === 'en' ? 'CORE TECHNOLOGIES' : 'TECNOLOGÍAS CORE'}
           </span>
@@ -204,7 +208,11 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
               <SplitWords text="Stack." />
             </h2>
             <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-              <p className="max-w-[42rem] text-body-lead text-text-secondary" >
+              <p
+                className="max-w-[42rem] text-body-lead text-text-secondary"
+                data-i18n-en={introEn}
+                data-i18n-es={introEs}
+              >
                 {lang === 'en' ? introEn : introEs}
               </p>
             </Reveal>
@@ -214,6 +222,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
           <div className="flex flex-col gap-xs border-t border-border-hairline pt-sm lg:col-span-4 lg:items-end lg:border-t-0 lg:border-l lg:pl-md lg:pt-0">
             <span
               className="text-label-index uppercase tracking-widest text-text-muted"
+              data-i18n-en="LEGEND / DOMAIN MASTERY"
+              data-i18n-es="LEYENDA / DOMINIO"
             >
               {lang === 'en' ? 'LEGEND / DOMAIN MASTERY' : 'LEYENDA / DOMINIO'}
             </span>
@@ -227,7 +237,10 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                     className={`inline-block h-1.5 w-1.5 ${LEVEL_DOT_CLASS[level]}`}
                     aria-hidden="true"
                   />
-                  <span >
+                  <span
+                    data-i18n-en={LEVEL_LABEL[level].en}
+                    data-i18n-es={LEVEL_LABEL[level].es}
+                  >
                     {t(LEVEL_LABEL[level], lang)}
                   </span>
                 </span>
@@ -252,12 +265,18 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                   <div>
                     <span
                       className="block text-label-index uppercase tracking-widest text-text-muted"
+                      data-i18n-en={`QUADRANT ${meta.index} // ${meta.tag.en}`}
+                      data-i18n-es={`CUADRANTE ${meta.index} // ${meta.tag.es}`}
                     >
                       {lang === 'en'
                         ? `QUADRANT ${meta.index} // ${meta.tag.en}`
                         : `CUADRANTE ${meta.index} // ${meta.tag.es}`}
                     </span>
-                    <h3 className="mt-2xs text-headline-lg text-text-primary" >
+                    <h3
+                      className="mt-2xs text-headline-lg text-text-primary"
+                      data-i18n-en={meta.title.en}
+                      data-i18n-es={meta.title.es}
+                    >
                       {t(meta.title, lang)}
                     </h3>
                   </div>
@@ -270,6 +289,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
 
                 <p
                   className="mb-lg text-body-md leading-relaxed text-text-secondary"
+                  data-i18n-en={meta.description.en}
+                  data-i18n-es={meta.description.es}
                 >
                   {t(meta.description, lang)}
                 </p>
@@ -290,6 +311,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                         {skill.favorite && (
                           <span
                             className="text-label-index font-bold text-accent-vermilion"
+                            data-i18n-en="[FAVORITE]"
+                            data-i18n-es="[FAVORITO]"
                           >
                             {lang === 'en' ? '[FAVORITE]' : '[FAVORITO]'}
                           </span>
@@ -297,6 +320,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                       </div>
                       <span
                         className={`px-sm py-2xs text-[10px] uppercase tracking-wider ${LEVEL_BADGE_CLASS[skill.level]}`}
+                        data-i18n-en={LEVEL_LABEL[skill.level].en}
+                        data-i18n-es={LEVEL_LABEL[skill.level].es}
                       >
                         {t(LEVEL_LABEL[skill.level], lang)}
                       </span>
@@ -317,17 +342,25 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                 <div>
                   <span
                     className="block text-label-index uppercase tracking-widest text-accent-vermilion"
+                    data-i18n-en={`QUADRANT ${DATA_CLOUD_META.index} // ${DATA_CLOUD_META.tag.en}`}
+                    data-i18n-es={`CUADRANTE ${DATA_CLOUD_META.index} // ${DATA_CLOUD_META.tag.es}`}
                   >
                     {lang === 'en'
                       ? `QUADRANT ${DATA_CLOUD_META.index} // ${DATA_CLOUD_META.tag.en}`
                       : `CUADRANTE ${DATA_CLOUD_META.index} // ${DATA_CLOUD_META.tag.es}`}
                   </span>
-                  <h3 className="mt-2xs text-headline-lg text-text-primary" >
+                  <h3
+                    className="mt-2xs text-headline-lg text-text-primary"
+                    data-i18n-en={DATA_CLOUD_META.title.en}
+                    data-i18n-es={DATA_CLOUD_META.title.es}
+                  >
                     {t(DATA_CLOUD_META.title, lang)}
                   </h3>
                 </div>
                 <span
                   className="shrink-0 border border-accent-vermilion bg-accent-vermilion-subtle px-xs py-2xs text-label-mono font-semibold text-accent-vermilion"
+                  data-i18n-en="NEW · 2026"
+                  data-i18n-es="NUEVO · 2026"
                 >
                   {lang === 'en' ? 'NEW · 2026' : 'NUEVO · 2026'}
                 </span>
@@ -335,6 +368,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
 
               <p
                 className="mb-lg text-body-md leading-relaxed text-text-secondary"
+                data-i18n-en={DATA_CLOUD_META.description.en}
+                data-i18n-es={DATA_CLOUD_META.description.es}
               >
                 {t(DATA_CLOUD_META.description, lang)}
               </p>
@@ -355,6 +390,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                         </span>
                         <span
                           className="text-[12px] font-normal text-text-muted"
+                          data-i18n-en={item.note.en}
+                          data-i18n-es={item.note.es}
                         >
                           {t(item.note, lang)}
                         </span>
@@ -362,6 +399,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                     </div>
                     <span
                       className="ml-2 shrink-0 whitespace-nowrap border border-border-hairline bg-canvas-subtle px-sm py-2xs text-[10px] uppercase tracking-wider text-text-secondary"
+                      data-i18n-en={item.badge.en}
+                      data-i18n-es={item.badge.es}
                     >
                       {t(item.badge, lang)}
                     </span>
@@ -378,12 +417,18 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                 <div>
                   <span
                     className="block text-label-index uppercase tracking-widest text-text-muted"
+                    data-i18n-en={`QUADRANT ${TOOLS_META.index} // ${TOOLS_META.tag.en}`}
+                    data-i18n-es={`CUADRANTE ${TOOLS_META.index} // ${TOOLS_META.tag.es}`}
                   >
                     {lang === 'en'
                       ? `QUADRANT ${TOOLS_META.index} // ${TOOLS_META.tag.en}`
                       : `CUADRANTE ${TOOLS_META.index} // ${TOOLS_META.tag.es}`}
                   </span>
-                  <h3 className="mt-2xs text-headline-lg text-text-primary" >
+                  <h3
+                    className="mt-2xs text-headline-lg text-text-primary"
+                    data-i18n-en={TOOLS_META.title.en}
+                    data-i18n-es={TOOLS_META.title.es}
+                  >
                     {t(TOOLS_META.title, lang)}
                   </h3>
                 </div>
@@ -394,6 +439,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
 
               <p
                 className="mb-lg text-body-md leading-relaxed text-text-secondary"
+                data-i18n-en={TOOLS_META.description.en}
+                data-i18n-es={TOOLS_META.description.es}
               >
                 {t(TOOLS_META.description, lang)}
               </p>
@@ -414,6 +461,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                       {skill.favorite && (
                         <span
                           className="text-label-index font-bold text-accent-vermilion"
+                          data-i18n-en="[FAVORITE]"
+                          data-i18n-es="[FAVORITO]"
                         >
                           {lang === 'en' ? '[FAVORITE]' : '[FAVORITO]'}
                         </span>
@@ -421,6 +470,8 @@ export function SkillsSection({ skills, lang }: SkillsSectionProps) {
                     </div>
                     <span
                       className={`px-sm py-2xs text-[10px] uppercase tracking-wider ${LEVEL_BADGE_CLASS[skill.level]}`}
+                      data-i18n-en={LEVEL_LABEL[skill.level].en}
+                      data-i18n-es={LEVEL_LABEL[skill.level].es}
                     >
                       {t(LEVEL_LABEL[skill.level], lang)}
                     </span>

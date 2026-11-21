@@ -1,20 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import { persistLangCookie, useLang } from './i18n-provider';
+import { useLang } from './i18n-provider';
 import type { Lang } from '@/lib/types';
 
 /**
  * Editorial bilingual toggle. Mono uppercase, hairline underline on active.
  * Renders as a single `EN · ES` pair so it reads as typography, not as a switch.
- *
- * Each language is a real link to its crawlable document — `/` for English,
- * `/es` for Spanish. There is no in-place text swap: the document language is
- * decided on the server, so switching languages is navigation. The choice is
- * persisted in the `lang` cookie so a later visit to `/` opens in it.
  */
 export function LangToggle({ className }: { readonly className?: string }) {
-  const { lang } = useLang();
+  const { lang, setLang } = useLang();
 
   return (
     <div
@@ -22,34 +16,33 @@ export function LangToggle({ className }: { readonly className?: string }) {
       aria-label="Language"
       className={`inline-flex items-center gap-2 ${className ?? ''}`}
     >
-      <LangLink current={lang} value="en">
+      <LangButton current={lang} value="en" onSelect={setLang}>
         EN
-      </LangLink>
+      </LangButton>
       <span aria-hidden="true" className="text-label-mono text-text-muted">
         ·
       </span>
-      <LangLink current={lang} value="es">
+      <LangButton current={lang} value="es" onSelect={setLang}>
         ES
-      </LangLink>
+      </LangButton>
     </div>
   );
 }
 
-const LANG_HREF: Record<Lang, string> = { en: '/', es: '/es' };
-
-interface LangLinkProps {
+interface LangButtonProps {
   readonly current: Lang;
   readonly value: Lang;
+  readonly onSelect: (next: Lang) => void;
   readonly children: string;
 }
 
-function LangLink({ current, value, children }: LangLinkProps) {
+function LangButton({ current, value, onSelect, children }: LangButtonProps) {
   const isActive = current === value;
   return (
-    <Link
-      href={LANG_HREF[value]}
-      aria-current={isActive ? 'page' : undefined}
-      onClick={() => persistLangCookie(value)}
+    <button
+      type="button"
+      onClick={() => onSelect(value)}
+      aria-pressed={isActive}
       className={`text-label-mono pb-0.5 transition-colors ${
         isActive
           ? 'text-text-primary border-b border-text-primary'
@@ -57,6 +50,6 @@ function LangLink({ current, value, children }: LangLinkProps) {
       }`}
     >
       {children}
-    </Link>
+    </button>
   );
 }

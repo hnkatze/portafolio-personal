@@ -66,7 +66,11 @@ export function ProjectCard({
         <div className="mb-xs flex items-center gap-xs text-label-mono">
           <span className={ACCENT_TEXT[accent]}>{num}</span>
           <span className="text-text-muted">•</span>
-          <span className="text-text-secondary" >
+          <span
+            className="text-text-secondary"
+            data-i18n-en={status.en}
+            data-i18n-es={status.es}
+          >
             {t(status, lang)}
           </span>
         </div>
@@ -94,6 +98,8 @@ export function ProjectCard({
       <div className="lg:col-span-8 lg:border-l lg:border-border-hairline lg:pl-xl">
         <p
           className="text-body-sm leading-relaxed text-text-secondary lg:text-body-md"
+          data-i18n-en={t(project.description, 'en')}
+          data-i18n-es={t(project.description, 'es')}
         >
           {t(project.description, lang)}
         </p>
@@ -108,7 +114,12 @@ export function ProjectCard({
                 className={`text-label-mono inline-flex items-center gap-1.5 border-b border-border-hairline pb-2xs text-text-primary transition-colors hover:border-text-primary ${ACCENT_HOVER_BORDER[accent]}`}
                 aria-label={`View live demo of ${project.title}`}
               >
-                <span>{lang === 'en' ? 'LIVE DEMO' : 'DEMO EN VIVO'}</span>
+                {/* Leaf span — applyLangToDom only swaps elements with zero
+                    children, so the i18n text and the arrow icon must be
+                    separate leaf nodes, not combined in the <a> itself. */}
+                <span data-i18n-en="LIVE DEMO" data-i18n-es="DEMO EN VIVO">
+                  {lang === 'en' ? 'LIVE DEMO' : 'DEMO EN VIVO'}
+                </span>
                 <span aria-hidden="true">↗</span>
               </a>
             )}
@@ -120,7 +131,7 @@ export function ProjectCard({
                 className="text-label-mono inline-flex items-center gap-1.5 border-b border-border-hairline pb-2xs text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
                 aria-label={`View source code of ${project.title}`}
               >
-                <span>
+                <span data-i18n-en="SOURCE CODE" data-i18n-es="CÓDIGO FUENTE">
                   {lang === 'en' ? 'SOURCE CODE' : 'CÓDIGO FUENTE'}
                 </span>
                 <span aria-hidden="true">↗</span>

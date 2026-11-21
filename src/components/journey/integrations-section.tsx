@@ -55,6 +55,8 @@ export function IntegrationsSection({
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-accent-vermilion"
+            data-i18n-en="INTEGRATIONS"
+            data-i18n-es="INTEGRACIONES"
           >
             {lang === 'en' ? 'INTEGRATIONS' : 'INTEGRACIONES'}
           </span>
@@ -66,6 +68,8 @@ export function IntegrationsSection({
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
+            data-i18n-en="LIVE METRICS"
+            data-i18n-es="MÉTRICAS EN VIVO"
           >
             {lang === 'en' ? 'LIVE METRICS' : 'MÉTRICAS EN VIVO'}
           </span>
@@ -80,7 +84,11 @@ export function IntegrationsSection({
               <I18nSplitWords textEn="Integrations." textEs="Integraciones." />
             </h2>
             <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-              <p className="max-w-[42rem] text-body-lead text-text-secondary" >
+              <p
+                className="max-w-[42rem] text-body-lead text-text-secondary"
+                data-i18n-en={introEn}
+                data-i18n-es={introEs}
+              >
                 {lang === 'en' ? introEn : introEs}
               </p>
             </Reveal>
@@ -148,7 +156,7 @@ export function IntegrationsSection({
                   rel="noopener noreferrer"
                   className="label-mono inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
                 >
-                  <span>
+                  <span data-i18n-en="ALL REPOS" data-i18n-es="TODOS">
                     {lang === 'en' ? 'ALL REPOS' : 'TODOS'}
                   </span>
                   <span aria-hidden="true">↗</span>

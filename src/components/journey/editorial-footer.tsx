@@ -33,10 +33,18 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
         }}
       >
         <span className="text-label-mono text-text-primary">09</span>
-        <span className="text-label-mono text-text-secondary text-center" >
+        <span
+          className="text-label-mono text-text-secondary text-center"
+          data-i18n-en="COLOPHON"
+          data-i18n-es="COLOFÓN"
+        >
           {lang === 'en' ? 'COLOPHON' : 'COLOFÓN'}
         </span>
-        <span className="text-label-mono text-text-secondary text-right" >
+        <span
+          className="text-label-mono text-text-secondary text-right"
+          data-i18n-en="END OF FILE"
+          data-i18n-es="FIN DEL ARCHIVO"
+        >
           {lang === 'en' ? 'END OF FILE' : 'FIN DEL ARCHIVO'}
         </span>
       </div>
@@ -69,13 +77,25 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
         }}
       >
         <div>
-          <span className="text-label-mono text-text-muted block mb-3" >
+          <span
+            className="text-label-mono text-text-muted block mb-3"
+            data-i18n-en="BASED IN"
+            data-i18n-es="UBICACIÓN"
+          >
             {lang === 'en' ? 'BASED IN' : 'UBICACIÓN'}
           </span>
-          <p className="text-base text-text-primary" >
+          <p
+            className="text-base text-text-primary"
+            data-i18n-en="San Pedro Sula, Honduras"
+            data-i18n-es="San Pedro Sula, Honduras"
+          >
             San Pedro Sula, Honduras
           </p>
-          <p className="text-base text-text-secondary mt-1" >
+          <p
+            className="text-base text-text-secondary mt-1"
+            data-i18n-en="Working remote · Worldwide"
+            data-i18n-es="Trabajo remoto · A nivel mundial"
+          >
             {lang === 'en'
               ? 'Working remote · Worldwide'
               : 'Trabajo remoto · A nivel mundial'}
@@ -83,7 +103,11 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
         </div>
 
         <div>
-          <span className="text-label-mono text-text-muted block mb-3" >
+          <span
+            className="text-label-mono text-text-muted block mb-3"
+            data-i18n-en="DIRECT"
+            data-i18n-es="DIRECTO"
+          >
             {lang === 'en' ? 'DIRECT' : 'DIRECTO'}
           </span>
           <a
@@ -95,7 +119,11 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
         </div>
 
         <div>
-          <span className="text-label-mono text-text-muted block mb-3" >
+          <span
+            className="text-label-mono text-text-muted block mb-3"
+            data-i18n-en="ELSEWHERE"
+            data-i18n-es="EN OTROS LADOS"
+          >
             {lang === 'en' ? 'ELSEWHERE' : 'EN OTROS LADOS'}
           </span>
           <ul className="flex flex-col gap-2 list-none p-0 m-0">
@@ -136,7 +164,11 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
             aria-hidden="true"
             className="block h-2 w-2 rounded-full bg-status-success animate-pulse"
           />
-          <span className="text-label-mono text-text-secondary" >
+          <span
+            className="text-label-mono text-text-secondary"
+            data-i18n-en="AVAILABLE FOR WORK"
+            data-i18n-es="DISPONIBLE PARA PROYECTOS"
+          >
             {lang === 'en'
               ? 'AVAILABLE FOR WORK'
               : 'DISPONIBLE PARA PROYECTOS'}
@@ -154,7 +186,11 @@ export function EditorialFooter({ data, lang }: EditorialFooterProps) {
           CAMILO HENRIQUEZ — EST. 2020
         </span>
 
-        <span className="text-label-mono text-text-muted" >
+        <span
+          className="text-label-mono text-text-muted"
+          data-i18n-en="BUILT WITH NEXT.JS 16 · MOTION"
+          data-i18n-es="HECHO CON NEXT.JS 16 · MOTION"
+        >
           {lang === 'en'
             ? 'BUILT WITH NEXT.JS 16 · MOTION'
             : 'HECHO CON NEXT.JS 16 · MOTION'}

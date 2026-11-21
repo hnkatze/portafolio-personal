@@ -63,6 +63,8 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-accent-vermilion"
+            data-i18n-en="EXPERIENCE"
+            data-i18n-es="EXPERIENCIA"
           >
             {lang === 'en' ? 'EXPERIENCE' : 'EXPERIENCIA'}
           </span>
@@ -74,6 +76,8 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
+            data-i18n-en="WORK HISTORY"
+            data-i18n-es="HISTORIAL LABORAL"
           >
             {lang === 'en' ? 'WORK HISTORY' : 'HISTORIAL LABORAL'}
           </span>
@@ -88,7 +92,11 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
               <I18nSplitWords textEn="Experience." textEs="Experiencia." />
             </h2>
             <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-              <p className="max-w-[42rem] text-body-lead text-text-secondary" >
+              <p
+                className="max-w-[42rem] text-body-lead text-text-secondary"
+                data-i18n-en={introEn}
+                data-i18n-es={introEs}
+              >
                 {lang === 'en' ? introEn : introEs}
               </p>
             </Reveal>
@@ -99,6 +107,8 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
             <div className="flex flex-col gap-2xs border-b border-border-hairline pb-sm">
               <span
                 className="text-label-index uppercase tracking-widest text-text-muted"
+                data-i18n-en="AVAILABILITY STATUS"
+                data-i18n-es="ESTATUS DE DISPONIBILIDAD"
               >
                 {lang === 'en' ? 'AVAILABILITY STATUS' : 'ESTATUS DE DISPONIBILIDAD'}
               </span>
@@ -107,7 +117,11 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                   className="inline-block h-1.5 w-1.5 bg-status-success"
                   aria-hidden="true"
                 />
-                <span className="text-label-mono text-text-primary" >
+                <span
+                  className="text-label-mono text-text-primary"
+                  data-i18n-en="CIT (Associate) & Freelance"
+                  data-i18n-es="CIT (Asociado) & Freelance"
+                >
                   {lang === 'en'
                     ? 'CIT (Associate) & Freelance'
                     : 'CIT (Asociado) & Freelance'}
@@ -118,10 +132,16 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
             <div className="flex flex-col gap-2xs border-b border-border-hairline pb-sm">
               <span
                 className="text-label-index uppercase tracking-widest text-text-muted"
+                data-i18n-en="TRACK RECORD"
+                data-i18n-es="HISTORIAL VERIFICADO"
               >
                 {lang === 'en' ? 'TRACK RECORD' : 'HISTORIAL VERIFICADO'}
               </span>
-              <span className="text-label-mono text-text-primary" >
+              <span
+                className="text-label-mono text-text-primary"
+                data-i18n-en="25+ projects, 100% client satisfaction"
+                data-i18n-es="25+ proyectos, 100% satisfacción del cliente"
+              >
                 {lang === 'en'
                   ? '25+ projects, 100% client satisfaction'
                   : '25+ proyectos, 100% satisfacción del cliente'}
@@ -131,10 +151,16 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
             <div className="flex flex-col gap-2xs">
               <span
                 className="text-label-index uppercase tracking-widest text-text-muted"
+                data-i18n-en="PROTOCOL"
+                data-i18n-es="PROTOCOLO"
               >
                 {lang === 'en' ? 'PROTOCOL' : 'PROTOCOLO'}
               </span>
-              <span className="text-label-mono text-accent-vermilion" >
+              <span
+                className="text-label-mono text-accent-vermilion"
+                data-i18n-en="Enterprise NDA (CIT)"
+                data-i18n-es="NDA Enterprise (CIT)"
+              >
                 {lang === 'en' ? 'Enterprise NDA (CIT)' : 'NDA Enterprise (CIT)'}
               </span>
             </div>
@@ -145,7 +171,10 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
       {/* Timeline entries */}
       <div className="px-[var(--shell-padding-x)] pb-2xl">
         <div className="flex items-center justify-between border-b border-border-hairline pb-xs mb-xl text-label-index uppercase text-text-muted">
-          <span >
+          <span
+            data-i18n-en="LOG-ENTRY // WORK HISTORY"
+            data-i18n-es="LOG-ENTRY // HISTORIAL LABORAL"
+          >
             LOG-ENTRY // {lang === 'en' ? 'WORK HISTORY' : 'HISTORIAL LABORAL'}
           </span>
           <span>INDEX [01–{String(experience.length).padStart(2, '0')}]</span>
@@ -178,7 +207,11 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                       <span>{num}</span>
                       <span>•</span>
                       {current && (
-                        <span className="font-semibold text-status-success" >
+                        <span
+                          className="font-semibold text-status-success"
+                          data-i18n-en="ACTIVE"
+                          data-i18n-es="ACTIVO"
+                        >
                           {lang === 'en' ? 'ACTIVE' : 'ACTIVO'}
                         </span>
                       )}
@@ -186,12 +219,20 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                     <h3 className="text-headline-lg text-text-primary">
                       {entry.company}
                     </h3>
-                    <p className="mt-2xs text-body-md text-text-secondary" >
+                    <p
+                      className="mt-2xs text-body-md text-text-secondary"
+                      data-i18n-en={t(entry.role, 'en')}
+                      data-i18n-es={t(entry.role, 'es')}
+                    >
                       {t(entry.role, lang)}
                     </p>
 
                     <div className="mt-lg flex justify-between border-b border-border-hairline pb-2xs text-label-mono">
-                      <span className="text-text-muted" >
+                      <span
+                        className="text-text-muted"
+                        data-i18n-en="PERIOD"
+                        data-i18n-es="PERIODO"
+                      >
                         {lang === 'en' ? 'PERIOD' : 'PERIODO'}
                       </span>
                       <span
@@ -208,6 +249,8 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                       <div className="mb-xs flex items-center justify-between border-b border-border-hairline pb-xs">
                         <span
                           className="text-label-index uppercase tracking-widest text-text-muted"
+                          data-i18n-en="OSS REGISTRY"
+                          data-i18n-es="REGISTRO OSS"
                         >
                           {lang === 'en' ? 'OSS REGISTRY' : 'REGISTRO OSS'}
                         </span>
@@ -239,11 +282,15 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                   <div className="mb-lg border-b border-border-hairline pb-md">
                     <span
                       className="text-label-index uppercase tracking-widest text-text-muted"
+                      data-i18n-en="ENGINEERING FOCUS"
+                      data-i18n-es="FOCO DE INGENIERÍA"
                     >
                       {lang === 'en' ? 'ENGINEERING FOCUS' : 'FOCO DE INGENIERÍA'}
                     </span>
                     <p
                       className="mt-xs text-headline-md leading-snug text-text-primary"
+                      data-i18n-en={t(entry.description, 'en')}
+                      data-i18n-es={t(entry.description, 'es')}
                     >
                       {t(entry.description, lang)}
                     </p>
@@ -264,7 +311,11 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                           <span className="shrink-0 pt-2xs text-label-mono text-accent-vermilion">
                             {String(hIdx + 1).padStart(2, '0')}
                           </span>
-                          <span className="text-body-sm text-text-secondary" >
+                          <span
+                            className="text-body-sm text-text-secondary"
+                            data-i18n-en={t(highlight, 'en')}
+                            data-i18n-es={t(highlight, 'es')}
+                          >
                             {t(highlight, lang)}
                           </span>
                         </Reveal>
@@ -276,6 +327,8 @@ export function ExperienceSection({ experience, lang }: ExperienceSectionProps) 
                     <div>
                       <span
                         className="mb-sm block text-label-index uppercase tracking-widest text-text-muted"
+                        data-i18n-en="TECH STACK"
+                        data-i18n-es="STACK TÉCNICO"
                       >
                         {lang === 'en' ? 'TECH STACK' : 'STACK TÉCNICO'}
                       </span>

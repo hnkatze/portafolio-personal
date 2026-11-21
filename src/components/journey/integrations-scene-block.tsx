@@ -40,6 +40,8 @@ export function IntegrationsSceneBlock({
           {Icon ? <Icon className="h-4 w-4 shrink-0 text-text-secondary" /> : null}
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
+            data-i18n-en={labelEn}
+            data-i18n-es={labelEs}
           >
             {lang === 'en' ? labelEn : labelEs}
           </span>

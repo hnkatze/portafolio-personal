@@ -44,20 +44,6 @@ stopped; Lighthouse on `/es` scores SEO 100 and Accessibility 100.
 S12. Non-goals (approved plan): no design or copy changes, no new translations,
 no change to the cookie strategy beyond preserving the visitor's preference.
 
-S13. User request (approve the follow-on pair): "dale".
-
-S14. Slice 3a — the language switch becomes navigation: EN goes to `/`, ES goes
-to `/es`, the current language is marked for assistive tech, and the choice is
-persisted in the `lang` cookie so `/` honours it on a later visit.
-
-S15. Slice 3b — remove the legacy `data-i18n-en|es` and `data-placeholder-*`
-attributes plus the DOM-swap machinery they fed, without changing the served
-text of `/` or `/es`. Proof: the visible-text snapshot of both documents must be
-byte-identical before and after.
-
-S16. No accessibility or SEO regression: build green with the dev server
-stopped; Lighthouse on `/` and `/es` keeps accessibility 100 and SEO 100.
-
 ## Tasks
 
 - T1 (S5, S12) Extract the shared pieces: fonts module, metadata builder,
@@ -80,13 +66,6 @@ stopped; Lighthouse on `/` and `/es` keeps accessibility 100 and SEO 100.
   toggle and the document language contradict the Spanish document. Fix: the
   route language wins; persist it to the cookie instead of reading it on the
   `(es)` route. Route: worker. Commit: pending.
-- T10 (S14) `LangToggle` becomes navigation: `next/link` to `/` and `/es`,
-  `aria-current` on the active language, cookie persisted on select. This must
-  land BEFORE T11 — the instant DOM swap is what T11 removes. Route: worker.
-  Commit: pending.
-- T11 (S15) Delete the 259 `data-i18n-*` / `data-placeholder-*` attributes and
-  the `applyLangToDom` swap they fed. Sections already render `lang` from the
-  server prop, so served text must not change. Route: worker. Commit: pending.
 
 ## Log
 
@@ -180,23 +159,3 @@ L17. `<!DOCTYPE html>` finding, final evidence: the PRERENDERED files
 streaming artifact and cannot be fixed from app code — App Router must emit the
 doctype. Identical on HEAD before this change. Reported as a framework-level
 item (Next 16.2.4 + cacheComponents), not fixed here.
-
-L18. T10/T11 done (worker, reviewed). Toggle is now navigation: EN -> `/`,
-ES -> `/es`, `aria-current="page"` on the active one, `lang` cookie written on
-click; `setLang` had exactly one caller (the toggle) and was removed with
-`applyLangToDom`. All 258 `data-i18n-*` / `data-placeholder-*` attributes
-deleted across 17 files, and NO node had to be converted from static English:
-every attribute-bearing leaf already rendered from `lang`/`t()`.
-
-Evidence: build exit 0 twice (/es still Static); visible DOM text after
-stripping scripts and tags is byte-identical (EN 15,485 B, ES 16,317 B, matching
-md5 per language); raw-stream diff on `/` showed only React stream-segment
-repacking, identical when token-sorted; Playwright: click ES -> url /es,
-lang=es, Spanish visible, cookie lang=es, then `/` opens in Spanish, focus order
-intact, computed styles unchanged. Served HTML: `/` 557,866 -> 496,446
-(-61,420, -11.0%), `/es` 540,066 -> 479,193 (-60,873, -11.3%).
-
-L19. Final Lighthouse (parent, mobile, Slow 4G + 4x CPU) on `/` and `/es`:
-Accessibility 100, SEO 100, Agentic Browsing 100, Best Practices 96 — the only
-remaining failure is the framework-level missing doctype (L17). Zero
-`data-i18n` matches left in `src`, including comments.
