@@ -133,8 +133,6 @@ export function CertificationsSection({
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-text-primary"
-            data-i18n-en="CERTIFICATIONS"
-            data-i18n-es="CERTIFICACIONES"
           >
             {lang === 'en' ? 'CERTIFICATIONS' : 'CERTIFICACIONES'}
           </span>
@@ -146,8 +144,6 @@ export function CertificationsSection({
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
-            data-i18n-en="PUBLIC RECORDS"
-            data-i18n-es="REGISTROS PÚBLICOS"
           >
             {lang === 'en' ? 'PUBLIC RECORDS' : 'REGISTROS PÚBLICOS'}
           </span>
@@ -163,11 +159,7 @@ export function CertificationsSection({
           />
         </h2>
         <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-          <p
-            className="max-w-[42rem] text-body-lead text-text-secondary"
-            data-i18n-en={leadEn}
-            data-i18n-es={leadEs}
-          >
+          <p className="max-w-[42rem] text-body-lead text-text-secondary" >
             {lang === 'en' ? leadEn : leadEs}
           </p>
         </Reveal>
@@ -183,19 +175,13 @@ export function CertificationsSection({
                 <span className="text-label-index uppercase tracking-widest text-text-muted">
                   01 / ANTHROPIC TRACK
                 </span>
-                <h3
-                  className="mt-2xs text-headline-lg text-text-primary"
-                  data-i18n-en="Anthropic certificates"
-                  data-i18n-es="Certificados Anthropic"
-                >
+                <h3 className="mt-2xs text-headline-lg text-text-primary" >
                   {lang === 'en'
                     ? 'Anthropic certificates'
                     : 'Certificados Anthropic'}
                 </h3>
                 <span
                   className="mt-xs inline-block border border-accent-cobalt/30 bg-accent-cobalt-subtle px-xs py-2xs text-label-mono text-accent-cobalt"
-                  data-i18n-en="PUBLICLY VERIFIABLE"
-                  data-i18n-es="VERIFICABLES PÚBLICAMENTE"
                 >
                   {lang === 'en'
                     ? 'PUBLICLY VERIFIABLE'
@@ -206,15 +192,11 @@ export function CertificationsSection({
               <div className="flex flex-col gap-xs border border-border-hairline bg-canvas-base p-md">
                 <span
                   className="text-label-mono uppercase tracking-wider text-text-secondary"
-                  data-i18n-en="Editorial note"
-                  data-i18n-es="Anotación editorial"
                 >
                   {lang === 'en' ? 'Editorial note' : 'Anotación editorial'}
                 </span>
                 <p
                   className="text-body-sm leading-relaxed text-text-secondary"
-                  data-i18n-en={ANTHROPIC_NOTE.en}
-                  data-i18n-es={ANTHROPIC_NOTE.es}
                 >
                   {t(ANTHROPIC_NOTE, lang)}
                 </p>
@@ -237,7 +219,7 @@ export function CertificationsSection({
                             className="inline-block h-1.5 w-1.5 bg-status-success"
                             aria-hidden="true"
                           />
-                          <span data-i18n-en="VERIFIABLE" data-i18n-es="VERIFICABLE">
+                          <span>
                             {lang === 'en' ? 'VERIFIABLE' : 'VERIFICABLE'}
                           </span>
                         </span>
@@ -247,10 +229,7 @@ export function CertificationsSection({
                             className="inline-block h-1.5 w-1.5 bg-text-muted"
                             aria-hidden="true"
                           />
-                          <span
-                            data-i18n-en="OFFICIAL CERTIFICATE"
-                            data-i18n-es="CERTIFICADO OFICIAL"
-                          >
+                          <span >
                             {lang === 'en'
                               ? 'OFFICIAL CERTIFICATE'
                               : 'CERTIFICADO OFICIAL'}
@@ -263,8 +242,6 @@ export function CertificationsSection({
                     </h4>
                     <span
                       className="mt-sm inline-block border border-border-hairline bg-canvas-subtle px-xs py-2xs text-label-index text-text-muted"
-                      data-i18n-en="ISSUER: ANTHROPIC"
-                      data-i18n-es="EMISOR: ANTHROPIC"
                     >
                       {lang === 'en' ? 'ISSUER: ANTHROPIC' : 'EMISOR: ANTHROPIC'}
                     </span>
@@ -279,10 +256,7 @@ export function CertificationsSection({
                         className="text-label-mono inline-flex items-center gap-1.5 uppercase tracking-wider text-text-primary transition-colors hover:text-accent-cobalt"
                         aria-label={`Verify ${cert.title} credential`}
                       >
-                        <span
-                          data-i18n-en="VERIFY CREDENTIAL"
-                          data-i18n-es="VERIFICAR CREDENCIAL"
-                        >
+                        <span >
                           {lang === 'en'
                             ? 'VERIFY CREDENTIAL'
                             : 'VERIFICAR CREDENCIAL'}
@@ -290,21 +264,13 @@ export function CertificationsSection({
                         <span aria-hidden="true">↗</span>
                       </a>
                     ) : (
-                      <span
-                        className="text-label-mono text-text-muted"
-                        data-i18n-en="NO PUBLIC LINK"
-                        data-i18n-es="SIN LINK PÚBLICO"
-                      >
+                      <span className="text-label-mono text-text-muted" >
                         {lang === 'en'
                           ? 'NO PUBLIC LINK'
                           : 'SIN LINK PÚBLICO'}
                       </span>
                     )}
-                    <span
-                      className="text-label-index text-text-muted"
-                      data-i18n-en="DIRECT COURSE"
-                      data-i18n-es="CURSO DIRECTO"
-                    >
+                    <span className="text-label-index text-text-muted" >
                       {lang === 'en' ? 'DIRECT COURSE' : 'CURSO DIRECTO'}
                     </span>
                   </div>
@@ -323,11 +289,7 @@ export function CertificationsSection({
               <span className="text-label-index uppercase tracking-widest text-text-muted">
                 02 / LABS &amp; COMPLETION
               </span>
-              <h3
-                className="mt-2xs text-headline-lg text-text-primary"
-                data-i18n-en="Completed training & courses"
-                data-i18n-es="Formación y cursos completados"
-              >
+              <h3 className="mt-2xs text-headline-lg text-text-primary" >
                 {lang === 'en'
                   ? 'Completed training & courses'
                   : 'Formación y cursos completados'}
@@ -338,8 +300,6 @@ export function CertificationsSection({
             <div className="border-l-2 border-status-warning bg-canvas-subtle p-md lg:col-span-8">
               <span
                 className="text-label-mono uppercase tracking-wider text-status-warning"
-                data-i18n-en="Professional transparency note"
-                data-i18n-es="Nota de transparencia profesional"
               >
                 {lang === 'en'
                   ? 'Professional transparency note'
@@ -347,8 +307,6 @@ export function CertificationsSection({
               </span>
               <p
                 className="mt-xs text-body-sm leading-relaxed text-text-secondary"
-                data-i18n-en={WARNING.en}
-                data-i18n-es={WARNING.es}
               >
                 {t(WARNING, lang)}
               </p>
@@ -364,17 +322,17 @@ export function CertificationsSection({
                     #
                   </th>
                   <th scope="col" className="px-md py-sm">
-                    <span data-i18n-en="Course / Lab" data-i18n-es="Curso / Lab">
+                    <span>
                       {lang === 'en' ? 'Course / Lab' : 'Curso / Lab'}
                     </span>
                   </th>
                   <th scope="col" className="px-md py-sm">
-                    <span data-i18n-en="Issuer" data-i18n-es="Emisor">
+                    <span>
                       {lang === 'en' ? 'Issuer' : 'Emisor'}
                     </span>
                   </th>
                   <th scope="col" className="px-md py-sm text-right">
-                    <span data-i18n-en="Year" data-i18n-es="Año">
+                    <span>
                       {lang === 'en' ? 'Year' : 'Año'}
                     </span>
                   </th>
@@ -419,19 +377,13 @@ export function CertificationsSection({
                 <span className="text-label-index uppercase tracking-widest text-text-muted">
                   03 / ACADEMIC
                 </span>
-                <h3
-                  className="mt-2xs text-headline-lg text-text-primary"
-                  data-i18n-en="Formal education"
-                  data-i18n-es="Educación formal"
-                >
+                <h3 className="mt-2xs text-headline-lg text-text-primary" >
                   {lang === 'en' ? 'Formal education' : 'Educación formal'}
                 </h3>
               </div>
               <div className="flex flex-col gap-xs border border-border-hairline bg-canvas-subtle p-md">
                 <span
                   className="text-label-index uppercase tracking-widest text-text-muted"
-                  data-i18n-en="HOST INSTITUTION"
-                  data-i18n-es="FACULTAD MATRIZ"
                 >
                   {lang === 'en' ? 'HOST INSTITUTION' : 'FACULTAD MATRIZ'}
                 </span>
@@ -446,15 +398,11 @@ export function CertificationsSection({
                   className="border border-border-hairline p-lg"
                 >
                   <div className="flex flex-col gap-xs border-b border-border-hairline pb-md md:flex-row md:items-baseline md:justify-between">
-                    <h4
-                      className="text-headline-lg text-text-primary"
-                      data-i18n-en={t(edu.degree, 'en')}
-                      data-i18n-es={t(edu.degree, 'es')}
-                    >
+                    <h4 className="text-headline-lg text-text-primary" >
                       {t(edu.degree, lang)}
                     </h4>
                     <span className="flex items-baseline gap-2xs text-label-mono text-text-muted">
-                      <span data-i18n-en="STATUS:" data-i18n-es="ESTADO:">
+                      <span>
                         {lang === 'en' ? 'STATUS:' : 'ESTADO:'}
                       </span>
                       <span
@@ -463,8 +411,6 @@ export function CertificationsSection({
                             ? 'text-status-success'
                             : 'text-text-primary'
                         }`}
-                        data-i18n-en={STATUS_LABEL[edu.status].en}
-                        data-i18n-es={STATUS_LABEL[edu.status].es}
                       >
                         {t(STATUS_LABEL[edu.status], lang)}
                       </span>
@@ -473,7 +419,7 @@ export function CertificationsSection({
 
                   <div className="grid grid-cols-1 gap-md pt-md md:grid-cols-12">
                     <div className="flex items-baseline gap-2xs text-label-mono text-text-muted md:col-span-4">
-                      <span data-i18n-en="INSTITUTION:" data-i18n-es="INSTITUCIÓN:">
+                      <span>
                         {lang === 'en' ? 'INSTITUTION:' : 'INSTITUCIÓN:'}
                       </span>
                       <span className="text-text-primary">
@@ -484,8 +430,6 @@ export function CertificationsSection({
                       <div className="md:col-span-8">
                         <span
                           className="mb-xs block text-label-index uppercase tracking-widest text-text-muted"
-                          data-i18n-en="FOCUS AREAS"
-                          data-i18n-es="ÁREAS DE ENFOQUE"
                         >
                           {lang === 'en' ? 'FOCUS AREAS' : 'ÁREAS DE ENFOQUE'}
                         </span>

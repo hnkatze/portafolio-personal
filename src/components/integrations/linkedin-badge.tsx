@@ -23,7 +23,7 @@ export function LinkedInBadge({ profileUrl, lang = 'en' }: LinkedInBadgeProps) {
       }
     >
       <LinkedInIcon className="h-4 w-4 shrink-0" />
-      <span data-i18n-en="VIEW LINKEDIN PROFILE" data-i18n-es="VER PERFIL DE LINKEDIN">
+      <span>
         {lang === 'en' ? 'VIEW LINKEDIN PROFILE' : 'VER PERFIL DE LINKEDIN'}
       </span>{' '}
       <span aria-hidden="true">↗</span>

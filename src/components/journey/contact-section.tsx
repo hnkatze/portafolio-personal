@@ -98,8 +98,6 @@ export function ContactSection({ data }: ContactSectionProps) {
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-text-primary"
-            data-i18n-en="CONTACT"
-            data-i18n-es="CONTACTO"
           >
             {lang === 'en' ? 'CONTACT' : 'CONTACTO'}
           </span>
@@ -111,8 +109,6 @@ export function ContactSection({ data }: ContactSectionProps) {
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
-            data-i18n-en="OPEN FOR FREELANCE"
-            data-i18n-es="ABIERTO A FREELANCE"
           >
             {lang === 'en' ? 'OPEN FOR FREELANCE' : 'ABIERTO A FREELANCE'}
           </span>
@@ -126,11 +122,7 @@ export function ContactSection({ data }: ContactSectionProps) {
         </h2>
 
         <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-          <p
-            className="max-w-[42rem] text-body-lead text-text-secondary"
-            data-i18n-en={LEAD.en}
-            data-i18n-es={LEAD.es}
-          >
+          <p className="max-w-[42rem] text-body-lead text-text-secondary" >
             {lang === 'en' ? LEAD.en : LEAD.es}
           </p>
         </Reveal>
@@ -142,19 +134,12 @@ export function ContactSection({ data }: ContactSectionProps) {
               onClick={handleCvClick}
               className="text-label-mono inline-flex items-center gap-xs border border-border-hairline px-md py-sm text-text-primary transition-colors hover:border-accent-vermilion hover:text-accent-vermilion"
             >
-              <span
-                data-i18n-en="DOWNLOAD CV (PDF)"
-                data-i18n-es="DESCARGAR CV (PDF)"
-              >
+              <span >
                 {lang === 'en' ? 'DOWNLOAD CV (PDF)' : 'DESCARGAR CV (PDF)'}
               </span>
               <span aria-hidden="true">↓</span>
             </button>
-            <span
-              className="text-label-index text-text-muted"
-              data-i18n-en="EN · ES VERSIONS AVAILABLE"
-              data-i18n-es="VERSIONES EN · ES DISPONIBLES"
-            >
+            <span className="text-label-index text-text-muted" >
               {lang === 'en'
                 ? 'EN · ES VERSIONS AVAILABLE'
                 : 'VERSIONES EN · ES DISPONIBLES'}
@@ -173,8 +158,6 @@ export function ContactSection({ data }: ContactSectionProps) {
               <div className="flex flex-col gap-sm">
                 <span
                   className="text-label-index uppercase tracking-widest text-text-muted"
-                  data-i18n-en="PRIMARY CHANNEL // EMAIL"
-                  data-i18n-es="CANAL PRINCIPAL // EMAIL"
                 >
                   {lang === 'en'
                     ? 'PRIMARY CHANNEL // EMAIL'
@@ -192,10 +175,7 @@ export function ContactSection({ data }: ContactSectionProps) {
                     onClick={handleCopyEmail}
                     className="text-label-mono inline-flex items-center gap-2xs border border-border-hairline bg-canvas-base px-sm py-2xs text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
                   >
-                    <span
-                      data-i18n-en={copied ? 'COPIED' : 'COPY EMAIL'}
-                      data-i18n-es={copied ? 'COPIADO' : 'COPIAR EMAIL'}
-                    >
+                    <span >
                       {copied
                         ? lang === 'en'
                           ? 'COPIED'
@@ -209,10 +189,7 @@ export function ContactSection({ data }: ContactSectionProps) {
                     href={`mailto:${data.email}`}
                     className="text-label-mono inline-flex items-center gap-2xs border border-border-hairline bg-canvas-base px-sm py-2xs text-text-secondary transition-colors hover:border-accent-vermilion hover:text-accent-vermilion"
                   >
-                    <span
-                      data-i18n-en="OPEN MAIL CLIENT"
-                      data-i18n-es="ABRIR CLIENTE"
-                    >
+                    <span >
                       {lang === 'en' ? 'OPEN MAIL CLIENT' : 'ABRIR CLIENTE'}
                     </span>
                   </a>
@@ -223,8 +200,6 @@ export function ContactSection({ data }: ContactSectionProps) {
               <div className="flex flex-col border-t border-border-hairline">
                 <span
                   className="pt-lg text-label-index uppercase tracking-widest text-text-muted"
-                  data-i18n-en="DIRECT RECORDS // REPOS & NETWORK"
-                  data-i18n-es="REGISTROS DIRECTOS // REPOS Y RED"
                 >
                   {lang === 'en'
                     ? 'DIRECT RECORDS // REPOS & NETWORK'
@@ -263,10 +238,7 @@ export function ContactSection({ data }: ContactSectionProps) {
                   className="inline-block h-1.5 w-1.5 bg-accent-vermilion"
                   aria-hidden="true"
                 />
-                <span
-                  data-i18n-en="OPEN TO REMOTE ROLES & FREELANCE ARCHITECTURE WORK"
-                  data-i18n-es="ABIERTO A ROLES REMOTOS Y TRABAJO DE ARQUITECTURA FREELANCE"
-                >
+                <span >
                   {lang === 'en'
                     ? 'OPEN TO REMOTE ROLES & FREELANCE ARCHITECTURE WORK'
                     : 'ABIERTO A ROLES REMOTOS Y TRABAJO DE ARQUITECTURA FREELANCE'}
@@ -279,8 +251,6 @@ export function ContactSection({ data }: ContactSectionProps) {
               <div className="flex items-center justify-between border-b border-border-hairline pb-xs">
                 <span
                   className="text-label-index uppercase tracking-widest text-text-muted"
-                  data-i18n-en="DIRECT MESSAGE FORM"
-                  data-i18n-es="FORMULARIO DE MENSAJE DIRECTO"
                 >
                   {lang === 'en'
                     ? 'DIRECT MESSAGE FORM'
@@ -402,8 +372,6 @@ export function ContactSection({ data }: ContactSectionProps) {
                   <p
                     role="status"
                     className="text-label-mono text-status-success"
-                    data-i18n-en="MESSAGE SENT — I'LL REPLY SHORTLY"
-                    data-i18n-es="MENSAJE ENVIADO — RESPONDERÉ PRONTO"
                   >
                     {lang === 'en'
                       ? "MESSAGE SENT — I'LL REPLY SHORTLY"
@@ -429,8 +397,6 @@ export function ContactSection({ data }: ContactSectionProps) {
           </span>
           <p
             className="max-w-[48rem] text-headline-md leading-snug text-text-secondary"
-            data-i18n-en={COLOPHON_EN}
-            data-i18n-es={COLOPHON_ES}
           >
             {lang === 'en' ? COLOPHON_EN : COLOPHON_ES}
           </p>
@@ -482,8 +448,6 @@ function FormField({
         <label
           htmlFor={id}
           className="text-label-mono text-text-secondary"
-          data-i18n-en={`${index}. ${labelEn}`}
-          data-i18n-es={`${index}. ${labelEs}`}
         >
           {`${index}. ${lang === 'en' ? labelEn : labelEs}`}
           {required && <span className="text-accent-vermilion"> *</span>}
@@ -498,8 +462,6 @@ function FormField({
           rows={4}
           className={`${baseInput} resize-none`}
           placeholder={placeholder}
-          data-placeholder-en={placeholderEn}
-          data-placeholder-es={placeholderEs}
           aria-describedby={
             errors && errors.length > 0 ? `${id}-error` : undefined
           }
@@ -512,8 +474,6 @@ function FormField({
           required={required}
           className={baseInput}
           placeholder={placeholder}
-          data-placeholder-en={placeholderEn}
-          data-placeholder-es={placeholderEs}
           aria-describedby={
             errors && errors.length > 0 ? `${id}-error` : undefined
           }
@@ -559,8 +519,6 @@ function ContactRow({
   const label = (
     <span
       className="text-label-index uppercase tracking-widest text-text-muted"
-      data-i18n-en={labelEn}
-      data-i18n-es={labelEs}
     >
       {lang === 'en' ? labelEn : labelEs}
     </span>
@@ -570,11 +528,7 @@ function ContactRow({
     return (
       <div className="flex flex-col gap-2xs py-sm">
         {label}
-        <span
-          className="text-headline-md text-text-primary"
-          data-i18n-en={valueEn}
-          data-i18n-es={valueEs}
-        >
+        <span className="text-headline-md text-text-primary" >
           {lang === 'en' ? valueEn : valueEs}
         </span>
       </div>

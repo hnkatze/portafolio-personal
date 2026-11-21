@@ -23,8 +23,6 @@ export function TestimonialFigure({
   index,
   isLast = false,
 }: TestimonialFigureProps) {
-  const quoteEn = t(testimonial.quote, 'en');
-  const quoteEs = t(testimonial.quote, 'es');
   const roleEn = t(testimonial.role, 'en');
   const roleEs = t(testimonial.role, 'es');
   const projectUrl = toProjectUrl(testimonial.project);
@@ -43,11 +41,7 @@ export function TestimonialFigure({
         <figcaption className="text-headline-md text-text-primary">
           {testimonial.name}
         </figcaption>
-        <span
-          className="text-label-mono text-text-secondary"
-          data-i18n-en={roleEn}
-          data-i18n-es={roleEs}
-        >
+        <span className="text-label-mono text-text-secondary" >
           {lang === 'en' ? roleEn : roleEs}
         </span>
       </div>
@@ -56,8 +50,6 @@ export function TestimonialFigure({
       <div className="flex flex-col gap-md lg:col-span-8">
         <p
           className="text-body-lead leading-relaxed text-text-primary before:content-['“'] before:text-accent-vermilion after:content-['”'] after:text-accent-vermilion"
-          data-i18n-en={quoteEn}
-          data-i18n-es={quoteEs}
         >
           {t(testimonial.quote, lang)}
         </p>
@@ -70,10 +62,7 @@ export function TestimonialFigure({
             className="inline-flex items-center gap-1.5 self-start border-b border-border-hairline text-label-mono text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
             aria-label={`Visit ${testimonial.project} (opens in new tab)`}
           >
-            <span
-              data-i18n-en={`VISIT ${testimonial.project.toUpperCase()}`}
-              data-i18n-es={`VISITAR ${testimonial.project.toUpperCase()}`}
-            >
+            <span >
               {lang === 'en' ? 'VISIT' : 'VISITAR'} {testimonial.project.toUpperCase()}
             </span>
             <span aria-hidden="true">↗</span>

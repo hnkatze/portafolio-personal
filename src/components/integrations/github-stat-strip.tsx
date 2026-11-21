@@ -144,11 +144,7 @@ function Metric({ value, labelEn, labelEs, lang }: MetricProps) {
       >
         {value}
       </p>
-      <p
-        className="label-mono-muted mt-3"
-        data-i18n-en={labelEn}
-        data-i18n-es={labelEs}
-      >
+      <p className="label-mono-muted mt-3" >
         {lang === 'en' ? labelEn : labelEs}
       </p>
     </div>

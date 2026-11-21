@@ -66,7 +66,7 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
           rel="noopener noreferrer"
           className="label-mono inline-flex items-center gap-2 text-text-primary hover:opacity-70 transition-opacity"
         >
-          <span data-i18n-en="VIEW ON GITHUB" data-i18n-es="VER EN GITHUB">
+          <span>
             {lang === 'en' ? 'VIEW ON GITHUB' : 'VER EN GITHUB'}
           </span>
           <span aria-hidden="true">↗</span>
@@ -114,11 +114,7 @@ export async function GitHubRepos({ username, lang = 'en' }: GitHubReposProps) {
                 <span aria-label={`${repo.stargazers_count} stars`}>
                   ★ {repo.stargazers_count}
                 </span>
-                <span
-                  className="hidden sm:inline"
-                  data-i18n-en={updatedEn}
-                  data-i18n-es={updatedEs}
-                >
+                <span className="hidden sm:inline" >
                   {lang === 'en' ? updatedEn : updatedEs}
                 </span>
               </div>

@@ -7,16 +7,12 @@ import { SECTION_NAV_ITEMS } from './section-nav';
 /* ============================================================
    EditorialHeader — sticky top bar (T-09a). Client component.
 
-   Uses useLang() directly instead of data-i18n-* leaf spans:
-   this header lives in the root layout, which must stay static
-   (no cookies() read) for cacheComponents, so it never receives
-   a server-resolved `lang` prop. The i18n provider only syncs
-   REACT STATE on mount for the real cookie value — it does not
-   run the DOM-swap (that's reserved for user-triggered toggles,
-   see i18n-provider.tsx) — so a component here needs to be a
-   genuinely reactive client component to render the right
-   language on first paint. Same pattern/gotcha already logged
-   for contact-section.tsx in T-08.
+   Renders the language through useLang() because this header lives in the
+   root layout, which must stay static (no cookies() read) for
+   cacheComponents, so it never receives a server-resolved `lang` prop.
+   Each root layout seeds I18nProvider with its own document language, and
+   a page body is server-rendered from that same value — so provider state
+   and server markup agree, with no DOM swapping anywhere.
 
    Two rows:
      Row 1: logo + primary nav (all 8 sections) + lang toggle + CTA

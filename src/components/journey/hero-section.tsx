@@ -119,11 +119,6 @@ const DOT_CLASS: Record<Stat['dot'], string> = {
 };
 
 export function HeroSection({ data, lang }: HeroSectionProps) {
-  const titleEn = t(data.title, 'en');
-  const titleEs = t(data.title, 'es');
-  const summaryEn = t(data.summary, 'en');
-  const summaryEs = t(data.summary, 'es');
-
   return (
     <section id="about" className="relative bg-canvas-base">
       {/* Dossier breadcrumb bar — mirrors SectionNav's "02" for #about */}
@@ -134,8 +129,6 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-accent-vermilion"
-            data-i18n-en="PERFIL"
-            data-i18n-es="PERFIL"
           >
             PERFIL
           </span>
@@ -147,8 +140,6 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
-            data-i18n-en="PRODUCTION ACTIVE"
-            data-i18n-es="EN PRODUCCIÓN"
           >
             {lang === 'en' ? 'PRODUCTION ACTIVE' : 'EN PRODUCCIÓN'}
           </span>
@@ -164,11 +155,7 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
               <p className="text-label-mono uppercase tracking-wider text-text-muted">
                 [{lang === 'en' ? 'ROLE' : 'ROL PRINCIPAL'}]
               </p>
-              <p
-                className="text-headline-md text-text-primary"
-                data-i18n-en={titleEn}
-                data-i18n-es={titleEs}
-              >
+              <p className="text-headline-md text-text-primary" >
                 {t(data.title, lang)}
               </p>
             </div>
@@ -218,19 +205,11 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
               {data.name}
             </h1>
 
-            <p
-              className="text-headline-lg text-text-secondary"
-              data-i18n-en={titleEn}
-              data-i18n-es={titleEs}
-            >
+            <p className="text-headline-lg text-text-secondary" >
               {t(data.title, lang)}
             </p>
 
-            <p
-              className="max-w-[48rem] text-body-lead text-text-secondary"
-              data-i18n-en={summaryEn}
-              data-i18n-es={summaryEs}
-            >
+            <p className="max-w-[48rem] text-body-lead text-text-secondary" >
               {t(data.summary, lang)}
             </p>
 
@@ -302,19 +281,11 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
                     duration={1.4}
                   />
                 </div>
-                <p
-                  className="text-headline-md text-text-secondary"
-                  data-i18n-en={stat.label.en}
-                  data-i18n-es={stat.label.es}
-                >
+                <p className="text-headline-md text-text-secondary" >
                   {t(stat.label, lang)}
                 </p>
               </div>
-              <p
-                className="text-body-sm text-text-muted"
-                data-i18n-en={stat.note.en}
-                data-i18n-es={stat.note.es}
-              >
+              <p className="text-body-sm text-text-muted" >
                 {t(stat.note, lang)}
               </p>
             </div>
@@ -351,11 +322,7 @@ export function HeroSection({ data, lang }: HeroSectionProps) {
                 <h3 className="text-headline-md text-text-primary">
                   {t(pillar.title, lang)}
                 </h3>
-                <p
-                  className="text-body-sm text-text-secondary"
-                  data-i18n-en={pillar.description.en}
-                  data-i18n-es={pillar.description.es}
-                >
+                <p className="text-body-sm text-text-secondary" >
                   {t(pillar.description, lang)}
                 </p>
               </div>

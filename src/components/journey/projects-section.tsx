@@ -99,8 +99,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-accent-vermilion"
-            data-i18n-en="PROJECTS"
-            data-i18n-es="PROYECTOS"
           >
             {lang === 'en' ? 'PROJECTS' : 'PROYECTOS'}
           </span>
@@ -112,8 +110,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
-            data-i18n-en="SELECTED WORK"
-            data-i18n-es="TRABAJOS SELECCIONADOS"
           >
             {lang === 'en' ? 'SELECTED WORK' : 'TRABAJOS SELECCIONADOS'}
           </span>
@@ -128,11 +124,7 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
               <I18nSplitWords textEn="Projects." textEs="Proyectos." />
             </h2>
             <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-              <p
-                className="max-w-[42rem] text-body-lead text-text-secondary"
-                data-i18n-en={introEn}
-                data-i18n-es={introEs}
-              >
+              <p className="max-w-[42rem] text-body-lead text-text-secondary" >
                 {lang === 'en' ? introEn : introEs}
               </p>
             </Reveal>
@@ -142,8 +134,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
           <div className="flex flex-col gap-xs border-t border-border-hairline pt-sm lg:col-span-4 lg:items-end lg:border-t-0 lg:border-l lg:pl-md lg:pt-0">
             <span
               className="text-label-index uppercase tracking-widest text-text-muted"
-              data-i18n-en="REGISTRY"
-              data-i18n-es="REGISTRO"
             >
               {lang === 'en' ? 'REGISTRY' : 'REGISTRO'}
             </span>
@@ -160,10 +150,7 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                     aria-hidden="true"
                   />
                   <span>{String(group.items.length).padStart(2, '0')}</span>
-                  <span
-                    data-i18n-en={group.title.en}
-                    data-i18n-es={group.title.es}
-                  >
+                  <span >
                     {t(group.title, lang)}
                   </span>
                 </span>
@@ -194,11 +181,7 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                   >
                     {group.index} /
                   </span>
-                  <h3
-                    className="text-headline-lg text-text-primary"
-                    data-i18n-en={group.title.en}
-                    data-i18n-es={group.title.es}
-                  >
+                  <h3 className="text-headline-lg text-text-primary" >
                     {t(group.title, lang)}
                   </h3>
                 </div>
@@ -229,8 +212,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                   <div className="mb-xs flex items-center justify-between border-b border-border-hairline pb-xs">
                     <span
                       className="text-label-index uppercase tracking-widest text-text-muted"
-                      data-i18n-en="MCP SERVERS — PRIVATE"
-                      data-i18n-es="MCP SERVERS — PRIVADOS"
                     >
                       {lang === 'en' ? 'MCP SERVERS — PRIVATE' : 'MCP SERVERS — PRIVADOS'}
                     </span>
@@ -240,8 +221,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                   </div>
                   <p
                     className="text-body-sm leading-relaxed text-text-secondary"
-                    data-i18n-en={privateNoteEn}
-                    data-i18n-es={privateNoteEs}
                   >
                     {lang === 'en' ? privateNoteEn : privateNoteEs}
                   </p>
@@ -256,8 +235,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                   <div className="mb-xs flex items-center justify-between border-b border-border-hairline pb-xs">
                     <span
                       className="text-label-index uppercase tracking-widest text-text-muted"
-                      data-i18n-en="PRIVATE CLIENT WORK"
-                      data-i18n-es="TRABAJO PRIVADO DE CLIENTES"
                     >
                       {lang === 'en' ? 'PRIVATE CLIENT WORK' : 'TRABAJO PRIVADO DE CLIENTES'}
                     </span>
@@ -267,8 +244,6 @@ export function ProjectsSection({ projects, lang }: ProjectsSectionProps) {
                   </div>
                   <p
                     className="text-body-sm leading-relaxed text-text-secondary"
-                    data-i18n-en={privateClientNoteEn}
-                    data-i18n-es={privateClientNoteEs}
                   >
                     {lang === 'en' ? privateClientNoteEn : privateClientNoteEs}
                   </p>

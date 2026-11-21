@@ -50,8 +50,6 @@ export function TestimonialsSection({
           </span>
           <span
             className="text-label-index uppercase tracking-widest text-text-primary"
-            data-i18n-en="VOICES"
-            data-i18n-es="VOCES"
           >
             {lang === 'en' ? 'VOICES' : 'VOCES'}
           </span>
@@ -63,8 +61,6 @@ export function TestimonialsSection({
           />
           <span
             className="text-label-index uppercase tracking-widest text-text-secondary"
-            data-i18n-en="CLIENT RECORD"
-            data-i18n-es="REGISTRO DE CLIENTES"
           >
             {lang === 'en' ? 'CLIENT RECORD' : 'REGISTRO DE CLIENTES'}
           </span>
@@ -77,11 +73,7 @@ export function TestimonialsSection({
           <I18nSplitWords textEn="Voices." textEs="Voces." />
         </h2>
         <Reveal direction="up" delay={0.15} duration={0.6} className="mt-sm">
-          <p
-            className="max-w-[42rem] text-body-lead text-text-secondary"
-            data-i18n-en={leadEn}
-            data-i18n-es={leadEs}
-          >
+          <p className="max-w-[42rem] text-body-lead text-text-secondary" >
             {lang === 'en' ? leadEn : leadEs}
           </p>
         </Reveal>
