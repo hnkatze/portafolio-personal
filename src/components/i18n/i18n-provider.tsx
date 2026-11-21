@@ -4,7 +4,6 @@ import {
   createContext,
   useContext,
   useEffect,
-  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -77,44 +76,18 @@ function applyLangToDom(lang: Lang): void {
      first paint (server pre-rendered "Experience." via the client
      component using provider lang='en'; effect then swaps to
      "Experiencia."), but it is hydration-safe.
-
-   `syncFromCookie` (default true) keeps that legacy behavior for the
-   cookie-driven route. A route group that owns its own document
-   language (`/es`) passes false: the route language wins, and instead
-   of reading the cookie the provider persists `initialLang` so a later
-   visit to `/` opens in the same language. Reading the cookie there
-   would flip `/es` back to English after hydration, contradicting the
-   Spanish document and its toggle.
    ============================================================ */
 interface I18nProviderProps {
   initialLang: Lang;
-  syncFromCookie?: boolean;
   children: ReactNode;
 }
 
-export function I18nProvider({
-  initialLang,
-  syncFromCookie = true,
-  children,
-}: I18nProviderProps) {
+export function I18nProvider({ initialLang, children }: I18nProviderProps) {
   const [lang, setLangState] = useState<Lang>(initialLang);
-  // The mount sync below must run exactly once. The ref guard keeps it
-  // from re-running when its own cookie write or a prop change would
-  // otherwise re-arm it.
-  const didMountSync = useRef(false);
 
   useEffect(() => {
-    if (didMountSync.current) return;
-    didMountSync.current = true;
-
-    if (!syncFromCookie) {
-      // Route language wins: persist it, never read it.
-      persistLangCookie(initialLang);
-      return;
-    }
-
     const fromCookie = readLangCookie();
-    if (fromCookie === initialLang) return;
+    if (fromCookie === lang) return;
     // Initial sync: ONLY update React state + <html lang>. Do NOT call
     // applyLangToDom here — mutating the DOM before all client components
     // finish hydrating causes mismatches (their VDOM still has the
@@ -125,7 +98,9 @@ export function I18nProvider({
     if (typeof document !== 'undefined') {
       document.documentElement.lang = fromCookie;
     }
-  }, [syncFromCookie, initialLang]);
+    // Sync once on mount only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const setLang = (next: Lang) => {
     setLangState(next);
