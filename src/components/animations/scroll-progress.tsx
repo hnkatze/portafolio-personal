@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useReducedMotion } from 'motion/react';
+import { m, useScroll, useReducedMotion } from 'motion/react';
 
 export interface ScrollProgressProps {
   readonly className?: string;
@@ -23,7 +23,7 @@ export function ScrollProgress({
   const classes = className ? `${baseClasses} ${className}` : baseClasses;
 
   return (
-    <motion.div
+    <m.div
       className={classes}
       style={{ scaleX: scrollYProgress, backgroundColor: color }}
       aria-hidden="true"

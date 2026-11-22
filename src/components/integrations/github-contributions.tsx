@@ -24,6 +24,11 @@ export async function GitHubContributions({ username }: GitHubContributionsProps
       <img
         src={`https://ghchart.rshah.org/e63926/${username}`}
         alt={`${username} contribution graph`}
+        // Explicit dimensions so the browser reserves the box before the
+        // external chart arrives (CLS); `w-full h-auto` still owns the
+        // rendered size.
+        width={676}
+        height={128}
         loading="lazy"
         className="w-full h-auto"
       />

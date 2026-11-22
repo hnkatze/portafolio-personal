@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from 'react';
 import {
-  motion,
+  m,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -19,7 +19,7 @@ export interface MagneticButtonProps {
   readonly radius?: number;
   readonly className?: string;
   /**
-   * When true, renders a `motion.span` wrapper around the child instead of a `motion.button`.
+   * When true, renders a `m.span` wrapper around the child instead of a `m.button`.
    * Useful when the child is already an interactive element (anchor, button, etc.).
    */
   readonly asChild?: boolean;
@@ -89,7 +89,7 @@ export function MagneticButton({
 
   if (asChild) {
     return (
-      <motion.span
+      <m.span
         ref={(node: HTMLSpanElement | null) => {
           ref.current = node;
         }}
@@ -99,12 +99,12 @@ export function MagneticButton({
         style={{ x, y, display: 'inline-block' }}
       >
         {children}
-      </motion.span>
+      </m.span>
     );
   }
 
   return (
-    <motion.button
+    <m.button
       type="button"
       ref={(node: HTMLButtonElement | null) => {
         ref.current = node;
@@ -116,6 +116,6 @@ export function MagneticButton({
       style={{ x, y, display: 'inline-block' }}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }

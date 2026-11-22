@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { m, useScroll, useTransform, useReducedMotion } from 'motion/react';
 
 export interface ScrollScaleProps {
   readonly children: ReactNode;
@@ -43,8 +43,8 @@ export function ScrollScale({
   }
 
   return (
-    <motion.div ref={ref} className={className} style={{ scale, opacity }}>
+    <m.div ref={ref} className={className} style={{ scale, opacity }}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,3 +1,6 @@
+export { LazyMotionProvider } from './lazy-motion-provider';
+export type { LazyMotionProviderProps } from './lazy-motion-provider';
+
 export { CountUp } from './count-up';
 export type { CountUpProps } from './count-up';
 

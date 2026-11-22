@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { m, useScroll, useTransform, useReducedMotion } from 'motion/react';
 
 export interface ScrollParallaxProps {
   readonly children: ReactNode;
@@ -39,12 +39,12 @@ export function ScrollParallax({
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className}
       style={{ y, scale: scaleTo !== undefined ? scale : undefined }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

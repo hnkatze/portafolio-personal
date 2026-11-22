@@ -1,7 +1,7 @@
 'use client';
 
 import { Children, useRef, type ReactNode } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from 'motion/react';
+import { m, useScroll, useTransform, useReducedMotion, type MotionValue } from 'motion/react';
 
 export interface ScrollSequenceStep {
   readonly opacity?: readonly [number, number];
@@ -56,7 +56,7 @@ function SequenceChild({ child, step, progress }: SequenceChildProps) {
   }
 
   return (
-    <motion.div
+    <m.div
       style={{
         ...(transforms.opacity ? { opacity: transforms.opacity } : {}),
         ...(transforms.y ? { y: transforms.y } : {}),
@@ -65,7 +65,7 @@ function SequenceChild({ child, step, progress }: SequenceChildProps) {
       }}
     >
       {child}
-    </motion.div>
+    </m.div>
   );
 }
 

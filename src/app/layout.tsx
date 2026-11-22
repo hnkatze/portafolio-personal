@@ -6,7 +6,7 @@ import { personalInfo } from '@/lib/data';
 import { I18nProvider } from '@/components/i18n/i18n-provider';
 import { SectionNav } from '@/components/layout/section-nav';
 import { EditorialHeader } from '@/components/layout/editorial-header';
-import { ScrollProgress } from '@/components/animations';
+import { LazyMotionProvider, ScrollProgress } from '@/components/animations';
 import { LenisProvider } from '@/components/lenis-provider';
 
 /* ============================================================
@@ -211,18 +211,23 @@ export default function RootLayout({
         <StructuredData />
         <LenisProvider>
           <I18nProvider initialLang="en">
-            {/* print:hidden on each component (not a shared wrapper) — a
-                wrapper div here would become EditorialHeader's sticky
-                containing block, collapsed to just the header's own
-                height instead of the full page, breaking position:sticky.
-                /cv-print renders its own printable page; this site chrome
-                must never bleed into the exported PDF
-                (scripts/generate-cv-pdf.ts calls page.pdf() under the
-                print media type). */}
-            <ScrollProgress className="print:hidden" />
-            <EditorialHeader />
-            <SectionNav />
-            {children}
+            {/* One LazyMotion boundary for the entire tree: every animated
+                component uses the lightweight `m`, and this provider is the
+                only place the animation feature bundle is registered. */}
+            <LazyMotionProvider>
+              {/* print:hidden on each component (not a shared wrapper) — a
+                  wrapper div here would become EditorialHeader's sticky
+                  containing block, collapsed to just the header's own
+                  height instead of the full page, breaking position:sticky.
+                  /cv-print renders its own printable page; this site chrome
+                  must never bleed into the exported PDF
+                  (scripts/generate-cv-pdf.ts calls page.pdf() under the
+                  print media type). */}
+              <ScrollProgress className="print:hidden" />
+              <EditorialHeader />
+              <SectionNav />
+              {children}
+            </LazyMotionProvider>
           </I18nProvider>
         </LenisProvider>
       </body>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { m, useInView, useReducedMotion } from 'motion/react';
 
 type RevealDirection = 'up' | 'down' | 'left' | 'right' | 'fade';
 type RevealAs = 'div' | 'section' | 'article' | 'li' | 'span';
@@ -48,7 +48,7 @@ export function Reveal({
   const shouldReduceMotion = useReducedMotion();
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { once, amount });
-  const Tag = motion[as];
+  const Tag = m[as];
   const offset = OFFSET_PRESETS[direction];
 
   void _stagger;

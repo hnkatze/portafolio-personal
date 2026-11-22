@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, type MotionValue } from 'motion/react';
+import { m, useReducedMotion, type MotionValue } from 'motion/react';
 
 export interface HairlineProgressProps {
   /**
@@ -34,7 +34,7 @@ export function HairlineProgress({ progress, className }: HairlineProgressProps)
 
   return (
     <div className={outerClasses} aria-hidden="true">
-      <motion.div
+      <m.div
         className="absolute inset-0 bg-[#0a0a0a] origin-left"
         style={{ scaleX: progress }}
       />

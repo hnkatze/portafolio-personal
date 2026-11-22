@@ -2,7 +2,7 @@
 
 import { Children, useRef, type ReactNode } from 'react';
 import {
-  motion,
+  m,
   useScroll,
   useTransform,
   useReducedMotion,
@@ -127,12 +127,12 @@ function StackItem({
   }
 
   return (
-    <motion.div
+    <m.div
       className="absolute inset-0 flex items-center justify-center"
       style={{ opacity, scale, y, willChange: 'opacity, transform' }}
     >
       {child}
-    </motion.div>
+    </m.div>
   );
 }
 

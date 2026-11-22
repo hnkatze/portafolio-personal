@@ -2,7 +2,7 @@
 
 import { useRef, type MouseEvent, type ReactNode } from 'react';
 import {
-  motion,
+  m,
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
@@ -75,7 +75,7 @@ export function TiltCard({
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className}
       onMouseMove={handleMouseMove}
@@ -91,12 +91,12 @@ export function TiltCard({
     >
       {children}
       {glare && (
-        <motion.div
+        <m.div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 rounded-[inherit] mix-blend-overlay"
           style={{ background: glareBackground }}
         />
       )}
-    </motion.div>
+    </m.div>
   );
 }

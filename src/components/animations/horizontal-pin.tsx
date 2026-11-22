@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from 'react';
 import {
-  motion,
+  m,
   useScroll,
   useTransform,
   useReducedMotion,
@@ -82,7 +82,7 @@ function CardWrapper({
   });
 
   return (
-    <motion.div
+    <m.div
       className="relative shrink-0 h-full"
       style={{
         width: `${cardWidthVw}vw`,
@@ -94,13 +94,13 @@ function CardWrapper({
     >
       {child}
       {isEdge && velocityBlurEdges && (
-        <motion.div
+        <m.div
           className="pointer-events-none absolute inset-0"
           style={{ filter: blur, willChange: 'filter' }}
           aria-hidden="true"
         />
       )}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -168,7 +168,7 @@ export function HorizontalPin({
         style={{ willChange: 'transform' }}
       >
         {/* Horizontally scrolling track */}
-        <motion.div
+        <m.div
           className="flex h-full"
           style={{ x: trackX, willChange: 'transform' }}
         >
@@ -185,7 +185,7 @@ export function HorizontalPin({
               scrollProgress={scrollYProgress}
             />
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Left edge fade */}
         <div

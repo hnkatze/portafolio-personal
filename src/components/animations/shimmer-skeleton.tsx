@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 
 type Rounded = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -40,7 +40,7 @@ export function ShimmerSkeleton({
 
   return (
     <div className={base} style={style} aria-hidden="true">
-      <motion.div
+      <m.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}

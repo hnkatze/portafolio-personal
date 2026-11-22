@@ -2,7 +2,7 @@
 
 import { Fragment, useRef, type JSX, type ReactNode } from 'react';
 import {
-  motion,
+  m,
   useAnimationFrame,
   useMotionValue,
   useReducedMotion,
@@ -164,7 +164,7 @@ export function Marquee({
   return (
     <div className={containerClasses}>
       {srOnly}
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="flex"
         style={{ x }}
@@ -173,7 +173,7 @@ export function Marquee({
         {renderBlock(1)}
         {renderBlock(2)}
         {renderBlock(3)}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

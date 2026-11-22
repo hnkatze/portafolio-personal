@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 
 interface BreathingPhotoProps {
   readonly src: string;
@@ -13,6 +13,10 @@ interface BreathingPhotoProps {
  * - underlying glow gradient that pulses (CSS keyframe animate-glow-pulse)
  *
  * Respects prefers-reduced-motion: renders static.
+ *
+ * `width`/`height` are set on both variants so the intrinsic 1:1 aspect ratio
+ * is known before load (no layout shift); the Tailwind classes still own the
+ * rendered size, so nothing visually changes.
  */
 export function BreathingPhoto({ src, alt }: BreathingPhotoProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -28,13 +32,17 @@ export function BreathingPhoto({ src, alt }: BreathingPhotoProps) {
         <img
           src={src}
           alt={alt}
+          width={160}
+          height={160}
           className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-white/10"
           loading="eager"
         />
       ) : (
-        <motion.img
+        <m.img
           src={src}
           alt={alt}
+          width={160}
+          height={160}
           className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-white/10"
           loading="eager"
           initial={{ scale: 1 }}

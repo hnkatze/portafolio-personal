@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 
 interface NavItem {
   readonly id: string;
@@ -86,7 +86,7 @@ export function SectionNav() {
               {item.num}
             </span>
             {/* Tick */}
-            <motion.span
+            <m.span
               aria-hidden="true"
               className="block h-px bg-text-primary origin-right"
               initial={false}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import { sendContact, type ContactState } from '@/app/actions/contact';
 import { useLang } from '@/components/i18n/i18n-provider';
 import { Reveal, I18nSplitWords } from '@/components/animations';
@@ -366,7 +366,7 @@ export function ContactSection({ data }: ContactSectionProps) {
 
                 {/* Submit */}
                 <div className="flex flex-col gap-sm pt-xs sm:flex-row sm:items-center sm:justify-between">
-                  <motion.button
+                  <m.button
                     type="submit"
                     disabled={isPending || state.status === 'success'}
                     className="text-label-mono order-2 w-full border border-text-primary bg-text-primary px-xl py-sm text-canvas-base transition-colors hover:bg-accent-vermilion hover:border-accent-vermilion disabled:cursor-not-allowed disabled:opacity-60 sm:order-1 sm:w-auto"
@@ -378,7 +378,7 @@ export function ContactSection({ data }: ContactSectionProps) {
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                   >
                     <AnimatePresence mode="wait" initial={false}>
-                      <motion.span
+                      <m.span
                         key={buttonLabel}
                         initial={
                           shouldReduceMotion ? false : { opacity: 0, y: 4 }
@@ -392,9 +392,9 @@ export function ContactSection({ data }: ContactSectionProps) {
                       >
                         {buttonLabel}
                         <span aria-hidden="true">↗</span>
-                      </motion.span>
+                      </m.span>
                     </AnimatePresence>
-                  </motion.button>
+                  </m.button>
                 </div>
 
                 {/* Status feedback */}

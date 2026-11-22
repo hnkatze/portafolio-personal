@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { m, useInView, useReducedMotion } from 'motion/react';
 
 export interface SplitWordsProps {
   readonly text: string;
@@ -39,7 +39,7 @@ export function SplitWords({
           key={`${word}-${i}`}
           className="inline-block overflow-hidden align-bottom pb-[0.12em]"
         >
-          <motion.span
+          <m.span
             className="inline-block will-change-transform origin-bottom"
             initial={{ y: '120%', rotateX: -50, opacity: 0 }}
             animate={
@@ -55,7 +55,7 @@ export function SplitWords({
           >
             {word}
             {i < words.length - 1 ? ' ' : ''}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </span>

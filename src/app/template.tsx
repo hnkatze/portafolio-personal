@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
@@ -16,6 +16,10 @@ interface TemplateProps {
  * user preference (spec §Animation Reveals — reduced motion must yield 0ms).
  *
  * Subtle transition: opacity 0→1, y 8→0, duration 0.35s.
+ *
+ * Uses `m` (not `motion`) — the feature bundle is registered once by the
+ * root layout's LazyMotion provider; `AnimatePresence` exit transitions are
+ * covered by `domAnimation`.
  */
 export default function Template({ children }: TemplateProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -27,7 +31,7 @@ export default function Template({ children }: TemplateProps) {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <motion.div
+      <m.div
         key={pathname}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -35,7 +39,7 @@ export default function Template({ children }: TemplateProps) {
         transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }
